@@ -23,7 +23,6 @@
     >
         <div class="flex items-center justify-between">
             <a href="/" class="group flex items-center text-2xl font-semibold tracking-tighter">
-                <!-- <span class="text-orange-500 text-3xl font-light transition-transform group-hover:rotate-12">{'<'}</span> -->
                 <span class="group-hover:text-orange-500 transition-all ease-in duration-150">Dagmawi</span>
                 <span class="group-hover:text-white text-orange-500 transition-all ease-in duration-150">{'.et'}</span>
             </a>
@@ -42,7 +41,7 @@
                         >
                             <span class="text-[12px] font-mono opacity-50 mr-1">{link.id}.</span>
                             {link.label}
-                            <span class="absolute bottom-0 left-0 w-0 h-[1px] bg-orange-500 transition-all group-hover:w-full"></span>
+                            <span class="absolute bottom-0 left-0 w-0 h-px bg-orange-500 transition-all group-hover:w-full"></span>
                         </a>
                     </li>
                 {/each}

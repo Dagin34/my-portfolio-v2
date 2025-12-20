@@ -33,7 +33,7 @@
                     <MoveLeft class="w-5 h-5 transition-transform group-hover:-translate-x-1" />
                     Back to Safety
                     
-                    <span class="absolute inset-0 rounded-2xl bg-gradient-to-tr from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></span>
+                    <span class="absolute inset-0 rounded-2xl bg-linear-to-tr from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></span>
                 </button>
             </div>
         </div>
