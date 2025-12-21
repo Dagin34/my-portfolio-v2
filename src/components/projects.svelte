@@ -25,23 +25,23 @@
             title: 'StreamSynx', 
             description: 'Virtual movie streaming platform with synchronized playback via TMDB API.', 
             images: [], // [cite: 49, 51]
-            github: 'https://github.com/dagmawinapoleon', 
-            live: 'https://streamsynx-demo.vercel.app',
+            github: 'https://github.com/dagin34', 
+            live: 'https://streamsynx.vercel.app',
             tech: ['Next.js', 'SSR', 'WebSockets']
         },
         { 
             title: 'Chewata Chat', 
             description: 'Real-time instant messaging app enabling text and image exchange.', 
             images: [], // [cite: 52, 53, 54]
-            github: 'https://github.com/dagmawinapoleon', 
-            live: 'https://chewata-demo.vercel.app',
+            github: 'https://github.com/dagin34', 
+            live: 'https://chewata-chat.vercel.app',
             tech: ['MERN', 'Socket.io', 'Zustand']
         },
         { 
             title: 'Testing Auth', 
             description: 'Secure notes app with JWT and automated Selenium test scripts.', 
             images: [], // [cite: 55, 56]
-            github: 'https://github.com/dagmawinapoleon', 
+            github: 'https://github.com/dagin34', 
             live: null,
             tech: ['Selenium', 'JWT', 'Zustand']
         }
