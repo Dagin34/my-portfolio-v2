@@ -9,6 +9,7 @@
   --color-primary: #00bcff;
   --color-primary-text: #ffffff;
   --color-border-color: #1d202a;
+  --font-cooper-black: 'Cooper Black', sans-serif;
 }
 
 @layer base {

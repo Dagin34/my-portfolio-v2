@@ -1,8 +1,16 @@
 <script>
     import { onMount } from 'svelte';
 
-    // Svelte 5 Rune for state
+    // Svelte 5 Runes for state management
     let scrolled = $state(false);
+    let mobileMenuOpen = $state(false);
+
+    const navLinks = [
+        { id: '01', label: 'Projects', href: '#projects' },
+        { id: '02', label: 'Experience', href: '#experience' },
+        { id: '03', label: 'Skills', href: '#skills' },
+        { id: '04', label: 'Contact', href: '#contact' }
+    ];
 
     onMount(() => {
         const handleScroll = () => {
@@ -11,23 +19,30 @@
         window.addEventListener('scroll', handleScroll, { passive: true });
         return () => window.removeEventListener('scroll', handleScroll);
     });
+
+    function toggleMenu() {
+        mobileMenuOpen = !mobileMenuOpen;
+        // Prevent scrolling when menu is open
+        document.body.style.overflow = mobileMenuOpen ? 'hidden' : '';
+    }
+
+    function closeMenu() {
+        mobileMenuOpen = false;
+        document.body.style.overflow = '';
+    }
 </script>
 
-<nav class="fixed top-0 left-0 w-full z-50 transition-all bg-background duration-500 ease-in-out px-4 py-3 md:px-10 border-b border-border-color">
-    <div class="max-w-7xl mx-auto rounded-2xl transition-all duration-300 border border-transparent px-6 py-3">
+<nav class="fixed top-0 left-0 w-full z-100 transition-all duration-500 ease-in-out px-4 py-3 md:px-10 border-b border-border-color 
+    {scrolled ? 'bg-background/80 backdrop-blur-md py-2' : 'bg-background py-4'}">
+    <div class="max-w-7xl mx-auto px-6 py-2">
         <div class="flex items-center justify-between">
-            <a href="/" class="group flex items-center text-2xl font-semibold tracking-tighter">
+            <a href="/" onclick={closeMenu} class="group flex items-center text-2xl font-semibold tracking-tighter relative z-110">
                 <span class="group-hover:text-brand-primary transition-all ease-in duration-150">Dagmawi</span>
                 <span class="group-hover:text-white text-brand-primary transition-all ease-in duration-150">{'.et'}</span>
             </a>
 
             <ul class="hidden md:flex items-center gap-2">
-                {#each [
-                    { id: '01', label: 'Projects', href: '#projects' },
-                    { id: '02', label: 'Experience', href: '#experience' },
-                    { id: '03', label: 'Skills', href: '#skills' },
-                    { id: '04', label: 'Contact', href: '#contact' }
-                ] as link}
+                {#each navLinks as link}
                     <li>
                         <a 
                             href={link.href} 
@@ -41,11 +56,69 @@
                 {/each}
             </ul>
 
-            <div class="md:hidden">
-                <a href="#contact" class="bg-brand-primary text-white px-4 py-2 rounded-full text-xs font-bold uppercase tracking-widest hover:bg-brand-primary transition-colors">
-                    Hire Me
-                </a>
-            </div>
+            <button 
+                onclick={toggleMenu}
+                class="md:hidden relative z-110 p-2 text-white focus:outline-none"
+                aria-label="Toggle Menu"
+            >
+                <div class="w-6 h-5 relative flex flex-col justify-between">
+                    <span class="w-full h-px bg-white transition-all duration-300 {mobileMenuOpen ? 'rotate-45 translate-y-2.25' : ''}"></span>
+                    <span class="w-full h-px bg-white transition-all duration-300 {mobileMenuOpen ? 'opacity-0' : ''}"></span>
+                    <span class="w-full h-px bg-white transition-all duration-300 {mobileMenuOpen ? '-rotate-45 -translate-y-2.5' : ''}"></span>
+                </div>
+            </button>
         </div>
     </div>
 </nav>
+
+{#if mobileMenuOpen}
+    <div 
+        class="fixed inset-0 z-105 bg-background flex flex-col justify-center items-center md:hidden"
+    >
+        <div class="absolute inset-0 opacity-10 pointer-events-none overflow-hidden">
+            <div class="absolute left-1/4 top-0 h-full w-px bg-border-color"></div>
+            <div class="absolute right-1/4 top-0 h-full w-px bg-border-color"></div>
+            <div class="absolute inset-0 separator-pattern"></div>
+        </div>
+
+        <ul class="relative z-110 flex flex-col items-center gap-8">
+            {#each navLinks as link, i}
+                <li class="overflow-hidden">
+                    <a 
+                        href={link.href} 
+                        onclick={closeMenu}
+                        class="block text-5xl font-light tracking-tighter text-white hover:text-brand-primary transition-all duration-300 transform"
+                    >
+                        <span class="text-sm font-mono text-brand-primary opacity-50 mr-4">0{i+1}.</span>
+                        {link.label}
+                    </a>
+                </li>
+            {/each}
+        </ul>
+
+        <div class="absolute bottom-12 flex gap-8 opacity-40 text-[10px] font-mono uppercase tracking-widest">
+            <a href="https://github.com/dagin34" target="_blank">Github</a>
+            <a href="https://linkedin.com/in/dagin34" target="_blank">LinkedIn</a>
+            <a href="mailto:dagmawinapoleon02@gmail.com">Email</a>
+        </div>
+    </div>
+{/if}
+
+<style>
+    /* Ensure the diagonal pattern stays consistent with the rest of your app */
+    .separator-pattern {
+        background-image: repeating-linear-gradient(
+            -45deg,
+            transparent,
+            transparent 15px,
+            rgba(255, 255, 255, 0.05) 15px,
+            rgba(255, 255, 255, 0.05) 16px
+        );
+        width: 100%;
+        height: 100%;
+    }
+
+    /* Transition helper if not using svelte/transition */
+    :global(.fade-enter) { opacity: 0; }
+    :global(.fade-exit) { opacity: 0; }
+</style>

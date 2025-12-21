@@ -21,8 +21,8 @@
         <div class="p-6 border border-border-color text-left">
             <p class="text-[10px] uppercase opacity-40 mb-2">Socials</p>
             <div class="flex gap-4">
-                <a href="https://github.com/dagmawinapoleon" class="hover:text-brand-primary">GitHub</a>
-                <a href="#" class="hover:text-brand-primary">LinkedIn</a>
+                <a href="https://github.com/dagin34" class="hover:text-brand-primary">GitHub</a>
+                <a href="https://linkedIn.com/in/dagin34" class="hover:text-brand-primary">LinkedIn</a>
             </div>
         </div>
     </div>
