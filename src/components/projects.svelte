@@ -15,36 +15,100 @@
     let projects: Project[] = [
         { 
             title: 'Gojo Getaways', 
-            description: 'Vacation Home Management & Booking Ecosystem for Ethiopian property owners.', 
-            images: [], // [cite: 47, 48]
+            description: 'Vacation Home Management & Booking Ecosystem for Ethiopian property owners and International Travellers.', 
+            images: [], 
             github: null, 
             live: null,
-            tech: ['MERN', 'JWT', 'Payment Integration'] 
+            tech: ['React.js', 'Node.js', 'MongoDB', 'JWT', 'Tailwind'] 
         },
         { 
             title: 'StreamSynx', 
             description: 'Virtual movie streaming platform with synchronized playback via TMDB API.', 
-            images: [], // [cite: 49, 51]
-            github: 'https://github.com/dagin34', 
+            images: [], 
+            github: null, 
             live: 'https://streamsynx.vercel.app',
-            tech: ['Next.js', 'SSR', 'WebSockets']
+            tech: ['Next.js', 'Firebase', 'TailwindCSS', 'WebSockets', 'TMDB API']
         },
         { 
             title: 'Chewata Chat', 
             description: 'Real-time instant messaging app enabling text and image exchange.', 
-            images: [], // [cite: 52, 53, 54]
-            github: 'https://github.com/dagin34', 
+            images: [],
+            github: 'https://github.com/Dagin34/chewata-backend', 
             live: 'https://chewata-chat.vercel.app',
-            tech: ['MERN', 'Socket.io', 'Zustand']
+            tech: ['MERN Stack', 'WebSockets', 'Zustand', 'TailwindCSS']
         },
         { 
             title: 'Testing Auth', 
             description: 'Secure notes app with JWT and automated Selenium test scripts.', 
-            images: [], // [cite: 55, 56]
+            images: [], 
+            github: 'https://github.com/Dagin34/testing-frontend', 
+            live: 'https://auth-tester-et.vercel.app',
+            tech: ['MERN Stack', 'Selenium', 'JWT', 'Zustand', 'TailwindCSS']
+        },
+        { 
+            title: 'Andro Solutions', 
+            description: 'The official Andro Solutions website designed with a clean aesthetic. Features responsive layouts, smooth animations, and optimized SEO structure.', 
+            images: [], 
+            github: null, 
+            live: 'https://andro-solutions.tech',
+            tech: ['Next.js', 'TailwindCSS', 'Framer']
+        },
+        { 
+            title: 'Spectate Interview Room', 
+            description: 'A real-time virtual room for Python Interviews for Interviewers to monitor and manage the work of Interviewees.', 
+            images: [], 
             github: 'https://github.com/dagin34', 
+            live: 'https://spectate-room.vercel.app',
+            tech: ['Next.js', 'TailwindCSS', 'Supabase', 'WebSockets']
+        },
+        { 
+            title: 'Wolfden Cigar Lounge', 
+            description: 'Elevated the lounge\'s digital identity through a refined web platform. By integrating curated galleries and intuitive booking flows.', 
+            images: [], 
+            github: null, 
             live: null,
-            tech: ['Selenium', 'JWT', 'Zustand']
-        }
+            tech: ['Next.js', 'TailwindCSS', 'Supabase', 'WebSockets']
+        },
+        { 
+            title: 'Spawn Point HMS', 
+            description: 'A project that allows you to keep track of everything in a hospital from staff to medications in stock to even specific medications prescribed to patients.', 
+            images: [], 
+            github: 'https://github.com/Dagin34/Spawn_Point_Hospital', 
+            live: null,
+            tech: ['Csharp', 'DotNet', 'SQL', 'GUNA UI', 'Entitiy Framework']
+        },
+        { 
+            title: 'SILO Stock Mgmt.', 
+            description: 'An inventory management system designed for a knitting business that allows the admins to track the salary and yarn count of employees, customers and their respective orders in a slick and modern UI design.', 
+            images: [], 
+            github: 'https://github.com/Dagin34/SILO-Clothing-New-UI', 
+            live: null,
+            tech: ['Csharp', 'DotNet', 'SQL', 'GUNA UI', 'Entitiy Framework']
+        },
+        { 
+            title: 'Eon Recycling', 
+            description: 'Developed and maintained the system to support recycling operations, lead generations, including data management, and API integrations to improve operational efficiency and visibility.', 
+            images: [], 
+            github: null, 
+            live: 'https://eonrecycling.com',
+            tech: ['React.js', 'Node.js', 'MongoDB', 'JWT', 'TailwindCSS', 'Zustand']
+        },
+        { 
+            title: 'Wonder Nest Daycare', 
+            description: 'Built and customized a management system for a daycare center, streamlining enrollment, and daily operations through intuitive and reliable software solutions.', 
+            images: [], 
+            github: null, 
+            live: 'https://wonder-nest-daycare.com',
+            tech: ['React.js', 'Node.js', 'MongoDB', 'JWT', 'TailwindCSS', 'Zustand']
+        },
+        { 
+            title: 'BlueSpark SFA', 
+            description: 'An end-to-end development of a Sales Force Automation (SFA) system. Responsibilities including building multi-tenant APIs, implementing KPI analytics for sales performances, designing management of RTMs, and travel tracking of sales representatives.', 
+            images: [], 
+            github: null, 
+            live: null,
+            tech: ['SvelteKIT', 'Python', 'FastAPI', 'JWT', 'TailwindCSS', 'PostgreSQL']
+        },
     ];
 
     let activeProject = $state<Project | null>(null);

@@ -3,10 +3,10 @@
         {
             company: "Blue Spark Business Technologies",
             role: "Junior Software Developer",
-            period: "2024 — Present",
+            period: "July 2025 — Present",
             description:
                 "Contributing to enterprise-level solutions, focusing on full-stack architecture and performance optimization.",
-            skills: ["SvelteKit", "Django", "PostgreSQL", "Tailwind"],
+            skills: ["SvelteKit", "FastAPI", "PostgreSQL", "TailwindCSS"],
         },
         {
             company: "Andro Solutions",
@@ -15,6 +15,14 @@
             description:
                 "Leading the technical vision and development of custom software solutions for diverse clients, bridging the gap between business needs and robust code.",
             skills: ["System Design", "Cloud Architecture", "Leadership"],
+        },
+        {
+            company: "Bala Media",
+            role: "Full Stack Developer",
+            period: "September 2025",
+            description:
+                "Designing, developing, and maintaining front-end and back-end systems while collaborating with other team members on project architecture and implementation.",
+            skills: ["Next.js", "React.js", "Node.js", "Express.js", "TailwindCSS", "Docker"],
         },
         {
             company: "Spring of Knowledge Academy",
