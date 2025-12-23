@@ -1,10 +1,13 @@
 <script>
     import { goto } from '$app/navigation';
-    import { MoveLeft } from 'lucide-svelte'; // Using Lucide as we set up before
+    import { MoveLeft } from 'lucide-svelte';
+    import SEO from '$components/repetitive/SEO.svelte';
 </script>
 
 <svelte:head>
-    <title>404 - Lost in Space</title>
+    <SEO
+        title="Dagmawi Napoleon | 404 - Lost in Space"
+    />
 </svelte:head>
 
 <div class="relative min-h-screen w-full flex items-center justify-center overflow-hidden bg-background">
