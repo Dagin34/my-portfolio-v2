@@ -2,7 +2,7 @@
     export let title = "Dagmawi Napoleon | Software Engineer (Ethiopia)";
     export let description =
         "Welcome to my Portfolio Website, where you can find the skills and services I offer, and the projects I have worked on in the past.";
-    export let image = "https://dagmawi-napoleon.vercel.app/Thumbnail.png";
+    export let image = "https://dagmawinapoleon.vercel.app/Thumbnail.png";
     export let url = "https://dagmawinapoleon.vercel.app";
 </script>
 

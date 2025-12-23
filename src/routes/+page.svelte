@@ -28,7 +28,6 @@
 <svelte:head>
     <SEO
         title="Dagmawi Napoleon | Software Engineer (Ethiopia)"
-        description="Welcome to my Portfolio Website, where you can find the skills and services I offer, and the projects I have worked on in the past."
     />
 </svelte:head>
 
