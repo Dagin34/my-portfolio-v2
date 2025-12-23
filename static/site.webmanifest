@@ -1,0 +1,16 @@
+{
+  "name": "Dagmawi Napoleon | Software Engineer (Ethiopia)",
+  "short_name": "Dagmawi Napoleon",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#030712",
+  "theme_color": "#ff6900",
+  "description": "Welcome to my Portfolio Website, where you can find the skills and services I offer, and the projects I have worked on in the past.",
+  "icons": [
+    {
+      "src": "/Logo.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
