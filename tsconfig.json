@@ -18,11 +18,11 @@
 			"$components/*": [
 				"./src/components/*"
 			],
-			"$lib": [
-				"./src/lib"
+			"$utils": [
+				"./src/utils"
 			],
-			"$lib/*": [
-				"./src/lib/*"
+			"$utils/*": [
+				"./src/utils/*"
 			],
 			"$assets": [
 				"./src/assets"

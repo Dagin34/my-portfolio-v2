@@ -1,6 +1,6 @@
 <script lang="ts">
     import { Github, Linkedin, Send, Instagram, Phone } from 'lucide-svelte';
-    import { copyToClipboard } from "$lib/utils.ts";
+    import { copyToClipboard } from "../utils/utils";
 
     let { onMissing } = $props<{ onMissing: (msg: string) => void }>();
 </script>
