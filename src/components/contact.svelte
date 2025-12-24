@@ -13,7 +13,7 @@
         <div class="absolute -bottom-4 left-0 w-0 h-1 bg-brand-primary transition-all duration-700 group-hover:w-full"></div>
     </a>
 
-    <div class="mt-20 grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-2xl">
+    <div class="mt-20 grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-3xl">
         <div class="p-6 border border-border-color text-left">
             <p class="text-[10px] uppercase opacity-40 mb-2">Location</p>
             <p class="text-lg font-light">Addis Ababa, Ethiopia</p>
@@ -23,6 +23,8 @@
             <div class="flex gap-4">
                 <a href="https://github.com/dagin34" class="hover:text-brand-primary">GitHub</a>
                 <a href="https://linkedIn.com/in/dagin34" class="hover:text-brand-primary">LinkedIn</a>
+                <a href="https://instagram.com/dagi_n34" class="hover:text-brand-primary">Instagram</a>
+                <a href="https://facebook.com/dagi_n34" class="hover:text-brand-primary">Telegram</a>
             </div>
         </div>
     </div>
