@@ -11,6 +11,11 @@
       "src": "/Logo.svg",
       "sizes": "any",
       "type": "image/svg+xml"
+    },
+    {
+      "src": "/Logo.png",
+      "sizes": "any",
+      "type": "image/png"
     }
   ]
 }
