@@ -48,10 +48,10 @@
     </div>
 
     <div class="border-x border-b border-border-color p-8 flex flex-wrap gap-12 opacity-40 grayscale hover:grayscale-0 transition-all duration-700">
-        <span class="text-xs font-mono tracking-tighter uppercase">Next.js</span>
         <span class="text-xs font-mono tracking-tighter uppercase">FastAPI</span>
+        <span class="text-xs font-mono tracking-tighter uppercase">Next.js</span>
         <span class="text-xs font-mono tracking-tighter uppercase">SvelteKit</span>
-        <span class="text-xs font-mono tracking-tighter uppercase">PostgreSQL</span>
-        <span class="text-xs font-mono tracking-tighter uppercase">Docker</span>
+        <span class="text-xs font-mono tracking-tighter uppercase">Node.js</span>
+        <span class="text-xs font-mono tracking-tighter uppercase">React.js</span>
     </div>
 </section>
