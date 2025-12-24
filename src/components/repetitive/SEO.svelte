@@ -10,11 +10,19 @@
     <title>{title}</title>
 
     <!-- Primary SEO -->
+    <meta name="description" content={description} />
+
+    <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content={url} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={image} />
+    <meta property="og:image:alt" content={title} />
+    <meta property="og:image:width" content="1906" />
+    <meta property="og:image:height" content="908" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:site_name" content={title} />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
@@ -34,18 +42,6 @@
     <link rel="manifest" href="/site.webmanifest" />
     <meta name="theme-color" content="#ff6900" />
     <meta name="mobile-web-app-capable" content="yes" />
-
-    <!-- Open Graph -->
-    <meta property="og:site_name" content={title} />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description}  />
-    <meta property="og:image" content={image} />
-    <meta property="og:image:alt" content={title} />
-    <meta property="og:image:width" content="1906" />
-    <meta property="og:image:height" content="908" />
-    <meta property="og:url" content={url} />
-    <meta property="og:type" content="website" />
-    <meta property="og:locale" content="en_US" />
 
     <!-- Structured data (JSON-LD) -->
     <script type="application/ld+json">
