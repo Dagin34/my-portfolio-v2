@@ -5,7 +5,7 @@
 </script>
 
 <svelte:head>
-	<meta name="google-site-verification" content="D3g1xWI36x7xyVb-KdVKFShsVyv-h_PZWE4TVwdMeYk" />
+	<meta name="google-site-verification" content="DQ9GnMhhKWqXE4mmG2OE5E9A4fueQqLlz8q_2eP58WA" />
 </svelte:head>
 
 {@render children()}
