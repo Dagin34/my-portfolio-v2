@@ -1,5 +1,5 @@
 <script>
-  export let title = "Dagmawi Napoleon | Software Engineer (Ethiopia)";
+  export let title = "Dagmawi Napoleon Bogale | Software Engineer (Ethiopia)";
   export let description =
     "Welcome to my Portfolio Website, where you can find the skills and services I offer, and the projects I have worked on in the past.";
   export let image = "https://dagmawi.et/Thumbnail.png";
@@ -72,7 +72,7 @@
         {
           "@type": "Person",
           "@id": "https://dagmawi.et/#person",
-          "name": "Dagmawi Napoleon",
+          "name": "Dagmawi Napoleon Bogale",
           "url": "https://dagmawi.et/",
           "image": "https://dagmawi.et/Logo.svg",
           "jobTitle": "Software Engineer",
@@ -89,7 +89,7 @@
           "@type": "WebSite",
           "@id": "https://dagmawi.et/#website",
           "url": "https://dagmawi.et/",
-          "name": "Dagmawi Napoleon | Software Engineer (Ethiopia)",
+          "name": "Dagmawi Napoleon Bogale | Software Engineer (Ethiopia)",
           "publisher": {
             "@id": "https://dagmawi.et/#person"
           }

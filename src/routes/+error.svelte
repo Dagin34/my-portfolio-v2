@@ -6,7 +6,7 @@
 
 <svelte:head>
     <SEO
-        title="Dagmawi Napoleon | 404 - Lost in Space"
+        title="Dagmawi Napoleon Bogale | 404 - Lost in Space (Ethiopia)"
     />
 </svelte:head>
 

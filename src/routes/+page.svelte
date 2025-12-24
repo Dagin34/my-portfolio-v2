@@ -27,7 +27,7 @@
 
 <svelte:head>
     <SEO
-        title="Dagmawi Napoleon | Software Engineer (Ethiopia)"
+        title="Dagmawi Napoleon Bogale | Software Engineer (Ethiopia)"
     />
 </svelte:head>
 
