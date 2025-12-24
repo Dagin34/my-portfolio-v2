@@ -1,4 +1,18 @@
 <script lang="ts">
+    import { X } from "lucide-svelte";
+    import Andro from '$assets/project-images/andro-solutions.png';
+    import Chewata from '$assets/project-images/chewata-chatting.png';
+    import Eon from '$assets/project-images/eon-recycling.png';
+    import Gojo from '$assets/project-images/gojo-getaways.png';
+    import Testing from '$assets/project-images/testing.png';
+    import Silo from '$assets/project-images/silo-knitting.png';
+    import Spawn from '$assets/project-images/spawn-point.png';
+    import Spectate from '$assets/project-images/spectate-interview.png';
+    import StreamSynx from '$assets/project-images/streamsynx.png';
+    import Wolfden from '$assets/project-images/wolfden.png';
+    import WonderNest from '$assets/project-images/wonder-nest.png';
+    import SFA from '$assets/project-images/sfa.png';
+
     // Define the Project type to fix the 'any' error
     interface Project {
         title: string;
@@ -16,7 +30,7 @@
         { 
             title: 'Gojo Getaways', 
             description: 'Vacation Home Management & Booking Ecosystem for Ethiopian property owners and International Travellers.', 
-            images: [], 
+            images: [Gojo], 
             github: null, 
             live: null,
             tech: ['React.js', 'Node.js', 'MongoDB', 'JWT', 'Tailwind'] 
@@ -24,7 +38,7 @@
         { 
             title: 'StreamSynx', 
             description: 'Virtual movie streaming platform with synchronized playback via TMDB API.', 
-            images: [], 
+            images: [StreamSynx], 
             github: null, 
             live: 'https://streamsynx.vercel.app',
             tech: ['Next.js', 'Firebase', 'TailwindCSS', 'WebSockets', 'TMDB API']
@@ -32,7 +46,7 @@
         { 
             title: 'Chewata Chat', 
             description: 'Real-time instant messaging app enabling text and image exchange.', 
-            images: [],
+            images: [Chewata],
             github: 'https://github.com/Dagin34/chewata-backend', 
             live: 'https://chewata-chatting.vercel.app',
             tech: ['MERN Stack', 'WebSockets', 'Zustand', 'TailwindCSS']
@@ -40,7 +54,7 @@
         { 
             title: 'Testing Auth', 
             description: 'Secure notes app with JWT and automated Selenium test scripts.', 
-            images: [], 
+            images: [Testing], 
             github: 'https://github.com/Dagin34/testing-frontend', 
             live: 'https://auth-tester-et.vercel.app',
             tech: ['MERN Stack', 'Selenium', 'JWT', 'Zustand', 'TailwindCSS']
@@ -48,7 +62,7 @@
         { 
             title: 'Andro Solutions', 
             description: 'The official Andro Solutions website designed with a clean aesthetic. Features responsive layouts, smooth animations, and optimized SEO structure.', 
-            images: [], 
+            images: [Andro], 
             github: null, 
             live: 'https://andro-solutions.tech',
             tech: ['Next.js', 'TailwindCSS', 'Framer']
@@ -56,7 +70,7 @@
         { 
             title: 'Spectate Interview Room', 
             description: 'A real-time virtual room for Python Interviews for Interviewers to monitor and manage the work of Interviewees.', 
-            images: [], 
+            images: [Spectate], 
             github: 'https://github.com/dagin34', 
             live: 'https://spectate-room.vercel.app',
             tech: ['Next.js', 'TailwindCSS', 'Supabase', 'WebSockets']
@@ -64,7 +78,7 @@
         { 
             title: 'Wolfden Cigar Lounge', 
             description: 'Elevated the lounge\'s digital identity through a refined web platform. By integrating curated galleries and intuitive booking flows.', 
-            images: [], 
+            images: [Wolfden], 
             github: null, 
             live: null,
             tech: ['Next.js', 'TailwindCSS', 'Supabase', 'WebSockets']
@@ -72,7 +86,7 @@
         { 
             title: 'Spawn Point HMS', 
             description: 'A project that allows you to keep track of everything in a hospital from staff to medications in stock to even specific medications prescribed to patients.', 
-            images: [], 
+            images: [Spawn], 
             github: 'https://github.com/Dagin34/Spawn_Point_Hospital', 
             live: null,
             tech: ['Csharp', 'DotNet', 'SQL', 'GUNA UI', 'Entitiy Framework']
@@ -80,7 +94,7 @@
         { 
             title: 'SILO Stock Mgmt.', 
             description: 'An inventory management system designed for a knitting business that allows the admins to track the salary and yarn count of employees, customers and their respective orders in a slick and modern UI design.', 
-            images: [], 
+            images: [Silo], 
             github: 'https://github.com/Dagin34/SILO-Clothing-New-UI', 
             live: null,
             tech: ['Csharp', 'DotNet', 'SQL', 'GUNA UI', 'Entitiy Framework']
@@ -88,7 +102,7 @@
         { 
             title: 'Eon Recycling', 
             description: 'Developed and maintained the system to support recycling operations, lead generations, including data management, and API integrations to improve operational efficiency and visibility.', 
-            images: [], 
+            images: [Eon], 
             github: null, 
             live: 'https://eonrecycling.com',
             tech: ['React.js', 'Node.js', 'MongoDB', 'JWT', 'TailwindCSS', 'Zustand']
@@ -96,7 +110,7 @@
         { 
             title: 'Wonder Nest Daycare', 
             description: 'Built and customized a management system for a daycare center, streamlining enrollment, and daily operations through intuitive and reliable software solutions.', 
-            images: [], 
+            images: [WonderNest], 
             github: null, 
             live: 'https://wonder-nest-daycare.com',
             tech: ['React.js', 'Node.js', 'MongoDB', 'JWT', 'TailwindCSS', 'Zustand']
@@ -104,7 +118,7 @@
         { 
             title: 'BlueSpark SFA', 
             description: 'An end-to-end development of a Sales Force Automation (SFA) system. Responsibilities including building multi-tenant APIs, implementing KPI analytics for sales performances, designing management of RTMs, and travel tracking of sales representatives.', 
-            images: [], 
+            images: [SFA], 
             github: null, 
             live: null,
             tech: ['SvelteKIT', 'Python', 'FastAPI', 'JWT', 'TailwindCSS', 'PostgreSQL']
@@ -201,9 +215,9 @@
 
                 <div class="w-full md:w-1/3 p-8 flex flex-col justify-between">
                     <div>
-                        <div class="flex justify-between items-center mb-6">
+                        <div class="flex justify-between items-center mb-6 relative">
                             <h2 class="text-3xl font-light tracking-tighter">{activeProject.title}</h2>
-                            <button onclick={() => activeProject = null} class="text-xl opacity-50 hover:opacity-100">✕</button>
+                            <button onclick={() => activeProject = null} class="absolute top-0 right-0 text-xl opacity-50 hover:opacity-100 hover:text-brand-primary"><X size={22} /></button>
                         </div>
                         <p class="text-sm font-light text-gray-400 leading-relaxed mb-8">
                             {activeProject.description}

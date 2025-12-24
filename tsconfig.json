@@ -17,6 +17,18 @@
 			],
 			"$components/*": [
 				"./src/components/*"
+			],
+			"$lib": [
+				"./src/lib"
+			],
+			"$lib/*": [
+				"./src/lib/*"
+			],
+			"$assets": [
+				"./src/assets"
+			],
+			"$assets/*": [
+				"./src/assets/*"
 			]
 		}
 	}

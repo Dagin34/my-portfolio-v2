@@ -48,7 +48,7 @@
             <div id="projects"><Projects onMissing={triggerToast} /></div>
             <div id="experience"><Experience /></div>
             <div id="skills"><Offerings /></div>
-            <div id="contact"><Contact /></div>
+            <div id="contact"><Contact onMissing={triggerToast} /></div>
             <Footer />
         </div>
     </main>
