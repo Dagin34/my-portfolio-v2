@@ -21,9 +21,9 @@
     </a>
 
     <div class="mt-20 grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-6xl">
-        <div class="p-6 border border-border-color text-left flex flex-col items-center justify-center">
-            <p class="text-[10px] uppercase opacity-40 mb-2">Location</p>
-            <p class="text-lg font-light">Addis Ababa, Ethiopia</p>
+        <div class="group p-6 border border-border-color text-left flex flex-col items-center justify-center">
+            <p class="group-hover:text-brand-primary text-[10px] uppercase opacity-40 mb-2">Location</p>
+            <p class="group-hover:text-brand-primary text-lg font-light">Addis Ababa, Ethiopia</p>
         </div>
         <div class="p-6 border border-border-color text-left">
             <div class="grid grid-cols-4 gap-2">
@@ -44,8 +44,8 @@
                     <span class="group-hover:text-brand-primary">Telegram</span>
                 </a>
             </div>
-            <div 
-                class="group p-6 border border-border-color flex gap-x-3 items-center text-left mt-8 cursor-pointer"
+            <button 
+                class="w-full group p-6 border border-border-color flex gap-x-3 items-center text-left mt-8 cursor-pointer"
                 onclick={() => {
                     copyToClipboard('+251931523923');
                     onMissing('Phone number copied to clipboard');
@@ -53,7 +53,7 @@
             >
                 <span class="group-hover:text-brand-primary"><Phone size={20} /></span>
                 <p class="group-hover:text-brand-primary text-lg font-light">+251 931 523 923</p>
-            </div>
+            </button>
         </div>
     </div>
 </section>

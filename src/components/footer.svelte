@@ -3,7 +3,7 @@
     <div
       class="p-8 md:p-12 border-b md:border-b-0 md:border-r border-border-color col-span-1 md:col-span-2"
     >
-      <a href="#home" class="text-2xl font-semibold tracking-tighter group">
+      <a href="#home" class="text-2xl font-semibold tracking-tighter group flex">
         <span class="group-hover:text-brand-primary transition-colors"
           >Dagmawi</span
         >
@@ -14,7 +14,7 @@
       </a>
       <p class="mt-6 text-sm font-light text-gray-400 leading-relaxed max-w-sm">
         Software Engineer specialized in building cloud-ready, high-performance
-        systems. Graduating Feb 2026 from <span class="font-cooper-black"
+        systems. Graduating Feb 2026 from <span class="font-semibold"
           >HiLCoE</span
         > School of Computer Science and Technologies.
       </p>
