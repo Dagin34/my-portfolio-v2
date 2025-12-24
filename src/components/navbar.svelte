@@ -46,7 +46,7 @@
                     <li>
                         <a 
                             href={link.href} 
-                            class="relative px-3 py-4 text-md font-medium transition-colors hover:text-brand-primary group"
+                            class="relative px-3 py-7 text-md font-medium transition-colors hover:text-brand-primary group"
                         >
                             <span class="text-[12px] font-mono opacity-50 mr-1">{link.id}.</span>
                             {link.label}

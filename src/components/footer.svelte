@@ -1,4 +1,4 @@
-<footer class="mt-32 border-t border-border-color bg-white/[0.01]">
+<footer class="mt-32 border-t border-border-color bg-white/1">
   <div class="grid grid-cols-1 md:grid-cols-4 border-x border-border-color">
     <div
       class="p-8 md:p-12 border-b md:border-b-0 md:border-r border-border-color col-span-1 md:col-span-2"
