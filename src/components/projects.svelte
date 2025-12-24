@@ -34,7 +34,7 @@
             description: 'Real-time instant messaging app enabling text and image exchange.', 
             images: [],
             github: 'https://github.com/Dagin34/chewata-backend', 
-            live: 'https://chewata-chat.vercel.app',
+            live: 'https://chewata-chatting.vercel.app',
             tech: ['MERN Stack', 'WebSockets', 'Zustand', 'TailwindCSS']
         },
         { 
