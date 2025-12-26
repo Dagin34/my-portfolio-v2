@@ -38,7 +38,7 @@
     <Toast message={toastMessage} visible={showToast} />
 
     <main
-        class="relative mx-auto w-4/5 min-h-screen border-x border-border-color bg-background overflow-visible"
+        class="relative mx-auto w-full md:w-4/5 min-h-screen border-x border-border-color bg-background overflow-visible"
     >
         <VerticalLines position={"left"} />
         <VerticalLines position={"right"} />
