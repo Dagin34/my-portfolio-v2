@@ -157,10 +157,10 @@
                 </div>
 
                 <div class="relative z-10">
-                    <h3 class="text-4xl font-light text-white group-hover:text-brand-primary transition-colors duration-300 tracking-tighter">
+                    <h3 class="text-2xl md:text-4xl font-light text-white group-hover:text-brand-primary transition-colors duration-300 tracking-tighter">
                         {project.title}
                     </h3>
-                    <p class="text-sm text-gray-400 font-light mt-4 leading-relaxed max-w-sm">
+                    <p class="text-xs md:text-sm text-gray-400 font-light mt-4 leading-relaxed max-w-sm">
                         {project.description}
                     </p>
                     

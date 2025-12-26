@@ -12,7 +12,7 @@
           >.et</span
         >
       </a>
-      <p class="mt-6 text-sm font-light text-gray-400 leading-relaxed max-w-sm">
+      <p class="mt-6 text-xs md:text-sm font-light text-gray-400 leading-relaxed max-w-sm">
         Software Engineer specialized in building cloud-ready, high-performance
         systems. Graduating Feb 2026 from <span class="font-semibold"
           >HiLCoE</span

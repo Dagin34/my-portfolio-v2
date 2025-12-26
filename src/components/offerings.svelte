@@ -1,4 +1,6 @@
 <script>
+  import { ArrowRight } from "lucide-svelte";
+
   const frontend_skills = [
     "Next",
     "React",
@@ -63,12 +65,12 @@
       </h4>
       <ul class="space-y-3 grid grid-cols-2">
         {#each frontend_skills as item}
-          <li class="flex items-center gap-2 group">
+          <li class="flex items-center gap-2 group cursor-pointer">
             <span
               class="text-brand-primary opacity-0 group-hover:opacity-100 transition-opacity"
               >→</span
             >
-            <span class="text-lg font-light opacity-70 group-hover:opacity-100"
+            <span class="text-sm md:text-lg font-light opacity-70 group-hover:opacity-100"
               >{item}</span
             >
           </li>
@@ -84,12 +86,12 @@
       </h4>
       <ul class="space-y-3 grid grid-cols-2">
         {#each backend_skills as item}
-          <li class="flex items-center gap-2 group">
+          <li class="flex items-center gap-2 group cursor-pointer">
             <span
               class="text-brand-primary opacity-0 group-hover:opacity-100 transition-opacity"
-              >→</span
+              ><ArrowRight size={15} /></span
             >
-            <span class="text-lg font-light opacity-70 group-hover:opacity-100"
+            <span class="text-sm md:text-lg font-light opacity-70 group-hover:opacity-100"
               >{item}</span
             >
           </li>
@@ -105,12 +107,12 @@
       </h4>
       <ul class="space-y-3 grid grid-cols-2">
         {#each other_skills as item}
-          <li class="flex items-center gap-2 group">
+          <li class="flex items-center gap-2 group cursor-pointer">
             <span
               class="text-brand-primary opacity-0 group-hover:opacity-100 transition-opacity"
               >→</span
             >
-            <span class="text-lg font-light opacity-70 group-hover:opacity-100"
+            <span class="text-sm md:text-lg font-light opacity-70 group-hover:opacity-100"
               >{item}</span
             >
           </li>
@@ -134,7 +136,7 @@
   <div
     class="mt-12 p-8 border border-border-color bg-white/1 flex flex-col md:flex-row justify-between items-center gap-8"
   >
-    <p class="text-sm font-light opacity-60 max-w-xl">
+    <p class="text-xs md:text-sm font-light opacity-60 max-w-xl">
       Specializing in building scalable, resilient, high-performance systems
       with cloud-ready architectures. Experienced in leading Agile delivery with
       high impact.

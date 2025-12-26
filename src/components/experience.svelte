@@ -54,13 +54,13 @@
             02. Career Path
         </p>
         <h2
-            class="text-5xl font-light tracking-tighter text-white leading-tight"
+            class="text-3xl md:text-5xl font-light tracking-tighter text-white leading-tight"
         >
             Work <br /> <span class="opacity-40 italic">History</span>
         </h2>
         <div class="mt-8 h-px w-20 bg-brand-primary opacity-50"></div>
         <p
-            class="mt-8 text-sm text-gray-400 font-light leading-relaxed max-w-xs"
+            class="mt-8 text-xs md:text-sm text-gray-400 font-light leading-relaxed max-w-xs"
         >
             My journey through the Ethiopian tech landscape, from founding
             startups to scaling enterprise systems.
@@ -86,20 +86,20 @@
                         >{exp.period}</span
                     >
                     <h3
-                        class="text-3xl font-light text-white group-hover:translate-x-2 transition-transform duration-300"
+                        class="text-xl md:text-3xl font-light text-white group-hover:translate-x-2 transition-transform duration-300"
                     >
                         {exp.role} <span class="text-gray-500">@</span>
                         {exp.company}
                     </h3>
 
-                    <p class="mt-4 text-gray-400 font-light leading-7 max-w-xl">
+                    <p class="text-xs md:text-sm mt-4 text-gray-400 font-light leading-5 md:leading-7 max-w-xl">
                         {exp.description}
                     </p>
 
                     <div class="mt-6 flex flex-wrap gap-2">
                         {#each exp.skills as skill}
                             <span
-                                class="px-3 py-1 text-[10px] font-mono border border-border-color bg-white/5 text-gray-300 uppercase tracking-wider"
+                                class="px-3 py-1 text-[8px] md:text-[10px] font-mono border border-border-color bg-white/5 text-gray-300 uppercase tracking-wider"
                             >
                                 {skill}
                             </span>
@@ -113,7 +113,7 @@
             href="/resume.pdf"
             class="flex items-center justify-between p-12 group hover:bg-brand-primary transition-all duration-500"
         >
-            <span class="text-2xl font-light">View Full Resume</span>
+            <span class="text-xl md:text-2xl font-light">View Full Resume</span>
             <span
                 class="text-4xl group-hover:translate-x-4 transition-transform"
                 >→</span
