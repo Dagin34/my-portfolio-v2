@@ -26,22 +26,22 @@
             <p class="group-hover:text-brand-primary text-lg font-light">Addis Ababa, Ethiopia</p>
         </div>
         <div class="p-6 border border-border-color text-left">
-            <div class="grid grid-cols-4 gap-2">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
                 <a target="_blank" href="https://github.com/dagin34" class="border border-border-color py-6 px-8 group flex flex-col gap-y-3 items-center justify-center">
                     <span class="group-hover:text-brand-primary"><Github size={20} /></span>
-                    <span class="group-hover:text-brand-primary">GitHub</span>
+                    <span class="group-hover:text-brand-primary text-xs md:text-md">GitHub</span>
                 </a>
                 <a target="_blank" href="https://linkedIn.com/in/dagin34" class="border border-border-color py-6 px-8 group flex flex-col gap-y-3 items-center justify-center">
                     <span class="group-hover:text-brand-primary"><Linkedin size={20} /></span>
-                    <span class="group-hover:text-brand-primary">LinkedIn</span>
+                    <span class="group-hover:text-brand-primary text-xs md:text-md">LinkedIn</span>
                 </a>
                 <a target="_blank" href="https://instagram.com/dagi_n34" class="border border-border-color py-6 px-8 group flex flex-col gap-y-3 items-center justify-center">
                     <span class="group-hover:text-brand-primary"><Instagram size={20} /></span>
-                    <span class="group-hover:text-brand-primary">Instagram</span>
+                    <span class="group-hover:text-brand-primary text-xs md:text-md">Instagram</span>
                 </a>
                 <a target="_blank" href="https://t.me/dagi_n34" class="border border-border-color py-6 px-8 group flex flex-col gap-y-3 items-center justify-center">
                     <span class="group-hover:text-brand-primary"><Send size={20} /></span>
-                    <span class="group-hover:text-brand-primary">Telegram</span>
+                    <span class="group-hover:text-brand-primary text-xs md:text-md">Telegram</span>
                 </a>
             </div>
             <button 
@@ -52,7 +52,7 @@
                 }}
             >
                 <span class="group-hover:text-brand-primary"><Phone size={20} /></span>
-                <p class="group-hover:text-brand-primary text-lg font-light">+251 931 523 923</p>
+                <p class="group-hover:text-brand-primary text-xs md:text-md font-light">+251 931 523 923</p>
             </button>
         </div>
     </div>
