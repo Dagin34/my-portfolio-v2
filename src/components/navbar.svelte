@@ -36,7 +36,7 @@
     {scrolled ? 'bg-background/80 backdrop-blur-md py-2' : 'bg-background py-4'}">
     <div class="max-w-7xl mx-auto px-6 py-2">
         <div class="flex items-center justify-between">
-            <a href="/" onclick={closeMenu} class="group flex items-center text-2xl font-semibold tracking-tighter relative z-110">
+            <a href="/" onclick={closeMenu} class="group flex items-center text-2xl font-semibold tracking-tighter relative z-200">
                 <span class="group-hover:text-brand-primary transition-all ease-in duration-150">Dagmawi</span>
                 <span class="group-hover:text-white text-brand-primary transition-all ease-in duration-150">{'.et'}</span>
             </a>
@@ -73,6 +73,8 @@
 
 {#if mobileMenuOpen}
     <div 
+        role="presentation"
+        onclick={closeMenu}
         class="fixed inset-0 z-105 bg-background flex flex-col justify-center items-center md:hidden"
     >
         <div class="absolute inset-0 opacity-10 pointer-events-none overflow-hidden">
@@ -81,7 +83,11 @@
             <div class="absolute inset-0 separator-pattern"></div>
         </div>
 
-        <ul class="relative z-110 flex flex-col items-center gap-8">
+        <ul 
+            role="presentation"
+            onclick={(e) => e.stopPropagation()} 
+            class="relative z-110 flex flex-col items-center gap-8"
+        >
             {#each navLinks as link, i}
                 <li class="overflow-hidden">
                     <a 
@@ -96,10 +102,14 @@
             {/each}
         </ul>
 
-        <div class="absolute bottom-12 flex gap-8 opacity-40 text-[10px] font-mono uppercase tracking-widest">
-            <a href="https://github.com/dagin34" target="_blank">Github</a>
-            <a href="https://linkedin.com/in/dagin34" target="_blank">LinkedIn</a>
-            <a href="mailto:dagmawinapoleon02@gmail.com">Email</a>
+        <div 
+            role="presentation"
+            onclick={(e) => e.stopPropagation()} 
+            class="absolute bottom-12 flex gap-8 opacity-40 text-[10px] font-mono uppercase tracking-widest"
+        >
+            <a href="https://github.com/dagin34" target="_blank" class="hover:text-brand-primary transition-colors">Github</a>
+            <a href="https://linkedin.com/in/dagin34" target="_blank" class="hover:text-brand-primary transition-colors">LinkedIn</a>
+            <a href="mailto:dagmawinapoleon02@gmail.com" class="hover:text-brand-primary transition-colors">Email</a>
         </div>
     </div>
 {/if}
