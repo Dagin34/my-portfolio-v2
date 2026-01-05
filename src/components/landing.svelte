@@ -12,10 +12,10 @@
 
     <div class="border-t border-x border-border-color group transition-colors hover:bg-white/1">
         <div class="p-8 md:p-12">
-            <h1 class="text-5xl md:text-8xl font-light tracking-tighter leading-none text-white">
-                Dagmawi <br/>
-                <span class="text-brand-primary italic opacity-90">Napoleon</span> <br />
-                <span class="text-brand-primary italic opacity-90">Bogale</span>
+            <h1 class="text-4xl md:text-7xl font-light tracking-tighter leading-none text-white flex flex-col -gap-2">
+                <span class="text-5xl md:text-8xl">Dagmawi</span>
+                <span class="text-brand-primary opacity-90">Napoleon</span> 
+                <span class="opacity-90">Bogale</span>
             </h1>
         </div>
         
@@ -31,7 +31,7 @@
                 <div class="space-y-4">
                     <div class="flex justify-between items-end border-b border-border-color pb-2">
                         <span class="text-[10px] font-mono opacity-40 uppercase">Status</span>
-                        <span class="text-xs font-light">Junior Dev @ Blue Spark</span>
+                        <span class="text-xs font-light">Full Stack Dev @ Blue Spark</span>
                     </div>
                     <div class="flex justify-between items-end border-b border-border-color pb-2">
                         <span class="text-[10px] font-mono opacity-40 uppercase">Education</span>
