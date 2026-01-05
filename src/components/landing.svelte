@@ -14,7 +14,8 @@
         <div class="p-8 md:p-12">
             <h1 class="text-5xl md:text-8xl font-light tracking-tighter leading-none text-white">
                 Dagmawi <br/>
-                <span class="text-brand-primary italic opacity-90">Napoleon <br/> Bogale</span>
+                <span class="text-brand-primary italic opacity-90">Napoleon</span> <br />
+                <span class="text-brand-primary italic opacity-90">Bogale</span>
             </h1>
         </div>
         
