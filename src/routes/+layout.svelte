@@ -6,8 +6,12 @@
 
 <svelte:head>
 	<meta name="google-site-verification" content="DQ9GnMhhKWqXE4mmG2OE5E9A4fueQqLlz8q_2eP58WA" />
-	<link rel="icon" href="/icon.png" sizes="96x96" type="image/png">
-  	<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+	<link rel="icon" href="/favicon.ico" />
+	<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png">
+	<link rel="icon" type="image/png" sizes="96x96" href="/favicon-96.png">
+
+	<link rel="apple-touch-icon" href="/icon.png">
 	<link rel="manifest" href="/site.webmanifest" />
 
 	<meta name="author" content="Dagmawi Napoleon Bogale" />
