@@ -45,13 +45,13 @@
 </script>
 
 <section id="skills" class="py-24 border-t border-border-color">
-  <div class="flex items-center gap-4 mb-12">
-    <span class="h-px w-12 bg-brand-primary"></span>
-    <p
-      class="text-[12px] font-mono text-brand-primary uppercase tracking-[0.3em]"
-    >
-      03. Technical Arsenal
-    </p>
+  <div class="w-full p-8 md:p-12">
+    <p class="text-brand-primary font-mono text-sm mb-4 tracking-widest uppercase">03. Technical Arsenal</p>
+    <h2 class="text-3xl md:text-5xl font-light tracking-tighter text-white leading-tight">
+      Skills and <br /> <span class="opacity-40 italic">Offerings</span>
+    </h2>
+
+    <div class="mt-8 h-px w-20 bg-brand-primary opacity-50"></div>
   </div>
 
   <div
