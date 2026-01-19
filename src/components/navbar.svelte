@@ -6,8 +6,8 @@
     let mobileMenuOpen = $state(false);
 
     const navLinks = [
-        { id: '01', label: 'Projects', href: '#projects' },
-        { id: '02', label: 'Experience', href: '#experience' },
+        { id: '01', label: 'Experience', href: '#experience' },
+        { id: '02', label: 'Projects', href: '#projects' },
         { id: '03', label: 'Skills', href: '#skills' },
         { id: '04', label: 'Contact', href: '#contact' }
     ];
