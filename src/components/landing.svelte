@@ -35,7 +35,11 @@
                     </div>
                     <div class="flex justify-between items-end border-b border-border-color pb-2">
                         <span class="text-[10px] font-mono opacity-40 uppercase">Education</span>
-                        <span class="text-xs font-light">BSc Software Engineering & A2SVian (Backed by Google)</span>
+                        <span class="text-xs font-light">BSc Software Engineering</span>
+                    </div>
+                    <div class="flex justify-between items-end border-b border-border-color pb-2">
+                        <span class="text-[10px] font-mono opacity-40 uppercase">Bonus</span>
+                        <span class="text-xs font-light">A2SVian (Backed by Google)</span>
                     </div>
                 </div>
                 
