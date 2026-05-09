@@ -52,6 +52,14 @@
             tech: ['MERN Stack', 'WebSockets', 'Zustand', 'TailwindCSS']
         },
         { 
+            title: 'BlueSpark SFA', 
+            description: 'A backend heavy Sales Force Automation system with responsibilities including implementing KPIs for sales performances, designing management of RTMs, and integration with MoR (Ministry of Revenue).', 
+            images: [SFA], 
+            github: null, 
+            live: null,
+            tech: ['SvelteKIT', 'Python', 'FastAPI', 'JWT', 'TailwindCSS', 'PostgreSQL']
+        },
+        { 
             title: 'Testing Auth', 
             description: 'Secure notes app with JWT and automated Selenium test scripts.', 
             images: [Testing], 
@@ -84,22 +92,6 @@
             tech: ['Next.js', 'TailwindCSS', 'Supabase', 'WebSockets']
         },
         { 
-            title: 'Spawn Point HMS', 
-            description: 'A project that allows you to keep track of everything in a hospital from staff to medications in stock to even specific medications prescribed to patients.', 
-            images: [Spawn], 
-            github: 'https://github.com/Dagin34/Spawn_Point_Hospital', 
-            live: null,
-            tech: ['Csharp', 'DotNet', 'SQL', 'GUNA UI', 'Entitiy Framework']
-        },
-        { 
-            title: 'SILO Stock Mgmt.', 
-            description: 'An inventory management system designed for a knitting business that allows the admins to track the salary and yarn count of employees, customers and their respective orders in a slick and modern UI design.', 
-            images: [Silo], 
-            github: 'https://github.com/Dagin34/SILO-Clothing-New-UI', 
-            live: null,
-            tech: ['Csharp', 'DotNet', 'SQL', 'GUNA UI', 'Entitiy Framework']
-        },
-        { 
             title: 'Eon Recycling', 
             description: 'Developed and maintained the system to support recycling operations, lead generations, including data management, and API integrations to improve operational efficiency and visibility.', 
             images: [Eon], 
@@ -116,12 +108,20 @@
             tech: ['React.js', 'Node.js', 'MongoDB', 'JWT', 'TailwindCSS', 'Zustand']
         },
         { 
-            title: 'BlueSpark SFA', 
-            description: 'An end-to-end development of a Sales Force Automation (SFA) system. Responsibilities including building multi-tenant APIs, implementing KPI analytics for sales performances, designing management of RTMs, and travel tracking of sales representatives.', 
-            images: [SFA], 
-            github: null, 
+            title: 'Spawn Point HMS', 
+            description: 'A project that allows you to keep track of everything in a hospital from staff to medications in stock to even specific medications prescribed to patients.', 
+            images: [Spawn], 
+            github: 'https://github.com/Dagin34/Spawn_Point_Hospital', 
             live: null,
-            tech: ['SvelteKIT', 'Python', 'FastAPI', 'JWT', 'TailwindCSS', 'PostgreSQL']
+            tech: ['Csharp', 'DotNet', 'SQL', 'GUNA UI', 'Entitiy Framework']
+        },
+        { 
+            title: 'SILO Stock Mgmt.', 
+            description: 'An inventory management system designed for a knitting business that allows the admins to track the salary and yarn count of employees, customers and their respective orders in a slick and modern UI design.', 
+            images: [Silo], 
+            github: 'https://github.com/Dagin34/SILO-Clothing-New-UI', 
+            live: null,
+            tech: ['Csharp', 'DotNet', 'SQL', 'GUNA UI', 'Entitiy Framework']
         },
     ];
 
@@ -141,9 +141,13 @@
 </script>
 
 <section class="py-24 border-t border-border-color">
-    <div class="flex items-center gap-4 mb-12">
-        <span class="h-px w-12 bg-brand-primary"></span>
-        <p class="text-[12px] font-mono text-brand-primary uppercase tracking-[0.3em]">01. Selected Works</p>
+    <div class="w-full p-8 md:p-12">
+        <p class="text-brand-primary font-mono text-sm mb-4 tracking-widest uppercase">02. Selected Works</p>
+        <h2 class="text-3xl md:text-5xl font-light tracking-tighter text-white leading-tight">
+            Personal <br /> <span class="opacity-40 italic">Projects</span>
+        </h2>
+
+        <div class="mt-8 h-px w-20 bg-brand-primary opacity-50"></div>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-0 border-l border-t border-border-color">

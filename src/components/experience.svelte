@@ -17,6 +17,14 @@
             skills: ["System Design", "Cloud Architecture", "Leadership"],
         },
         {
+            company: "A2SV | Africa to Silicon Valley",
+            role: "Trainee",
+            period: "Jan 2026 — Present",
+            description:
+                "Chosen to join A2SV's competitive training program, where I'm focused on deepening my problem-solving skills through Data Structures and Algorithms.",
+            skills: ["Data Structures", "Problem Solving", "Algorithm Analysis"],
+        },
+        {
             company: "Bala Media",
             role: "Full Stack Developer",
             period: "September 2025",
@@ -32,14 +40,14 @@
                 "Developed and Integrated a high-performance web API and automated workflows for the academy owners.",
             skills: ["Python", "FastAPI", "Next.js"],
         },
-        {
-            company: "Ethiopia for All Initiative",
-            role: "Full Stack Developer",
-            period: "Oct 2024 - Jan 2025",
-            description:
-                "Led backend development and integration for the platform using Node.js, Express, and React.",
-            skills: ["Python", "FastAPI", "Next.js"],
-        },
+        // {
+        //     company: "Ethiopia for All Initiative",
+        //     role: "Full Stack Developer",
+        //     period: "Oct 2024 - Jan 2025",
+        //     description:
+        //         "Led backend development and integration for the platform using Node.js, Express, and React.",
+        //     skills: ["Python", "FastAPI", "Next.js"],
+        // },
     ];
 </script>
 
@@ -48,20 +56,13 @@
     class="relative min-h-screen border-t border-border-color flex flex-col md:flex-row"
 >
     <div class="w-full md:w-1/3 p-8 md:p-12 md:sticky md:top-20 md:h-fit">
-        <p
-            class="text-brand-primary font-mono text-sm mb-4 tracking-widest uppercase"
-        >
-            02. Career Path
-        </p>
-        <h2
-            class="text-3xl md:text-5xl font-light tracking-tighter text-white leading-tight"
-        >
+        <p class="text-brand-primary font-mono text-sm mb-4 tracking-widest uppercase">01. Career Path</p>
+        <h2 class="text-3xl md:text-5xl font-light tracking-tighter text-white leading-tight">
             Work <br /> <span class="opacity-40 italic">History</span>
         </h2>
+
         <div class="mt-8 h-px w-20 bg-brand-primary opacity-50"></div>
-        <p
-            class="mt-8 text-xs md:text-sm text-gray-400 font-light leading-relaxed max-w-xs"
-        >
+        <p class="mt-8 text-xs md:text-sm text-gray-400 font-light leading-relaxed max-w-xs">
             My journey through the Ethiopian tech landscape, from founding
             startups to scaling enterprise systems.
         </p>

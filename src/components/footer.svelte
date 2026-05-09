@@ -31,16 +31,16 @@
       <ul class="space-y-4 text-sm font-light opacity-60">
         <li>
           <a
-            href="#projects"
+            href="#experience"
             class="hover:text-brand-primary hover:opacity-100 transition-all"
-            >01. Projects</a
+            >01. Experience</a
           >
         </li>
         <li>
           <a
-            href="#experience"
+            href="#projects"
             class="hover:text-brand-primary hover:opacity-100 transition-all"
-            >02. Experience</a
+            >02. Projects</a
           >
         </li>
         <li>
