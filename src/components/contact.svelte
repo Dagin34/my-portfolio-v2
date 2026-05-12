@@ -1,6 +1,8 @@
 <script lang="ts">
     import { Github, Linkedin, Send, Instagram, Phone } from 'lucide-svelte';
     import { copyToClipboard } from "../utils/utils";
+    import Codeforces from './icons/codeforces.svelte';
+    import Leetcode from './icons/leetcode.svelte';
 
     let { onMissing } = $props<{ onMissing: (msg: string) => void }>();
 </script>
@@ -26,7 +28,7 @@
             <p class="group-hover:text-brand-primary text-lg font-light">Addis Ababa, Ethiopia</p>
         </div>
         <div class="p-6 border border-border-color text-left">
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-2">
                 <a target="_blank" href="https://github.com/dagin34" class="border border-border-color py-6 px-8 group flex flex-col gap-y-3 items-center justify-center">
                     <span class="group-hover:text-brand-primary"><Github size={20} /></span>
                     <span class="group-hover:text-brand-primary text-xs md:text-md">GitHub</span>
@@ -42,6 +44,14 @@
                 <a target="_blank" href="https://t.me/dagi_n34" class="border border-border-color py-6 px-8 group flex flex-col gap-y-3 items-center justify-center">
                     <span class="group-hover:text-brand-primary"><Send size={20} /></span>
                     <span class="group-hover:text-brand-primary text-xs md:text-md">Telegram</span>
+                </a>
+                <a target="_blank" href="https://codeforces.com/profile/dagin34" class="border border-border-color py-6 px-8 group flex flex-col gap-y-3 items-center justify-center">
+                    <span class="group-hover:text-brand-primary"><Codeforces /></span>
+                    <span class="group-hover:text-brand-primary text-xs md:text-md">Codeforces</span>
+                </a>
+                <a target="_blank" href="https://leetcode.com/u/dagi_n34/" class="border border-border-color py-6 px-8 group flex flex-col gap-y-3 items-center justify-center">
+                    <span class="group-hover:text-brand-primary"><Leetcode /></span>
+                    <span class="group-hover:text-brand-primary text-xs md:text-md">Leetcode</span>
                 </a>
             </div>
             <button 
