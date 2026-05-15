@@ -31,7 +31,7 @@
             title: 'Gojo Getaways', 
             description: 'Vacation Home Management & Booking Ecosystem for Ethiopian property owners and International Travellers.', 
             images: [Gojo], 
-            github: null, 
+            github: 'https://github.com/Dagin34/GojoBackend', 
             live: null,
             tech: ['React.js', 'Node.js', 'MongoDB', 'JWT', 'Tailwind'] 
         },
