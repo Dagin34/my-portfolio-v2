@@ -22,6 +22,6 @@
   }
 
   button, a {
-    cursor: pointer;
+    cursor: none;
   }
 }

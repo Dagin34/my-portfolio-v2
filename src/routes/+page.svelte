@@ -10,6 +10,7 @@
     import ScrollToTop from "$components/repetitive/scroll-to-top.svelte";
     import Toast from "$components/repetitive/toast.svelte";
     import SEO from "$components/repetitive/SEO.svelte";
+    import CustomCursor from "$components/repetitive/custom-cursor.svelte";
 
     // Toast State (Svelte 5 Runes)
     let toastMessage = $state("");
@@ -54,6 +55,7 @@
     </main>
 </div>
 <ScrollToTop />
+<CustomCursor />
 
 <style>
     :global(html) {

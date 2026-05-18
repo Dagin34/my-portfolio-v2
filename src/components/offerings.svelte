@@ -65,7 +65,7 @@
       </h4>
       <ul class="space-y-3 grid grid-cols-2">
         {#each frontend_skills as item}
-          <li class="flex items-center gap-2 group cursor-pointer mb-3">
+          <li class="flex items-center gap-2 group cursor-none mb-3">
             <span
               class="text-brand-primary opacity-0 group-hover:opacity-100 transition-opacity"
               >→</span
@@ -86,7 +86,7 @@
       </h4>
       <ul class="space-y-3 grid grid-cols-2">
         {#each backend_skills as item}
-          <li class="flex items-center gap-2 group cursor-pointer mb-3">
+          <li class="flex items-center gap-2 group cursor-none mb-3">
             <span
               class="text-brand-primary opacity-0 group-hover:opacity-100 transition-opacity"
               ><ArrowRight size={15} /></span
@@ -107,7 +107,7 @@
       </h4>
       <ul class="space-y-3 grid grid-cols-2">
         {#each other_skills as item}
-          <li class="flex items-center gap-2 group cursor-pointer mb-3">
+          <li class="flex items-center gap-2 group cursor-none mb-3">
             <span
               class="text-brand-primary opacity-0 group-hover:opacity-100 transition-opacity"
               >→</span
