@@ -5,7 +5,7 @@
 
 <section id="home" class="min-h-screen flex flex-col justify-center border-b border-border-color relative">
     <div class="pt-24 pb-4 pl-4">
-        <p class="text-[12px] font-mono text-brand-primary uppercase tracking-[0.4em] opacity-80">
+        <p class="text-[10px] lg:text-[12px] font-mono text-brand-primary uppercase tracking-[0.4em] opacity-80">
             Available for new opportunities — 2026
         </p>
     </div>
