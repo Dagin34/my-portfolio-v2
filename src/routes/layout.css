@@ -8,6 +8,7 @@
   --color-background: #030712;
   --color-primary: #00bcff;
   --color-primary-text: #ffffff;
+  --color-success: #1DB954;
   --color-border-color: #1d202a;
   --font-cooper-black: 'Cooper Black', sans-serif;
 }
@@ -16,7 +17,7 @@
   * {
     scroll-behavior: smooth;
   }
-  
+
   body {
     font-family: 'Poppins', sans-serif;
     background-color: var(--color-background);
@@ -28,4 +29,10 @@
   button, a {
     cursor: none;
   }
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  25% { transform: translateX(100%); }
+  100% { transform: translateX(100%); }
 }
