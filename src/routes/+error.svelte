@@ -41,10 +41,6 @@
                 </button>
             </div>
         </div>
-
-        <div class="mt-8 font-mono text-xs opacity-40 uppercase tracking-[0.2em]">
-            Error Code: 404 - PAGE NOT FOUND // <span class="lowercase">root</span>/dagmawi.et
-        </div>
     </div>
 </div>
 <CustomCursor />
