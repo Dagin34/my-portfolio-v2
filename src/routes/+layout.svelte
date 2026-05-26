@@ -13,6 +13,12 @@
 	<meta name="author" content="Dagmawi Napoleon Bogale" />
 	<meta name="keywords" content="Dagmawi Napoleon Bogale, dagmawi napoleon bogale, Dagmawi Napoleon, dagmawi napoleon, Ethiopian Developer, ethiopian developer, Ethiopia, Ethiopian Software Engineer, ethiopian software engineer, Developer, developer" />
 	<meta name="theme-color" content="#ff6900" />
+
+    <link rel="preload" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" as="style" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
+
+    <!-- 2. Preload the actual font file (crucial to eliminate the delay) -->
+    <link rel="preload" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/fonts/devicon.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
 </svelte:head>
 
 {@render children()}

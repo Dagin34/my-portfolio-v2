@@ -25,9 +25,9 @@
                 </p>
             </div>
             
-            <h1 class="text-2xl md:text-6xl font-light leading-none text-white uppercase flex flex-col -gap-2">
+            <h1 class="text-5xl md:text-7xl font-light leading-none text-white uppercase flex flex-col -gap-2">
                 Showcasing <br /> 
-                <span class="text-lg md:text-4xl text-transparent bg-clip-text bg-brand-primary/60 uppercase pr-4">
+                <span class="text-3xl md:text-5xl text-transparent bg-clip-text bg-linear-to-r from-brand-primary via-brand-primary/30 to-background uppercase pr-4">
                     innovation
                 </span>
             </h1>
@@ -37,13 +37,13 @@
             </p>
         </div>
 
-        <div class="border-l border-y border-border-color lg:col-span-5 flex flex-col items-start lg:items-end justify-end h-full lg:min-h-[50vh] w-full mt-8 lg:mt-0 lg:text-right">
+        <div class="border-l border-y border-border-color lg:col-span-5 flex flex-col items-start lg:items-end justify-end h-full lg:min-h-[50vh] w-full mt-0 lg:text-right">
             <div class="text-left lg:text-right w-full">
                 <p class="pr-8 text-[10px] font-mono text-brand-primary my-4 uppercase tracking-[0.25em] block pl-8 lg:pl-0">
                     // TECHNICAL JOURNEY SPECS
                 </p>
                 
-                <div class="w-full space-y-0 flex flex-col justify-center gap-y-0!">
+                <div class="w-full space-y-0 flex flex-col justify-center gap-y-0! bg-background">
                     <div class="pr-8 pl-8 lg:pl-0 group border-y border-white/8 py-5 flex items-center justify-between lg:justify-end gap-8 transition-all duration-300 hover:border-brand-primary/40">
                         <div>
                             <p class="text-xs font-mono text-gray-400 uppercase tracking-widest group-hover:text-white transition-colors">Featured Projects</p>

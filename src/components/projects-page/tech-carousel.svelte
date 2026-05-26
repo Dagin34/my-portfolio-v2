@@ -10,7 +10,7 @@
     />
 </svelte:head>
 
-<div class="absolute bottom-0 left-0 z-20 w-full lg:border-y border-border-color py-4 overflow-hidden lg:relative lg:bottom-auto lg:z-auto">
+<div class="absolute bottom-0 left-0 z-20 w-full lg:border-y border-border-color py-4 overflow-hidden ">
     <div class="absolute inset-y-0 left-0 w-16 bg-linear-to-r from-black to-transparent z-10 pointer-events-none"></div>
     <div class="absolute inset-y-0 right-0 w-16 bg-linear-to-l from-black to-transparent z-10 pointer-events-none"></div>
 

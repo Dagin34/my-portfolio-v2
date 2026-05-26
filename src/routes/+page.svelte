@@ -60,6 +60,13 @@
 </div>
 <ScrollToTop />
 <CustomCursor />
+<div 
+    aria-hidden="true" 
+    class="hidden absolute w-0 h-0 overflow-hidden opacity-0 pointer-events-none"
+    style="font-family: 'devicon';"
+>
+    preload
+</div>
 
 <style>
     :global(html) {
