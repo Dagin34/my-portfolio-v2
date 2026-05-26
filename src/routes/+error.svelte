@@ -2,6 +2,7 @@
     import { goto } from '$app/navigation';
     import { MoveLeft } from 'lucide-svelte';
     import SEO from '$components/repetitive/SEO.svelte';
+    import CustomCursor from '$components/repetitive/custom-cursor.svelte';
 </script>
 
 <svelte:head>
@@ -42,7 +43,8 @@
         </div>
 
         <div class="mt-8 font-mono text-xs opacity-40 uppercase tracking-[0.2em]">
-            Error_Code: PAGE_NOT_FOUND // root/dagmawi.et
+            Error Code: 404 - PAGE NOT FOUND // <span class="lowercase">root</span>/dagmawi.et
         </div>
     </div>
 </div>
+<CustomCursor />
