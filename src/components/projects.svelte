@@ -1,6 +1,7 @@
 <script lang="ts">
-    import { X } from "lucide-svelte";
     import allProjects, { type Project } from "$lib/projects";
+    import ProjectFilters from "$components/projects-filter.svelte"; // Adjust path as necessary
+    import ProjectsPopup from "$components/projects-popup.svelte";
 
     let { onMissing, fromHomePage, limit = 10 } = $props<{ 
         onMissing: (msg: string) => void; 
@@ -8,31 +9,49 @@
         limit?: number; 
     }>();
 
-    let projects = $derived(allProjects.slice(0, limit));
+    // Filter and Layout states
+    let searchQuery = $state("");
+    let selectedTech = $state("");
+    let layout = $state<"grid" | "list">("grid");
 
+    // Gather unique technologies dynamically from all projects
+    const availableTechs = Array.from(
+        new Set(allProjects.flatMap(p => p.tech || []))
+    ).sort();
+
+    // Filter projects based on query and selected technology, then apply slicing
+    let filteredProjects = $derived(
+        allProjects.filter(project => {
+            const matchesSearch = !searchQuery || 
+                project.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                project.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                (project.tech && project.tech.some(t => t.toLowerCase().includes(searchQuery.toLowerCase())));
+            
+            const matchesTech = !selectedTech || 
+                (project.tech && project.tech.includes(selectedTech));
+            
+            return matchesSearch && matchesTech;
+        })
+    );
+
+    let projects = $derived(filteredProjects.slice(0, limit));
     let activeProject = $state<Project | null>(null);
+        
     let currentImgIndex = $state(0);
-
     function openModal(p: Project) { 
         activeProject = p; 
         currentImgIndex = 0; 
     }
-    
-    function nextImg() { 
-        if (activeProject && activeProject.images.length > 0) {
-            currentImgIndex = (currentImgIndex + 1) % activeProject.images.length; 
-        }
-    }
 </script>
 
 <section id="projects" class="my-auto border-t border-border-color">
+    <!-- Header Area -->
     <div class="w-full px-8 lg:px-12 py-8 lg:py-18">
         {#if fromHomePage}
             <p class="text-brand-primary font-mono text-sm mb-4 tracking-widest uppercase">02. Selected Works</p>
             <h2 class="text-3xl md:text-5xl font-light tracking-tighter text-white leading-tight">
                 Personal <br /> <span class="opacity-40 italic">Projects</span>
             </h2>
-
             <div class="mt-8 h-px w-20 bg-brand-primary opacity-50"></div>
         {:else}
             <h2 class="text-3xl md:text-5xl font-light tracking-tighter text-white leading-tight">
@@ -42,100 +61,90 @@
         {/if}
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-0 border-l border-t border-border-color">
-        {#each projects as project}
-            <button 
-                onclick={() => openModal(project)}
-                class="group relative p-10 border-r border-b border-border-color text-left hover:bg-white/2 transition-all duration-500 overflow-hidden"
-            >
-                <div class="absolute -right-4 -bottom-4 text-9xl font-bold opacity-[0.02] group-hover:opacity-[0.05] transition-opacity pointer-events-none uppercase italic">
-                    {project.title.split(' ')[0]}
-                </div>
+    <!-- Dynamic Filter Component -->
+    <ProjectFilters 
+        bind:searchQuery={searchQuery}
+        bind:selectedTech={selectedTech}
+        bind:layout={layout}
+        {availableTechs}
+    />
 
-                <div class="relative z-10">
-                    <h3 class="text-2xl md:text-4xl font-light text-white group-hover:text-brand-primary transition-colors duration-300 tracking-tighter">
-                        {project.title}
-                    </h3>
-                    <p class="text-xs md:text-sm text-gray-400 font-light mt-4 leading-relaxed max-w-sm">
-                        {project.description}
-                    </p>
-                    
-                    {#if project.tech}
-                        <div class="mt-6 flex flex-wrap gap-2">
-                            {#each project.tech as t}
-                                <span class="text-[9px] font-mono border border-border-color px-2 py-0.5 opacity-40 group-hover:opacity-100 transition-opacity">
-                                    {t}
-                                </span>
-                            {/each}
+    <!-- Project List / Grid View Wrapper -->
+    {#if projects.length > 0}
+        {#if layout === 'grid'}
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-0 border-l border-t border-border-color">
+                {#each projects as project}
+                    <button 
+                        onclick={() => openModal(project)}
+                        class="group relative p-10 border-r border-b border-border-color text-left hover:bg-white/2 transition-all duration-500 overflow-hidden"
+                    >
+                        <div class="absolute -right-4 -bottom-4 text-9xl font-bold opacity-[0.02] group-hover:opacity-[0.05] transition-opacity pointer-events-none uppercase italic">
+                            {project.title.split(' ')[0]}
                         </div>
-                    {/if}
-                </div>
-            </button>
-        {/each}
-    </div>
+
+                        <div class="relative z-10">
+                            <h3 class="text-2xl md:text-4xl font-light text-white group-hover:text-brand-primary transition-colors duration-300 tracking-tighter">
+                                {project.title}
+                            </h3>
+                            <p class="text-xs md:text-sm text-gray-400 font-light mt-4 leading-relaxed max-w-sm line-clamp-2">
+                                {project.description}
+                            </p>
+                            
+                            {#if project.tech}
+                                <div class="mt-6 flex flex-wrap gap-2">
+                                    {#each project.tech as t}
+                                        <span class="text-[9px] font-mono border border-border-color px-2 py-0.5 opacity-40 group-hover:opacity-100 transition-opacity">
+                                            {t}
+                                        </span>
+                                    {/each}
+                                </div>
+                            {/if}
+                        </div>
+                    </button>
+                {/each}
+            </div>
+        {:else}
+            <!-- Responsive List View -->
+            <div class="flex flex-col border-t border-border-color">
+                {#each projects as project}
+                    <button 
+                        onclick={() => openModal(project)}
+                        class="group relative px-8 py-6 md:px-12 md:py-8 border-b border-border-color text-left hover:bg-white/2 transition-all duration-300 flex flex-col md:flex-row md:items-center justify-between gap-4 overflow-hidden"
+                    >
+                        <div class="relative z-10 flex-1 pr-0 md:pr-8">
+                            <h3 class="text-xl md:text-2xl font-light text-white group-hover:text-brand-primary transition-colors duration-300 tracking-tighter">
+                                {project.title}
+                            </h3>
+                            <p class="text-xs md:text-sm text-gray-400 font-light mt-2 leading-relaxed max-w-2xl line-clamp-2">
+                                {project.description}
+                            </p>
+                        </div>
+                        
+                        {#if project.tech}
+                            <div class="relative z-10 flex flex-wrap gap-2 md:justify-end md:max-w-xs h-fit">
+                                {#each project.tech as t}
+                                    <span class="text-[9px] font-mono border border-border-color px-2 py-0.5 opacity-40 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                                        {t}
+                                    </span>
+                                {/each}
+                            </div>
+                        {/if}
+                    </button>
+                {/each}
+            </div>
+        {/if}
+    {:else}
+        <!-- No Results Fallback -->
+        <div class="flex flex-col items-center justify-center p-20 border-t border-b border-border-color text-center">
+            <p class="text-sm font-light text-gray-500">No projects found matching the criteria.</p>
+        </div>
+    {/if}
 </section>
 
 {#if activeProject}
-    <div class="fixed inset-0 z-100 flex items-center justify-center p-6 sm:p-12">
-        <button 
-            onclick={() => activeProject = null} 
-            class="absolute inset-0 bg-background/90 backdrop-blur-xl transition-all"
-            aria-label='click-me'
-        ></button>
-
-        <div class="relative max-w-5xl w-full border border-border-color bg-background shadow-2xl overflow-hidden">
-            <div class="flex flex-col md:flex-row h-full">
-                
-                <div class="w-full md:w-2/3 bg-black/50 aspect-video md:aspect-auto flex flex-col border-b md:border-b-0 md:border-r border-border-color">
-                    {#if activeProject.images.length > 0}
-                        <div class="relative flex-1 overflow-hidden group">
-                            <img src={activeProject.images[currentImgIndex]} alt="Gallery" class="object-cover w-full h-full" />
-                            <button onclick={nextImg} class="absolute inset-y-0 right-0 px-6 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity hover:bg-brand-primary/20">
-                                Next →
-                            </button>
-                        </div>
-                        <div class="p-4 flex gap-2 justify-center border-t border-border-color">
-                            {#each activeProject.images as _, i}
-                                <div class="h-1 w-8 transition-all {i === currentImgIndex ? 'bg-brand-primary' : 'bg-white/10'}"></div>
-                            {/each}
-                        </div>
-                    {:else}
-                        <div class="flex-1 flex flex-col items-center justify-center p-12 opacity-20">
-                            <div class="w-full h-full border-2 border-dashed border-white/20 rounded-lg flex flex-col items-center justify-center">
-                                <span class="text-xs font-mono uppercase tracking-widest">Visuals Restricted</span>
-                                <span class="text-[10px] mt-2">Confidential or Internal System</span>
-                            </div>
-                        </div>
-                    {/if}
-                </div>
-
-                <div class="w-full md:w-1/3 p-8 flex flex-col justify-between">
-                    <div>
-                        <div class="flex justify-between items-center mb-6 relative">
-                            <h2 class="text-3xl font-light tracking-tighter">{activeProject.title}</h2>
-                            <button onclick={() => activeProject = null} class="absolute top-0 right-0 text-xl opacity-50 hover:opacity-100 hover:text-brand-primary"><X size={22} /></button>
-                        </div>
-                        <p class="text-sm font-light text-gray-400 leading-relaxed mb-8">
-                            {activeProject.description}
-                        </p>
-                    </div>
-
-                    <div class="space-y-3">
-                        <button 
-                            onclick={() => activeProject?.live ? window.open(activeProject.live) : onMissing('Live demo not available')} 
-                            class="w-full py-4 border border-brand-primary text-brand-primary text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-brand-primary hover:text-white transition-all"
-                        >
-                            Explore Site
-                        </button>
-                        <button 
-                            onclick={() => activeProject?.github ? window.open(activeProject.github) : onMissing('Project is under Private License')} 
-                            class="w-full py-4 border border-border-color text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-white/10 transition-all"
-                        >
-                            View Source
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <ProjectsPopup 
+        onMissing={onMissing} 
+        activeProject={activeProject} 
+        onClose={() => (activeProject = null)} 
+    />
 {/if}
