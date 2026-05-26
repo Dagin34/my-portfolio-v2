@@ -6,7 +6,7 @@ export interface Experience {
     skills?: string[];
 }
 
-const experiences = [
+const experiences: Experience[] = [
     {
         company: "Blue Spark Business Technologies",
         role: "Full Stack Developer",

@@ -1,29 +1,5 @@
 <script lang="ts">
-    const techs = [
-        { name: "FastAPI", icon: "devicon-fastapi-plain colored" },
-        { name: "SvelteKIT", icon: "devicon-svelte-plain colored" },
-        { name: "Next.js", icon: "devicon-nextjs-plain" },
-        { name: "React", icon: "devicon-react-original colored" },
-        { name: "Node.js", icon: "devicon-nodejs-plain colored" },
-        { name: "Express.js", icon: "devicon-express-original" },
-        { name: "TypeScript", icon: "devicon-typescript-plain colored" },
-        { name: "JavaScript", icon: "devicon-javascript-plain colored" },
-        { name: "MongoDB", icon: "devicon-mongodb-plain colored" },
-        { name: "TailwindCSS", icon: "devicon-tailwindcss-original colored" },
-        { name: "Firebase", icon: "devicon-firebase-plain colored" },
-        { name: "HTML5", icon: "devicon-html5-plain colored" },
-        { name: "CSS3", icon: "devicon-css3-plain colored" },
-        { name: "Figma", icon: "devicon-figma-plain colored" },
-        { name: "Bootstrap", icon: "devicon-bootstrap-plain colored" },
-        { name: "Selenium", icon: "devicon-selenium-original colored" },
-        { name: "SQL", icon: "devicon-sqlite-plain colored" },
-        { name: "C#", icon: "devicon-csharp-plain colored" },
-        { name: ".Net", icon: "devicon-dot-net-plain colored" },
-        { name: "Java", icon: "devicon-java-plain colored" },
-        { name: "PostgreSQL", icon: "devicon-postgresql-plain colored" },
-        { name: "Github", icon: "devicon-github-original" },
-        { name: "SpringBoot", icon: "devicon-spring-plain colored" },
-    ];
+    import technologies from "$lib/technologies";
 </script>
 
 <svelte:head>
@@ -41,7 +17,7 @@
     <div class="flex overflow-hidden select-none">
         <div class="marquee-track flex gap-8 whitespace-nowrap">
             {#each [0, 1] as _}
-                {#each techs as tech}
+                {#each technologies as tech}
                     <div class="inline-flex items-center gap-3 px-5 py-2 border border-border-color bg-white/1 hover:bg-white/3 hover:border-brand-primary/30 transition-colors duration-300">
                         <span class="w-4 h-4 flex items-center justify-center">
                             <i class="{tech.icon} text-white/90 text-base"></i>
