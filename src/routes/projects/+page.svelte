@@ -5,9 +5,11 @@
     import Toast from "$components/repetitive/toast.svelte";
     import SEO from "$components/repetitive/SEO.svelte";
     import CustomCursor from "$components/repetitive/custom-cursor.svelte";
-    import ProjectLanding from "$components/projects-page/projects-landing.svelte";
-    import ProjectsSection from "$components/projects.svelte";
     import VerticalLines from "$components/repetitive/vertical-lines.svelte";
+    
+    import ProjectLanding from "$components/projects-page/projects-landing.svelte";
+    import ContactSection from "$components/projects-page/contact-section.svelte";
+    import ProjectsSection from "$components/projects.svelte";
 
     // Toast State (Svelte 5 Runes)
     let toastMessage = $state("");
@@ -48,6 +50,9 @@
                 onMissing={triggerToast}
                 fromHomePage={false}
                 limit={12}
+            />
+            <ContactSection 
+                onMissing={triggerToast}
             />
             <Footer />
         </div>
