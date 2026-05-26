@@ -44,8 +44,8 @@
   ];
 </script>
 
-<section id="skills" class="py-24 border-t border-border-color">
-  <div class="w-full p-8 md:p-12">
+<section id="skills" class="my-auto border-t border-border-color">
+  <div class="w-full px-8 lg:px-12 py-8 lg:py-18">
     <p class="text-brand-primary font-mono text-sm mb-4 tracking-widest uppercase">03. Technical Arsenal</p>
     <h2 class="text-3xl md:text-5xl font-light tracking-tighter text-white leading-tight">
       Skills and <br /> <span class="opacity-40 italic">Offerings</span>

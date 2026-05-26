@@ -27,9 +27,7 @@
 </script>
 
 <svelte:head>
-    <SEO
-        title="Dagmawi Napoleon Bogale | Software Engineer (Ethiopia)"
-    />
+    <SEO title="Dagmawi Napoleon Bogale | Software Engineer (Ethiopia)" />
 </svelte:head>
 
 <div
@@ -47,7 +45,13 @@
         <div class="px-4 md:px-12">
             <div id="home"><Landing /></div>
             <div id="experience"><Experience /></div>
-            <div id="projects"><Projects onMissing={triggerToast} /></div>
+            <div id="projects">
+                <Projects
+                    onMissing={triggerToast}
+                    fromHomePage={true}
+                    limit={10}
+                />
+            </div>
             <div id="skills"><Offerings /></div>
             <div id="contact"><Contact onMissing={triggerToast} /></div>
             <Footer />

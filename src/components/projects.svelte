@@ -23,10 +23,15 @@
         tech?: string[];
     }
 
-    let { onMissing } = $props<{ onMissing: (msg: string) => void }>();
+    // 1. Added 'limit' to the destructured props with a default fallback
+    let { onMissing, fromHomePage, limit = 10 } = $props<{ 
+        onMissing: (msg: string) => void; 
+        fromHomePage: boolean | true;
+        limit?: number; 
+    }>();
     
     // Real project data from your resume
-    let projects: Project[] = [
+    let allProjects: Project[] = [
         { 
             title: 'Gojo Getaways', 
             description: 'Vacation Home Management & Booking Ecosystem for Ethiopian property owners and International Travellers.', 
@@ -125,6 +130,9 @@
         },
     ];
 
+    // 2. Use $derived to automatically slice the array when the limit prop changes
+    let projects = $derived(allProjects.slice(0, limit));
+
     let activeProject = $state<Project | null>(null);
     let currentImgIndex = $state(0);
 
@@ -140,14 +148,21 @@
     }
 </script>
 
-<section class="py-24 border-t border-border-color">
-    <div class="w-full p-8 md:p-12">
-        <p class="text-brand-primary font-mono text-sm mb-4 tracking-widest uppercase">02. Selected Works</p>
-        <h2 class="text-3xl md:text-5xl font-light tracking-tighter text-white leading-tight">
-            Personal <br /> <span class="opacity-40 italic">Projects</span>
-        </h2>
+<section id="projects" class="my-auto border-t border-border-color">
+    <div class="w-full px-8 lg:px-12 py-8 lg:py-18">
+        {#if fromHomePage}
+            <p class="text-brand-primary font-mono text-sm mb-4 tracking-widest uppercase">02. Selected Works</p>
+            <h2 class="text-3xl md:text-5xl font-light tracking-tighter text-white leading-tight">
+                Personal <br /> <span class="opacity-40 italic">Projects</span>
+            </h2>
 
-        <div class="mt-8 h-px w-20 bg-brand-primary opacity-50"></div>
+            <div class="mt-8 h-px w-20 bg-brand-primary opacity-50"></div>
+        {:else}
+            <h2 class="text-3xl md:text-5xl font-light tracking-tighter text-white leading-tight">
+                Explore <br /> <span class="opacity-40 italic">My Creations</span>
+            </h2>
+            <div class="mt-8 h-px w-20 bg-brand-primary opacity-50"></div>
+        {/if}
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-0 border-l border-t border-border-color">
