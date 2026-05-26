@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Github, Linkedin, Send, Instagram, Phone } from 'lucide-svelte';
+    import { Send, Phone } from 'lucide-svelte';
     import { copyToClipboard } from "../utils/utils";
     import Codeforces from './icons/codeforces.svelte';
     import Leetcode from './icons/leetcode.svelte';
@@ -30,17 +30,22 @@
         <div class="p-6 border border-border-color text-left">
             <div class="grid grid-cols-2 md:grid-cols-3 gap-2">
                 <a target="_blank" href="https://github.com/dagin34" class="border border-border-color py-6 px-8 group flex flex-col gap-y-3 items-center justify-center">
-                    <span class="group-hover:text-brand-primary"><Github size={20} /></span>
+                    <span class="group-hover:text-brand-primary">
+                        <i class="devicon-github-original"></i>
+                    </span>
                     <span class="group-hover:text-brand-primary text-xs md:text-md">GitHub</span>
                 </a>
                 <a target="_blank" href="https://linkedIn.com/in/dagin34" class="border border-border-color py-6 px-8 group flex flex-col gap-y-3 items-center justify-center">
-                    <span class="group-hover:text-brand-primary"><Linkedin size={20} /></span>
+                    <span class="group-hover:text-brand-primary">
+                        <i class="devicon-linkedin-plain"></i>
+                    </span>
                     <span class="group-hover:text-brand-primary text-xs md:text-md">LinkedIn</span>
                 </a>
-                <a target="_blank" href="https://instagram.com/dagi_n34" class="border border-border-color py-6 px-8 group flex flex-col gap-y-3 items-center justify-center">
+                <!-- TODO: Find an Instagram Icon -->
+                <!-- <a target="_blank" href="https://instagram.com/dagi_n34" class="border border-border-color py-6 px-8 group flex flex-col gap-y-3 items-center justify-center">
                     <span class="group-hover:text-brand-primary"><Instagram size={20} /></span>
                     <span class="group-hover:text-brand-primary text-xs md:text-md">Instagram</span>
-                </a>
+                </a> -->
                 <a target="_blank" href="https://t.me/dagi_n34" class="border border-border-color py-6 px-8 group flex flex-col gap-y-3 items-center justify-center">
                     <span class="group-hover:text-brand-primary"><Send size={20} /></span>
                     <span class="group-hover:text-brand-primary text-xs md:text-md">Telegram</span>
