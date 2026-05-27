@@ -21,12 +21,8 @@ const technologies: Technologies[] = [
     { name: "Bootstrap", icon: "devicon-bootstrap-plain colored" },
     { name: "Selenium", icon: "devicon-selenium-original colored" },
     { name: "SQL", icon: "devicon-sqlite-plain colored" },
-    { name: "C#", icon: "devicon-csharp-plain colored" },
-    { name: ".Net", icon: "devicon-dot-net-plain colored" },
-    { name: "Java", icon: "devicon-java-plain colored" },
     { name: "PostgreSQL", icon: "devicon-postgresql-plain colored" },
     { name: "Github", icon: "devicon-github-original" },
-    { name: "SpringBoot", icon: "devicon-spring-plain colored" },
 ];
 
 export default technologies;
