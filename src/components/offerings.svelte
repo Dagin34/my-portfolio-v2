@@ -2,17 +2,13 @@
   import { ArrowRight } from "lucide-svelte";
 
   const frontend_skills = [
-    "Next",
-    "React",
+    "Next.js",
+    "React.js",
     "Svelte",
     "Svelte Kit",
-    "Java",
     "JavaScript",
     "TypeScript",
     "TailwindCSS",
-    "HTML",
-    "CSS",
-    "Bootstrap",
     "Framer",
     "Flutter",
     "React Native",
@@ -24,19 +20,16 @@
     "Express.js",
     "Firebase",
     "BetterAuth",
-    "ASP.NET",
-    "Postman",
     "MongoDB",
     "SQL",
     "SQLite",
     "PostgreSQL",
   ];
   const other_skills = [
-    "Github",
-    "CI/CD",
+    "Git",
+    "Postman",
     "Docker",
     "Figma",
-    "RESTful API",
     "Selenium",
     "SEO optimization",
     "Adobe Illustrator",
@@ -119,18 +112,6 @@
         {/each}
       </ul>
     </div>
-
-    <!-- <div class="p-10 border-r border-b border-border-color hover:bg-white/2 transition-colors">
-            <h4 class="text-sm font-mono text-brand-primary mb-6 uppercase">Specialized</h4>
-            <ul class="space-y-3">
-                {#each ['AI/Machine Learning', 'Cloud Architecture', 'Agile Delivery', 'Systems Security'] as item}
-                    <li class="flex items-center gap-2 group">
-                        <span class="text-brand-primary opacity-0 group-hover:opacity-100 transition-opacity">→</span>
-                        <span class="text-lg font-light opacity-70 group-hover:opacity-100">{item}</span>
-                    </li>
-                {/each}
-            </ul>
-        </div> -->
   </div>
 
   <div

@@ -22,7 +22,7 @@
             <div class="flex-1 p-8 md:p-12 border-b md:border-b-0 md:border-r border-border-color">
                 <h2 class="text-2xl md:text-4xl font-light text-gray-200">{heroText}</h2>
                 <p class="mt-6 text-xs md:text-sm text-gray-400 font-light leading-relaxed max-w-sm">
-                    Innovative software engineer from Addis Ababa. I build scalable, high-performance systems with cloud-ready architectures.
+                    Full Stack Dev from Addis Ababa focused on clean code, meaningful products, user experience, and a knack for basketball.
                 </p>
             </div>
             

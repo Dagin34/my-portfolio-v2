@@ -13,7 +13,7 @@
         >
       </a>
       <p class="mt-6 text-xs md:text-sm font-light text-gray-400 leading-relaxed max-w-sm">
-        Software Engineer specialized in building cloud-ready, high-performance
+        Full Stack Dev specialized in building high-impact, high-performance ERP
         systems. Graduating Feb 2026 from <span class="font-semibold"
           >HiLCoE</span
         > School of Computer Science and Technologies.
@@ -104,17 +104,11 @@
   <div
     class="flex flex-col md:flex-row justify-between items-center p-8 border-t border-x border-border-color"
   >
-    <div class="flex items-center gap-4">
-      <div class="h-2 w-2 rounded-full bg-green-500 animate-pulse"></div>
-      <p class="text-[10px] font-mono opacity-40 uppercase tracking-widest">
-        System Status: Operational // 2025 Edition
-      </p>
-    </div>
 
     <p
       class="mt-4 md:mt-0 text-[10px] font-mono opacity-40 uppercase tracking-widest"
     >
-      Built with Svelte 5 & Tailwind v4
+      Designed and Developed by Me
     </p>
   </div>
 </footer>
