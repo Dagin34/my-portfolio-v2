@@ -18,7 +18,7 @@
 >
     <div class="absolute top-0 right-1/4 w-px h-full bg-linear-to-b from-white/5 via-transparent to-white/2 hidden lg:block"></div>
     <div class="relative z-10 w-full grid grid-cols-1 lg:grid-cols-12 items-start">
-        <div class="border-y border-border-color lg:col-span-7 flex flex-col justify-center h-full pl-8 py-12">
+        <div class="hover:bg-white/1 border-y border-border-color lg:col-span-7 flex flex-col justify-center h-full pl-8 py-12">
             <div class="flex items-center gap-3 mb-6">
                 <p class="text-brand-primary font-mono text-xs tracking-[0.3em] uppercase">
                     // The Archive
