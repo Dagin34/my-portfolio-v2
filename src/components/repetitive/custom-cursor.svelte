@@ -62,38 +62,48 @@
         position: fixed;
         top: 0;
         left: 0;
-        width: 3rem;
-        height: 3rem;
+        width: 2.5rem;
+        height: 2.5rem;
         border-radius: 50%;
-        background: #ff6900;
+        border: 1px solid rgba(255, 105, 0, 0.65);
+        background: rgba(255, 105, 0, 0.18);
+        box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.06), 0 0 24px rgba(255, 105, 0, 0.18);
+        backdrop-filter: blur(2px);
         pointer-events: none;
         z-index: 9999;
-        mix-blend-mode: difference;
-        
+        mix-blend-mode: normal;
+        opacity: 0.9;
+
         /* Flex center the dot initially */
         display: flex;
         align-items: center;
         justify-content: center;
 
-        /* Only transition the scale/size, not the position (the spring handles position) */
-        transition: width 0.3s ease, height 0.3s ease;
+        /* Keep the cursor light and non-invasive while still animating */
+        transition: width 0.2s ease, height 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
     }
 
     .hovering {
-        width: 6rem;
-        height: 6rem;
+        width: 3.5rem;
+        height: 3.5rem;
+        background: rgba(255, 105, 0, 0.28);
+        border-color: rgba(255, 105, 0, 0.95);
+        box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08), 0 0 30px rgba(255, 105, 0, 0.28);
     }
 
     /* Inner Ring */
     .dot {
-        width: 0.5rem;
-        height: 0.5rem;
-        background: #000; /* Tailwind red-500 */
+        width: 0.35rem;
+        height: 0.35rem;
+        background: #fff;
         border-radius: 50%;
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.35);
+        transition: width 0.2s ease, height 0.2s ease, background-color 0.2s ease;
     }
 
     .hovering-dot {
-        width: 0.8rem;
-        height: 0.8rem;
+        width: 0.55rem;
+        height: 0.55rem;
+        background: #ffb066;
     }
 </style>

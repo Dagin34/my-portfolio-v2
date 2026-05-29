@@ -36,7 +36,7 @@
     <div class="mt-20 grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-6xl">
         <!-- Location block with background image, grayscale hover transition, and text overlay protection -->
         <div
-            class="group relative overflow-hidden p-6 border border-border-color text-left flex flex-col items-center justify-center min-h-[250px] md:min-h-full"
+            class="group relative overflow-hidden p-6 border border-border-color text-left flex flex-col items-center justify-center min-h-62 md:min-h-full"
         >
             <!-- Background Image (Loads from static/ folder) -->
             <img
