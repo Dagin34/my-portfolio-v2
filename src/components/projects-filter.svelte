@@ -29,8 +29,8 @@
     <!-- Search and Tech Filter Group -->
     <div class="flex w-full gap-3 items-end flex-1 max-w-2xl">
         <!-- Tech Dropdown Selector -->
-        <div class="relative min-w-[160px]">
-            <select 
+        <div class="relative min-w-40">
+            <select
                 bind:value={selectedTech}
                 class="w-full border border-border-color px-4 py-2.5 text-xs text-white font-light focus:outline-none focus:border-brand-primary/50 transition-colors appearance-none cursor-pointer"
             >

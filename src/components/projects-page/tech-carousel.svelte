@@ -31,25 +31,3 @@
         </div>
     </div>
 </div>
-
-<style>
-    @keyframes scroll {
-        0% {
-            transform: translateX(0);
-        }
-        100% {
-            transform: translateX(-50%);
-        }
-    }
-
-    .marquee-track {
-        display: flex;
-        width: max-content;
-        animation: scroll 40s linear infinite;
-    }
-
-    /* Pause animation on hover */
-    .marquee-track:hover {
-        animation-play-state: paused;
-    }
-</style>

@@ -47,7 +47,7 @@
           <a
             href="#skills"
             class="hover:text-brand-primary hover:opacity-100 transition-all"
-            >03. Offerings</a
+            >03. Skills</a
           >
         </li>
         <li>
