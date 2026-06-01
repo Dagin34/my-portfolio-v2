@@ -7,13 +7,21 @@
     class="relative min-h-screen border-t border-border-color flex flex-col md:flex-row"
 >
     <div class="w-full md:w-1/3 p-8 md:p-12 md:sticky md:top-20 md:h-fit">
-        <p class="text-brand-primary font-mono text-sm mb-4 tracking-widest uppercase">01. Career Path</p>
-        <h2 class="text-3xl md:text-5xl font-light tracking-tighter text-white leading-tight">
+        <p
+            class="text-brand-primary font-mono text-sm mb-4 tracking-widest uppercase"
+        >
+            01. Career Path
+        </p>
+        <h2
+            class="text-3xl md:text-5xl font-light tracking-tighter text-white leading-tight"
+        >
             Work <br /> <span class="opacity-40 italic">History</span>
         </h2>
 
         <div class="mt-8 h-px w-20 bg-brand-primary opacity-50"></div>
-        <p class="mt-8 text-xs md:text-sm text-gray-400 font-light leading-relaxed max-w-xs">
+        <p
+            class="mt-8 text-xs md:text-sm text-gray-400 font-light leading-relaxed max-w-xs"
+        >
             My journey through the Ethiopian tech landscape, from founding
             startups to scaling enterprise systems.
         </p>
@@ -48,7 +56,9 @@
                         {exp.company}
                     </h3>
 
-                    <p class="text-xs md:text-sm mt-4 text-gray-400 font-light leading-5 md:leading-7 max-w-xl">
+                    <p
+                        class="text-xs md:text-sm mt-4 text-gray-400 font-light leading-5 md:leading-7 max-w-xl"
+                    >
                         {exp.description}
                     </p>
 
