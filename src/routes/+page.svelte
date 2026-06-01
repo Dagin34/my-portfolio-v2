@@ -4,13 +4,16 @@
     import VerticalLines from "$components/repetitive/vertical-lines.svelte";
     import Projects from "$components/projects.svelte";
     import Experience from "$components/experience.svelte";
-    import Offerings from "$components/offerings.svelte";
+    import Languages from "$components/languages.svelte";
     import Contact from "$components/contact.svelte";
     import Footer from "$components/footer.svelte";
     import ScrollToTop from "$components/repetitive/scroll-to-top.svelte";
     import Toast from "$components/repetitive/toast.svelte";
     import SEO from "$components/repetitive/SEO.svelte";
     import CustomCursor from "$components/repetitive/custom-cursor.svelte";
+    import Offerings from "$components/offerings.svelte";
+    import ScrollTwirly from "$components/repetitive/scroll-twirly.svelte";
+    import About from "$components/about.svelte";
 
     // Toast State (Svelte 5 Runes)
     let toastMessage = $state("");
@@ -44,16 +47,25 @@
 
         <div class="px-4 md:px-12">
             <div id="home"><Landing /></div>
-            <div id="experience"><Experience /></div>
-            <div id="projects">
-                <Projects
-                    onMissing={triggerToast}
-                    fromHomePage={true}
-                    limit={10}
-                />
+            <div id="about"><About /></div>
+            
+            <!-- Relative container holding the spaghetti line and mid-page content -->
+            <div class="relative w-full overflow-visible">
+                <ScrollTwirly color="#ff6900" girth={81} />
+                
+                <div id="experience" class="relative z-10"><Experience /></div>
+                <div id="projects" class="relative z-10">
+                    <Projects
+                        onMissing={triggerToast}
+                        fromHomePage={true}
+                        limit={10}
+                    />
+                </div>
+                <div id="skills" class="relative z-10"><Languages /></div>
+                <div id="services" class="relative z-10"><Offerings /></div>
+                <div id="contact" class="relative z-10"><Contact onMissing={triggerToast} /></div>
             </div>
-            <div id="skills"><Offerings /></div>
-            <div id="contact"><Contact onMissing={triggerToast} /></div>
+
             <Footer />
         </div>
     </main>

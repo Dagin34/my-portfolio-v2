@@ -30,7 +30,7 @@
     <div class="w-full md:w-2/3 border-l border-border-color">
         {#each experiences as exp, i}
             <div
-                class="group relative p-8 md:p-16 border-b border-border-color hover:bg-white/1 transition-all duration-500"
+                class="group relative p-8 md:p-16 border-b border-border-color hover:bg-white/1 hover:backdrop-blur-2xl transition-all duration-800"
             >
                 <div
                     class="absolute right-0 top-0 h-full w-24 opacity-0 group-hover:opacity-10 transition-opacity overflow-hidden pointer-events-none"
@@ -41,10 +41,14 @@
                 </div>
 
                 <div class="relative z-10">
-                    <span
-                        class="text-xs font-mono text-brand-primary opacity-50 mb-2 block"
-                        >{exp.period}</span
-                    >
+                    <div class="flex flex-wrap items-center gap-x-2 text-xs font-mono mb-2 uppercase">
+                        <span class="text-brand-primary opacity-50">{exp.period}</span>
+                        <span class="text-gray-600">/</span>
+                        <span class="text-gray-400 text-[10px] tracking-wider">{exp.type}</span>
+                        <span class="text-gray-600">/</span>
+                        <span class="text-gray-400 text-[10px] tracking-wider">{exp.location}</span>
+                    </div>
+
                     <h3
                         class="text-xl md:text-3xl font-light text-white group-hover:translate-x-2 transition-transform duration-300"
                     >
@@ -83,17 +87,3 @@
         </a>
     </div>
 </section>
-
-<style>
-    .separator-pattern {
-        background-image: repeating-linear-gradient(
-            -45deg,
-            transparent,
-            transparent 10px,
-            rgba(255, 255, 255, 0.1) 10px,
-            rgba(255, 255, 255, 0.1) 11px
-        );
-        width: 100%;
-        height: 100%;
-    }
-</style>

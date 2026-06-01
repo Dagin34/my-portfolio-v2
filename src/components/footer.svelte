@@ -1,9 +1,16 @@
-<footer class="mt-32 border-t border-border-color bg-white/1">
+<script>
+  import navLinks from "$lib/navigation";
+</script>
+
+<footer class=" border-t border-border-color bg-white/1">
   <div class="grid grid-cols-1 md:grid-cols-4 border-x border-border-color">
     <div
       class="p-8 md:p-12 border-b md:border-b-0 md:border-r border-border-color col-span-1 md:col-span-2"
     >
-      <a href="#home" class="text-2xl font-semibold tracking-tighter group flex">
+      <a
+        href="#home"
+        class="text-2xl font-semibold tracking-tighter group flex"
+      >
         <span class="group-hover:text-brand-primary transition-colors"
           >Dagmawi</span
         >
@@ -12,11 +19,11 @@
           >.et</span
         >
       </a>
-      <p class="mt-6 text-xs md:text-sm font-light text-gray-400 leading-relaxed max-w-sm">
+      <p
+        class="mt-6 text-xs md:text-sm font-light text-gray-400 leading-relaxed max-w-sm"
+      >
         Full Stack Dev specialized in building high-impact, high-performance ERP
-        systems. Graduating Feb 2026 from <span class="font-semibold"
-          >HiLCoE</span
-        > School of Computer Science and Technologies.
+        systems.
       </p>
     </div>
 
@@ -29,34 +36,15 @@
         Sitemap
       </h4>
       <ul class="space-y-4 text-sm font-light opacity-60">
-        <li>
-          <a
-            href="#experience"
-            class="hover:text-brand-primary hover:opacity-100 transition-all"
-            >01. Experience</a
-          >
-        </li>
-        <li>
-          <a
-            href="#projects"
-            class="hover:text-brand-primary hover:opacity-100 transition-all"
-            >02. Projects</a
-          >
-        </li>
-        <li>
-          <a
-            href="#skills"
-            class="hover:text-brand-primary hover:opacity-100 transition-all"
-            >03. Offerings</a
-          >
-        </li>
-        <li>
-          <a
-            href="#contact"
-            class="hover:text-brand-primary hover:opacity-100 transition-all"
-            >04. Contact</a
-          >
-        </li>
+        {#each navLinks as navlink}
+          <li>
+            <a
+              href={navlink.href}
+              class="hover:text-brand-primary hover:opacity-100 transition-all"
+              >{navlink.id}. {navlink.label}</a
+            >
+          </li>
+        {/each}
       </ul>
     </div>
 
@@ -67,6 +55,14 @@
         Connect
       </h4>
       <ul class="space-y-4 text-sm font-light opacity-60">
+        <li>
+          <a
+            href="https://t.me/dagi_n34"
+            target="_blank"
+            class="hover:text-brand-primary hover:opacity-100 transition-all"
+            >Telegram</a
+          >
+        </li>
         <li>
           <a
             href="https://linkedin.com/in/dagin34"
@@ -104,7 +100,6 @@
   <div
     class="flex flex-col md:flex-row justify-between items-center p-8 border-t border-x border-border-color"
   >
-
     <p
       class="mt-4 md:mt-0 text-[10px] font-mono opacity-40 uppercase tracking-widest"
     >

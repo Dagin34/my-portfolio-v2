@@ -23,8 +23,7 @@
     </p>
 
     <a
-        target="_blank"
-        href="mailto:dagmawinapoleon02@gmail.com"
+        href="/projects#contact"
         class="group relative"
     >
         <h2
@@ -40,18 +39,31 @@
     </a>
 
     <div class="mt-20 grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-6xl">
+        <!-- Location block with background image, grayscale hover transition, and text overlay protection -->
         <div
-            class="group p-6 border border-border-color text-left flex flex-col items-center justify-center"
+            class="group relative overflow-hidden p-6 border border-border-color text-left flex flex-col items-center justify-center min-h-62 md:min-h-full"
         >
-            <p
-                class="group-hover:text-brand-primary text-[10px] uppercase opacity-40 mb-2"
-            >
-                Location
-            </p>
-            <p class="group-hover:text-brand-primary text-lg font-light">
-                Addis Ababa, Ethiopia
-            </p>
+            <!-- Background Image (Loads from static/ folder) -->
+            <img
+                src="/headshot.jpg"
+                alt="Dagmawi Napoleon"
+                class="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 ease-in-out"
+            />
+            <!-- Dark Overlay to maintain text contrast -->
+            <div class="absolute inset-0 bg-black/70 group-hover:bg-black/50 transition-colors duration-700"></div>
+
+            <div class="relative z-10 text-center">
+                <p
+                    class="group-hover:text-brand-primary text-[10px] uppercase opacity-60 group-hover:opacity-100 transition-all duration-500 mb-2 font-mono"
+                >
+                    Location
+                </p>
+                <p class="group-hover:text-brand-primary text-lg font-light transition-colors duration-500">
+                    Addis Ababa, Ethiopia
+                </p>
+            </div>
         </div>
+
         <div class="p-6 border border-border-color text-left">
             <div class="grid grid-cols-2 md:grid-cols-3 gap-2">
                 <a

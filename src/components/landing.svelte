@@ -1,11 +1,13 @@
 <script>
+    import HomeTechCarousel from "./home-tech-carousel.svelte";
+
     // Using Svelte 5 Runes for any dynamic layout logic
     let heroText = $state("Software Engineer");
 </script>
 
-<section id="home" class="min-h-screen flex flex-col justify-center border-b border-border-color relative">
-    <div class="pt-24 pb-4 pl-4">
-        <p class="text-[10px] lg:text-[12px] font-mono text-brand-primary uppercase tracking-[0.4em] opacity-80">
+<section id="home" class="min-h-screen flex flex-col justify-center border-b border-border-color">
+    <div class="pt-24 pb-4 pl-4 max-md:py-8">
+        <p class="text-[10px] max-md:hidden lg:text-[12px] font-mono text-brand-primary uppercase tracking-[0.4em] opacity-80">
             Available for new opportunities — 2026
         </p>
     </div>
@@ -51,11 +53,5 @@
         </div>
     </div>
 
-    <div class="border-x border-b border-border-color p-8 flex flex-wrap gap-12 opacity-40 grayscale hover:grayscale-0 transition-all duration-700">
-        <span class="text-xs font-mono tracking-tighter uppercase">FastAPI</span>
-        <span class="text-xs font-mono tracking-tighter uppercase">Next.js</span>
-        <span class="text-xs font-mono tracking-tighter uppercase">SvelteKit</span>
-        <span class="text-xs font-mono tracking-tighter uppercase">Node.js</span>
-        <span class="text-xs font-mono tracking-tighter uppercase">React.js</span>
-    </div>
+    <HomeTechCarousel />
 </section>
