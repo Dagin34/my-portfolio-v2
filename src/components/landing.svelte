@@ -6,8 +6,8 @@
 </script>
 
 <section id="home" class="min-h-screen flex flex-col justify-center border-b border-border-color">
-    <div class="pt-24 pb-4 pl-4">
-        <p class="text-[10px] lg:text-[12px] font-mono text-brand-primary uppercase tracking-[0.4em] opacity-80">
+    <div class="pt-24 pb-4 pl-4 max-md:py-8">
+        <p class="text-[10px] max-md:hidden lg:text-[12px] font-mono text-brand-primary uppercase tracking-[0.4em] opacity-80">
             Available for new opportunities — 2026
         </p>
     </div>
@@ -53,12 +53,5 @@
         </div>
     </div>
 
-    <div class="bg-brand-primary border border-border-color py-6 flex flex-wrap gap-12 opacity-80 transition-all duration-700">
-        <!-- <span class="text-xs font-mono tracking-tighter uppercase">FastAPI</span>
-        <span class="text-xs font-mono tracking-tighter uppercase">Next.js</span>
-        <span class="text-xs font-mono tracking-tighter uppercase">SvelteKit</span>
-        <span class="text-xs font-mono tracking-tighter uppercase">Node.js</span>
-        <span class="text-xs font-mono tracking-tighter uppercase">React.js</span> -->
-        <HomeTechCarousel />
-    </div>
+    <HomeTechCarousel />
 </section>
