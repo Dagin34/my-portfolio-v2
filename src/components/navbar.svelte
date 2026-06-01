@@ -1,16 +1,10 @@
 <script>
     import { onMount } from 'svelte';
+    import navLinks from '$lib/navigation';
 
     // Svelte 5 Runes for state management
     let scrolled = $state(false);
     let mobileMenuOpen = $state(false);
-
-    const navLinks = [
-        { id: '01', label: 'Experience', href: '/#experience' },
-        { id: '02', label: 'Projects', href: '/projects' },
-        { id: '03', label: 'Skills', href: '/#skills' },
-        { id: '04', label: 'Contact', href: '/#contact' }
-    ];
 
     onMount(() => {
         const handleScroll = () => {
@@ -46,9 +40,9 @@
                     <li>
                         <a 
                             href={link.href} 
-                            class="relative px-3 py-7 text-md font-medium transition-colors hover:text-brand-primary group"
+                            class="relative px-3 py-7 text-sm font-medium transition-colors hover:text-brand-primary group"
                         >
-                            <span class="text-[12px] font-mono opacity-50 mr-1">{link.id}.</span>
+                            <span class="text-[10px] font-mono opacity-50 mr-1">{link.id}.</span>
                             {link.label}
                             <span class="absolute bottom-0 left-0 w-0 h-px bg-brand-primary transition-all group-hover:w-full"></span>
                         </a>
