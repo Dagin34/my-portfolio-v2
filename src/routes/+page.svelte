@@ -13,6 +13,7 @@
     import CustomCursor from "$components/repetitive/custom-cursor.svelte";
     import Offerings from "$components/offerings.svelte";
     import ScrollTwirly from "$components/repetitive/scroll-twirly.svelte";
+    import About from "$components/about.svelte";
 
     // Toast State (Svelte 5 Runes)
     let toastMessage = $state("");
@@ -46,6 +47,7 @@
 
         <div class="px-4 md:px-12">
             <div id="home"><Landing /></div>
+            <div id="about"><About /></div>
             
             <!-- Relative container holding the spaghetti line and mid-page content -->
             <div class="relative w-full overflow-visible">
@@ -60,7 +62,7 @@
                     />
                 </div>
                 <div id="skills" class="relative z-10"><Languages /></div>
-                <div id="offerings" class="relative z-10"><Offerings /></div>
+                <div id="services" class="relative z-10"><Offerings /></div>
                 <div id="contact" class="relative z-10"><Contact onMissing={triggerToast} /></div>
             </div>
 
