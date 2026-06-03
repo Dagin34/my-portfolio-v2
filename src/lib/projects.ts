@@ -12,7 +12,6 @@ import Wolfden from '$assets/project-images/wolfden.png';
 import WonderNest from '$assets/project-images/wonder-nest.png';
 import SFA from '$assets/project-images/sfa.png';
 import ENB from '$assets/project-images/enb-inventory.png';
-import Errium from '$assets/project-images/errium.png';
 
 // Define the Project type to fix the 'any' error
 export interface Project {

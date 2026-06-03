@@ -3,7 +3,7 @@
 
 @theme {
   /* This tells Tailwind to create classes like bg-background, text-primary, etc. */
-  --color-brand-primary: #ff6900;
+  --color-brand-primary: #ff6900; /* rgb(255, 105, 0) */
   --color-brand-secondary: #40b3ff;
   --color-background: #030712;
   --color-primary: #00bcff;
@@ -56,14 +56,13 @@
   animation-play-state: paused;
 }
 
-
 .separator-pattern {
   background-image: repeating-linear-gradient(
-    -45deg,
+    -45deg, 
     transparent,
-    transparent 10px,
-    rgba(255, 255, 255, 0.1) 10px,
-    rgba(255, 255, 255, 0.1) 11px
+    transparent 11px,
+    rgba(255, 255, 255, 0.1) 11px,
+    rgba(255, 255, 255, 0.1) 12px
   );
   width: 100%;
   height: 100%;
