@@ -5,7 +5,7 @@
     import Projects from "$components/projects.svelte";
     import Experience from "$components/experience.svelte";
     import Languages from "$components/languages.svelte";
-    import Contact from "$components/contact.svelte";
+    import Contact from "$components/projects-page/contact-section.svelte";
     import Footer from "$components/footer.svelte";
     import ScrollToTop from "$components/repetitive/scroll-to-top.svelte";
     import Toast from "$components/repetitive/toast.svelte";

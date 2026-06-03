@@ -36,7 +36,7 @@
 </script>
 
 <!-- Outer wrapper set to z-[9999] to clear any standard page content stacking -->
-<div class="fixed inset-0 z-[9999] flex items-center justify-center p-4 sm:p-6 md:p-12" transition:fade={{ duration: 300 }}>
+<div class="fixed inset-0 z-9999 flex items-center justify-center p-4 sm:p-6 md:p-12" transition:fade={{ duration: 300 }}>
     <!-- Backdrop -->
     <button
         onclick={onClose}
@@ -53,13 +53,13 @@
         <div class="absolute -inset-px bg-linear-to-br from-transparent via-brand-primary to-transparent opacity-100 transition-all duration-1000 blur-sm z-0"></div>
         <div class="absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-brand-primary to-transparent opacity-100 transition-opacity duration-1000 z-20"></div>
 
-        <div class="relative z-10 w-full bg-[#030303] border border-border-color group-hover:border-brand-primary/30 transition-colors duration-700 shadow-2xl overflow-hidden flex flex-col md:flex-row h-[85vh] md:h-auto max-h-[850px]">
+        <div class="relative z-10 w-full bg-[#030303] border border-border-color group-hover:border-brand-primary/30 transition-colors duration-700 shadow-2xl overflow-hidden flex flex-col md:flex-row h-[85vh] md:h-auto max-h-212">
             
             <!-- Visuals Column -->
             <div class="w-full md:w-1/2 bg-black flex flex-col border-b md:border-b-0 md:border-r border-border-color relative overflow-hidden">
                 {#if activeProject.images.length > 0}
                     <!-- Image Display -->
-                    <div class="relative flex-1 overflow-hidden min-h-[250px] md:min-h-0 flex items-center justify-center bg-black">
+                    <div class="relative flex-1 overflow-hidden min-h-62.5 md:min-h-0 flex items-center justify-center bg-black">
                         {#key currentImgIndex}
                             <!-- 1. Ambient Background Layer -->
                             <img
