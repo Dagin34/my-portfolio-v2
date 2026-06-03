@@ -153,26 +153,3 @@
         </div>
     </div>
 {/if}
-
-<style>
-    /* Ensure the diagonal pattern stays consistent with the rest of your app */
-    .separator-pattern {
-        background-image: repeating-linear-gradient(
-            -45deg,
-            transparent,
-            transparent 15px,
-            rgba(255, 255, 255, 0.05) 15px,
-            rgba(255, 255, 255, 0.05) 16px
-        );
-        width: 100%;
-        height: 100%;
-    }
-
-    /* Transition helper if not using svelte/transition */
-    :global(.fade-enter) {
-        opacity: 0;
-    }
-    :global(.fade-exit) {
-        opacity: 0;
-    }
-</style>
