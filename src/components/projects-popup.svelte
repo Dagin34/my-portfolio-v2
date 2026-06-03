@@ -23,50 +23,70 @@
             currentImgIndex = (currentImgIndex - 1 + activeProject.images.length) % activeProject.images.length;
         }
     }
+
+    // Svelte 5 effect to manage body scroll locks
+    $effect(() => {
+        const originalOverflow = document.body.style.overflow;
+        document.body.style.overflow = "hidden";
+
+        return () => {
+            document.body.style.overflow = originalOverflow;
+        };
+    });
 </script>
 
-<div class="fixed inset-0 z-1000 flex items-center justify-center p-4 sm:p-6 md:p-12" transition:fade={{ duration: 300 }}>
+<!-- Outer wrapper set to z-[9999] to clear any standard page content stacking -->
+<div class="fixed inset-0 z-[9999] flex items-center justify-center p-4 sm:p-6 md:p-12" transition:fade={{ duration: 300 }}>
     <!-- Backdrop -->
     <button
         onclick={onClose}
-        class="absolute inset-0 bg-black/85 backdrop-blur-xl transition-all"
+        class="absolute inset-0 bg-black/90 backdrop-blur-xl transition-all"
         aria-label="close-modal"
     ></button>
 
     <!-- Modal Container -->
     <div
-        class="relative  w-full group"
+        class="relative w-full group"
         transition:fly={{ y: 40, duration: 600, easing: cubicOut }}
     >
         <!-- Glowing borders -->
         <div class="absolute -inset-px bg-linear-to-br from-transparent via-brand-primary to-transparent opacity-100 transition-all duration-1000 blur-sm z-0"></div>
         <div class="absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-brand-primary to-transparent opacity-100 transition-opacity duration-1000 z-20"></div>
 
-        <div class="relative z-100 w-full bg-[#030303] border border-border-color group-hover:border-brand-primary/30 transition-colors duration-700 shadow-2xl overflow-hidden flex flex-col md:flex-row h-[90vh] md:h-auto max-h-212">
+        <div class="relative z-10 w-full bg-[#030303] border border-border-color group-hover:border-brand-primary/30 transition-colors duration-700 shadow-2xl overflow-hidden flex flex-col md:flex-row h-[85vh] md:h-auto max-h-[850px]">
             
             <!-- Visuals Column -->
-            <div class="w-full md:w-1/2 bg-black/80 aspect-video md:aspect-auto flex flex-col border-b md:border-b-0 md:border-r border-border-color relative">
+            <div class="w-full md:w-1/2 bg-black flex flex-col border-b md:border-b-0 md:border-r border-border-color relative overflow-hidden">
                 {#if activeProject.images.length > 0}
                     <!-- Image Display -->
-                    <div class="relative flex-1 overflow-hidden min-h-62.5 md:min-h-0">
+                    <div class="relative flex-1 overflow-hidden min-h-[250px] md:min-h-0 flex items-center justify-center bg-black">
                         {#key currentImgIndex}
+                            <!-- 1. Ambient Background Layer -->
+                            <img
+                                src={activeProject.images[currentImgIndex]}
+                                alt=""
+                                class="absolute inset-0 object-cover w-full h-full opacity-40 blur-2xl scale-110 pointer-events-none transition-opacity duration-500"
+                                aria-hidden="true"
+                            />
+                            
+                            <!-- 2. Sharp Object-Contain Foreground Layer -->
                             <img
                                 in:fade={{ duration: 400 }}
                                 src={activeProject.images[currentImgIndex]}
                                 alt="Gallery View"
-                                class="absolute inset-0 object-cover w-full h-full opacity-80 group-hover:opacity-100 transition-opacity duration-500"
+                                class="relative z-10 max-w-full max-h-full object-contain select-none"
                             />
                         {/key}
                         
                         <!-- Click zones for image switching -->
-                        <div class="absolute inset-0 flex">
-                            <button onclick={prevImg} class="w-1/2 h-full flex items-center justify-start p-4 group/left outline-none">
-                                <div class="bg-black/50 p-2 border border-white/10 opacity-0 group-hover/left:opacity-100 transform -translate-x-4 group-hover/left:translate-x-0 transition-all backdrop-blur-sm hover:border-brand-primary/50 hover:text-brand-primary">
+                        <div class="absolute inset-0 z-20 flex">
+                            <button onclick={prevImg} class="w-1/2 h-full flex items-center justify-start p-4 group/left outline-none" aria-label="Previous Image">
+                                <div class="bg-black/60 p-2 border border-white/10 opacity-0 group-hover/left:opacity-100 transform -translate-x-4 group-hover/left:translate-x-0 transition-all backdrop-blur-sm hover:border-brand-primary/50 hover:text-brand-primary">
                                     <ChevronLeft size={20} />
                                 </div>
                             </button>
-                            <button onclick={nextImg} class="w-1/2 h-full flex items-center justify-end p-4 group/right outline-none">
-                                <div class="bg-black/50 p-2 border border-white/10 opacity-0 group-hover/right:opacity-100 transform translate-x-4 group-hover/right:translate-x-0 transition-all backdrop-blur-sm hover:border-brand-primary/50 hover:text-brand-primary">
+                            <button onclick={nextImg} class="w-1/2 h-full flex items-center justify-end p-4 group/right outline-none" aria-label="Next Image">
+                                <div class="bg-black/60 p-2 border border-white/10 opacity-0 group-hover/right:opacity-100 transform translate-x-4 group-hover/right:translate-x-0 transition-all backdrop-blur-sm hover:border-brand-primary/50 hover:text-brand-primary">
                                     <ChevronRight size={20} />
                                 </div>
                             </button>
@@ -74,7 +94,7 @@
                     </div>
                     
                     <!-- Progress bar indicator -->
-                    <div class="h-0.5 w-full bg-border-color flex relative z-100">
+                    <div class="h-0.5 w-full bg-border-color flex relative z-30">
                         {#each activeProject.images as _, i}
                             <div class="h-full flex-1 transition-all duration-500 {i === currentImgIndex ? 'bg-brand-primary shadow-[0_0_10px_var(--color-brand-primary)]' : 'bg-transparent'}"></div>
                         {/each}
