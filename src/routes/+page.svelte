@@ -46,11 +46,11 @@
         <VerticalLines position={"right"} />
 
         <div class="px-4 md:px-12">
+            <div class="relative w-full overflow-visible">
             <div id="home"><Landing /></div>
-            <div id="about"><About /></div>
+            <!-- <div id="about"><About /></div> -->
             
             <!-- Relative container holding the spaghetti line and mid-page content -->
-            <div class="relative w-full overflow-visible">
                 <ScrollTwirly color="#ff6900" girth={81} />
                 
                 <div id="experience" class="relative z-10"><Experience /></div>

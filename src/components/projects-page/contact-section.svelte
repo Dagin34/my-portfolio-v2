@@ -55,18 +55,18 @@
         <!-- Left Sidebar: Informational Callout -->
         <div class="lg:col-span-5 p-8 lg:p-12 border-r border-b lg:border-b-0 border-border-color flex flex-col justify-between space-y-12">
             <div class="max-w-sm">
-                <p class="text-sm font-light text-gray-400 leading-relaxed">
+                <p class="text-sm font-light text-white/70 leading-relaxed">
                     Have an idea, project blueprint, or integration goal? Get in touch to discuss technical parameters, scope details, and scheduling availability.
                 </p>
             </div>
 
-            <div class="space-y-6">
-                <div class="flex items-center gap-4 text-xs font-mono text-gray-400">
+            <div class="space-y-4">
+                <div class="flex items-center gap-4 text-xs font-mono text-white">
                     <Mail size={16} class="text-brand-primary" />
                     <span class="tracking-wide">dagmawinapoleon02@gmail.com</span>
                 </div>
-                <div class="text-[10px] text-gray-500 font-mono tracking-wider">
-                    Average Response Time: 12hrs
+                <div class="text-[10px] text-white/70 font-mono tracking-wider">
+                    Average Response Time: <span class="text-brand-primary">12hrs</span>
                 </div>
             </div>
         </div>
@@ -74,7 +74,7 @@
         <!-- Right Side: Interactive Request Form -->
         <form 
             onsubmit={handleSubmit}
-            class="lg:col-span-7 p-8 lg:p-12 border-r border-border-color space-y-8 bg-black/10"
+            class="lg:col-span-7 p-8 lg:p-12 border-r border-border-color space-y-8 bg-black/10 backdrop-blur-sm"
         >
             <!-- Service Tag Selection -->
             <div class="space-y-3">
@@ -83,7 +83,7 @@
                         <button
                             type="button"
                             onclick={() => selectedService = service}
-                            class="px-3 py-1.5 border font-mono text-[9px] uppercase tracking-wider transition-all duration-300 {selectedService === service ? 'border-brand-primary text-brand-primary bg-brand-primary/5' : 'border-border-color text-gray-400 opacity-60 hover:opacity-100'}"
+                            class="bg-white/10 px-3 py-1.5 border font-mono text-[9px] uppercase tracking-wider transition-all duration-300 {selectedService === service ? 'border-brand-primary text-brand-primary bg-brand-primary/5' : 'border-border-color hover:border-brand-primary/50 text-white/70 hover:text-white opacity-60 hover:opacity-100'}"
                         >
                             {service}
                         </button>
@@ -100,7 +100,7 @@
                         placeholder="Name" 
                         required
                         disabled={isSending}
-                        class="w-full bg-transparent border-b border-border-color py-3 text-xs text-white placeholder-gray-600 focus:outline-none focus:border-brand-primary transition-colors disabled:opacity-40"
+                        class="w-full bg-black/10 pl-4 border-b border-white/20 py-3 text-xs text-white placeholder-white/20 focus:outline-none focus:border-brand-primary transition-colors disabled:opacity-40"
                     />
                 </div>
                 <div class="relative">
@@ -110,7 +110,7 @@
                         placeholder="Email Address" 
                         required
                         disabled={isSending}
-                        class="w-full bg-transparent border-b border-border-color py-3 text-xs text-white placeholder-gray-600 focus:outline-none focus:border-brand-primary transition-colors disabled:opacity-40"
+                        class="w-full bg-black/10 pl-4 border-b border-white/20 py-3 text-xs text-white placeholder-white/20 focus:outline-none focus:border-brand-primary transition-colors disabled:opacity-40"
                     />
                 </div>
             </div>
@@ -122,7 +122,7 @@
                     rows="4"
                     required
                     disabled={isSending}
-                    class="w-full bg-transparent border-b border-border-color py-3 text-xs text-white placeholder-gray-600 focus:outline-none focus:border-brand-primary transition-colors resize-none disabled:opacity-40"
+                    class="w-full bg-black/10 pl-4 border-b border-white/20 py-3 text-xs text-white placeholder-white/20 focus:outline-none focus:border-brand-primary transition-colors resize-none disabled:opacity-40"
                 ></textarea>
             </div>
 
