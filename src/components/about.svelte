@@ -6,32 +6,32 @@
 
   // Using Svelte 5 runes for the item data
   let items = $state([
-    { type: "img", src: kuriftu, area: "1/3", range: "2% 40%" },
-    { type: "text", content: "Addis Ababa Based", area: "1/3", range: "2% 40%" },
-    { type: "text", content: "Full Stack Dev", area: "3/3", range: "10% 40%" },
-    { type: "text", content: "A2SVian", area: "4/2", range: "15% 40%" },
-    { type: "text", content: "Backed by Google", area: "4/2", range: "20% 50%" },
-    { type: "img", src: basketball, area: "2/2", range: "10% 50%" },
-    { type: "text", content: "BasketBall Lover", area: "2/2", range: "10% 50%" },
-    { type: "img", src: arbaminch, area: "2/3", range: "20% 70%" },
-    { type: "text", content: "Problem Solver", area: "2/3", range: "20% 70%" },
-    { type: "text", content: "Continuous Learner", area: "1/2", range: "16% 60%" },
-    { type: "img", src: se7en, area: "3/1", range: "15% 50%" },
-    { type: "text", content: "Movie Lover", area: "3/1", range: "15% 50%" },
-    { type: "img", src: "./headshot.jpg", area: "4/3", range: "25% 70%" },
-    { type: "text", content: "Dagmawi Napoleon", area: "4/3", range: "25% 70%" },
+    { type: "img", src: kuriftu, area: "1/3", range: "10% 45%" },
+    { type: "text", content: "Addis Ababa Based", area: "1/3", range: "10% 45%" },
+    { type: "text", content: "Full Stack Dev", area: "3/3", range: "20% 50%" },
+    { type: "text", content: "A2SVian", area: "4/2", range: "25% 55%" },
+    { type: "text", content: "Backed by Google", area: "4/2", range: "30% 60%" },
+    { type: "img", src: basketball, area: "2/2", range: "20% 60%" },
+    { type: "text", content: "BasketBall Lover", area: "2/2", range: "20% 60%" },
+    { type: "img", src: arbaminch, area: "2/3", range: "30% 75%" },
+    { type: "text", content: "Problem Solver", area: "2/3", range: "30% 75%" },
+    { type: "text", content: "Continuous Learner", area: "1/2", range: "25% 70%" },
+    { type: "img", src: se7en, area: "3/1", range: "25% 65%" },
+    { type: "text", content: "Movie Lover", area: "3/1", range: "25% 65%" },
+    { type: "img", src: "./headshot.jpg", area: "4/3", range: "35% 80%" },
+    { type: "text", content: "Dagmawi Napoleon", area: "4/3", range: "35% 80%" },
   ]);
 </script>
 
 <!-- Wrap in a very tall container (400vh) to allow scrolling to drive the animation -->
-<section id="about" class="h-[600vh] relative border-b border-border-color">
+<section id="about" class="h-[400vh] relative border-b border-border-color">
   <div
     class="stuck-grid sticky top-0 h-screen w-full overflow-hidden flex justify-center items-center"
   >
     <!-- Center special text -->
     <div
       class="bg-white/5 p-8 border border-border-color grid-item special flex flex-col items-center justify-center text-center z-10"
-      style="--range: -20% 70%; --area: 2 / 2 / span 2 / span 2;"
+      style="--range: 0% 80%; --area: 2 / 2 / span 2 / span 2;"
     >
       <p
         class="text-[10px] md:text-[12px] font-mono text-brand-primary uppercase tracking-[0.4em] opacity-80 mb-2"
@@ -78,6 +78,12 @@
 </section>
 
 <style>
+  /* Define a named view-timeline on the parent section */
+  #about {
+    view-timeline-name: --about-timeline;
+    view-timeline-axis: block;
+  }
+
   /* The 3D animation keyframes */
   @keyframes zoom-in {
     0% {
@@ -85,9 +91,8 @@
       opacity: 0;
       filter: blur(10px);
     }
-    40%,
-    60% {
-      /* Holds in focus briefly in the middle of its timeline */
+    45%,
+    55% {
       transform: translateZ(0px) scale(1);
       opacity: 1;
       filter: blur(0px);
@@ -111,17 +116,16 @@
   .grid-item {
     transform-style: preserve-3d;
     grid-area: var(--area);
-    /* Fallback for non-supporting browsers */
-    opacity: 1;
+    opacity: 1; /* Fallback */
   }
 
-  /* Apply the scroll-timeline animations ONLY if the browser supports them */
-  @supports (animation-timeline: scroll()) {
+  /* Apply the scroll-timeline animations ONLY if supported */
+  @supports (animation-timeline: --about-timeline) or (animation-timeline: view()) {
     .grid-item {
-      opacity: 0; /* Hide initially, let animation reveal it */
+      opacity: 0;
       animation: zoom-in linear both;
-      animation-timeline: scroll(root block);
-      /* Inject the unique scroll ranges dynamically via the variable mapped in Svelte */
+      /* Link the animation to our custom timeline */
+      animation-timeline: --about-timeline;
       animation-range: var(--range);
       will-change: transform, opacity, filter;
     }
@@ -135,7 +139,6 @@
         filter: none !important;
       }
       .stuck-grid {
-        /* Simplify layout if reduced motion is enabled */
         display: flex;
         flex-wrap: wrap;
         gap: 2rem;
