@@ -1,4 +1,6 @@
-<script>
+<script lang="ts">
+    import { onMount } from "svelte";
+    import type Lenis from "lenis"; // Type-only import for compilation safety
     import Navbar from "$components/navbar.svelte";
     import Landing from "$components/landing.svelte";
     import VerticalLines from "$components/repetitive/vertical-lines.svelte";
@@ -13,19 +15,59 @@
     import CustomCursor from "$components/repetitive/custom-cursor.svelte";
     import Offerings from "$components/offerings.svelte";
     import ScrollTwirly from "$components/repetitive/scroll-twirly.svelte";
-    import About from "$components/about.svelte";
+    import Loader from "$components/repetitive/loader.svelte"; 
 
     // Toast State (Svelte 5 Runes)
     let toastMessage = $state("");
     let showToast = $state(false);
 
-    /**
-     * @param {string} msg
-     */
-    function triggerToast(msg) {
+    // Page Load State
+    let isPageReady = $state(false);
+
+    // Reference to the Lenis instance for cleanup
+    let lenisInstance: Lenis | null = null;
+
+    function triggerToast(msg: string): void {
         toastMessage = msg;
         showToast = true;
         setTimeout(() => (showToast = false), 3000);
+    }
+
+    onMount(() => {
+        // Keep the primary callback synchronous, initiate the async module import inside
+        const initLenis = async () => {
+            const { default: LenisModule } = await import("lenis");
+            
+            lenisInstance = new LenisModule({
+                duration: 2.4,          // Velocity scaling (higher is smoother & slower)
+                easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Physics curve
+                orientation: 'vertical',
+                gestureOrientation: 'vertical',
+                smoothWheel: true,
+                wheelMultiplier: 0.9,   // Slows down scroll step increments
+                infinite: false,
+            });
+
+            function raf(time: number) {
+                lenisInstance?.raf(time);
+                requestAnimationFrame(raf);
+            }
+
+            requestAnimationFrame(raf);
+        };
+
+        initLenis();
+
+        // Return the cleanup function synchronously
+        return () => {
+            if (lenisInstance) {
+                lenisInstance.destroy();
+            }
+        };
+    });
+
+    function handleLoaderComplete(): void {
+        isPageReady = true;
     }
 </script>
 
@@ -33,8 +75,14 @@
     <SEO title="Dagmawi Napoleon Bogale | Software Engineer (Ethiopia)" />
 </svelte:head>
 
+<!-- Mounts the loader and triggers display on completion -->
+<Loader onComplete={handleLoaderComplete} />
+
 <div
     class="bg-background text-white selection:bg-brand-primary selection:text-white"
+    class:opacity-0={!isPageReady}
+    class:transition-opacity={isPageReady}
+    class:duration-700={isPageReady}
 >
     <Navbar />
     <Toast message={toastMessage} visible={showToast} />
@@ -47,10 +95,8 @@
 
         <div class="px-4 md:px-12">
             <div class="relative w-full overflow-visible">
-            <div id="home"><Landing /></div>
-            <!-- <div id="about"><About /></div> -->
-            
-            <!-- Relative container holding the spaghetti line and mid-page content -->
+                <div id="home"><Landing /></div>
+                
                 <ScrollTwirly color="#ff6900" girth={81} />
                 
                 <div id="experience" class="relative z-10"><Experience /></div>
@@ -70,8 +116,10 @@
         </div>
     </main>
 </div>
+
 <ScrollToTop />
 <CustomCursor />
+
 <div 
     aria-hidden="true" 
     class="hidden absolute w-0 h-0 overflow-hidden opacity-0 pointer-events-none"
@@ -82,6 +130,14 @@
 
 <style>
     :global(html) {
-        scroll-behavior: smooth;
+        scroll-behavior: initial !important; /* Overridden to allow Lenis virtual scrolling to control the viewport */
+    }
+
+    :global(html.lenis, html.lenis body) {
+        height: auto;
+    }
+
+    :global(.lenis-scrolling iframe) {
+        pointer-events: none;
     }
 </style>
