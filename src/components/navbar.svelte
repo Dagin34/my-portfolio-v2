@@ -58,7 +58,7 @@
     <nav
         class="w-full transition-all duration-500 ease-in-out pointer-events-auto
         {scrolled
-            ? 'max-w-5xl bg-background/70 backdrop-blur-md border border-border-color/60 rounded-full shadow-[0_12px_40px_rgba(0,0,0,0.15)] px-8 py-4'
+            ? 'max-w-5xl bg-white/6 backdrop-blur-sm border border-border-color/60 rounded-full shadow-[0_12px_40px_rgba(0,0,0,0.15)] px-8 py-4'
             : 'max-w-7xl bg-background/0 border-b border-border-color/10 px-8 py-5 md:py-6'}"
     >
         <div class="flex items-center justify-between">
