@@ -49,12 +49,12 @@
                         <span class="text-gray-400 text-[10px] tracking-wider">{exp.location}</span>
                     </div>
 
-                    <h3
+                    <h1
                         class="text-xl md:text-3xl font-light text-white group-hover:translate-x-2 transition-transform duration-300"
                     >
                         {exp.role} <span class="text-gray-500">@</span>
                         {exp.company}
-                    </h3>
+                    </h1>
 
                     <p
                         class="text-xs md:text-sm mt-4 text-gray-400 font-light leading-5 md:leading-7 max-w-xl"

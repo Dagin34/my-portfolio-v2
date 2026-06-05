@@ -183,16 +183,20 @@
             </p>
         </div>
     {/if}
-
-    <a
-        href="/projects"
-        class="flex items-center justify-between p-12 group hover:bg-brand-primary transition-all duration-500"
-    >
-        <span class="text-xl md:text-2xl font-light">View Full Repertoire</span>
-        <span class="text-4xl group-hover:translate-x-4 transition-transform"
-            >→</span
+    {#if fromHomePage}
+        <a
+            href="/projects"
+            class="flex items-center justify-between p-12 group hover:bg-brand-primary transition-all duration-500 border border-border-color"
         >
-    </a>
+            <span class="text-xl md:text-2xl font-light"
+                >View Full Repertoire</span
+            >
+            <span
+                class="text-4xl group-hover:translate-x-4 transition-transform"
+                >→</span
+            >
+        </a>
+    {/if}
 </section>
 
 {#if activeProject}

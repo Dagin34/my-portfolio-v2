@@ -65,6 +65,7 @@
                             <img
                                 src={activeProject.images[currentImgIndex]}
                                 alt=""
+                                loading="lazy"
                                 class="absolute inset-0 object-cover w-full h-full opacity-40 blur-2xl scale-110 pointer-events-none transition-opacity duration-500"
                                 aria-hidden="true"
                             />
@@ -74,6 +75,7 @@
                                 in:fade={{ duration: 400 }}
                                 src={activeProject.images[currentImgIndex]}
                                 alt="Gallery View"
+                                loading="lazy"
                                 class="relative z-10 max-w-full max-h-full object-contain select-none"
                             />
                         {/key}
@@ -221,13 +223,3 @@
         </div>
     </div>
 </div>
-
-<style>
-    /* Custom animation for the restricted visual scanner */
-    @keyframes scan {
-        0% { transform: translateY(-100%); opacity: 0; }
-        10% { opacity: 1; }
-        90% { opacity: 1; }
-        100% { transform: translateY(500%); opacity: 0; }
-    }
-</style>

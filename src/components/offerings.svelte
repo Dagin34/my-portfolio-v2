@@ -79,9 +79,9 @@
 
                         <!-- Card Content Block -->
                         <div class="">
-                            <h3 class="text-sm md:text-lg tracking-wide opacity-70 font-extrabold  text-white whitespace-pre-line mb-4 uppercase">
+                            <h1 class="text-sm md:text-lg tracking-wide opacity-70 font-extrabold  text-white whitespace-pre-line mb-4 uppercase">
                                 {item.title}
-                            </h3>
+                            </h1>
                             <div class="h-px w-full bg-white/10 mb-5"></div>
                             <p class="text-sm text-white opacity-80 font-light leading-relaxed">
                                 {item.description}
