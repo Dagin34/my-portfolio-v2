@@ -22,7 +22,7 @@
         
         <div class="flex flex-col md:flex-row border-t border-border-color">
             <div class="flex-1 p-8 md:p-12 border-b md:border-b-0 md:border-r border-border-color">
-                <h2 class="text-2xl md:text-4xl font-light text-gray-200">{heroText}</h2>
+                <h1 class="text-2xl md:text-4xl font-light text-gray-200">{heroText}</h1>
                 <p class="mt-6 text-xs md:text-sm text-gray-400 font-light leading-relaxed max-w-sm">
                     Full Stack Dev from Addis Ababa focused on clean code, meaningful products, user experience, and a knack for basketball.
                 </p>
@@ -45,7 +45,7 @@
                 </div>
                 
                 <div class="flex gap-4">
-                    <a href="#contact" class="flex-1 py-3 bg-white/4 hover:bg-brand-primary text-gray-300 text-center text-xs font-bold uppercase tracking-widest transition-all">
+                    <a href="#contact" class="flex-1 py-3 bg-white/4 hover:bg-brand-primary text-gray-300 text-center text-xs font-bold uppercase tracking-widest transition-all duration-400 ease-in-out">
                         Let's Talk
                     </a>
                 </div>
