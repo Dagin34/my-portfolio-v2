@@ -1,13 +1,13 @@
 <script lang="ts">
     import { onMount } from "svelte";
-    import type Lenis from "lenis"; // Type-only import for compilation safety
+    import type Lenis from "lenis";
     import Navbar from "$components/navbar.svelte";
     import Landing from "$components/landing.svelte";
     import VerticalLines from "$components/repetitive/vertical-lines.svelte";
     import Projects from "$components/projects.svelte";
     import Experience from "$components/experience.svelte";
     import Languages from "$components/languages.svelte";
-    import Contact from "$components/projects-page/contact-section.svelte";
+    import Contact from "$components/contact.svelte";
     import Footer from "$components/footer.svelte";
     import ScrollToTop from "$components/repetitive/scroll-to-top.svelte";
     import Toast from "$components/repetitive/toast.svelte";
@@ -16,56 +16,25 @@
     import Offerings from "$components/offerings.svelte";
     import ScrollTwirly from "$components/repetitive/scroll-twirly.svelte";
     import Loader from "$components/repetitive/loader.svelte"; 
+    import { handleLenisInit } from "$lib/lenis";
+
+    // Reference to the Lenis instance for cleanup
+    let lenisInstance: Lenis | null = null;
+    onMount(() => {
+        handleLenisInit(lenisInstance);
+    });
 
     // Toast State (Svelte 5 Runes)
     let toastMessage = $state("");
     let showToast = $state(false);
-
-    // Page Load State
-    let isPageReady = $state(false);
-
-    // Reference to the Lenis instance for cleanup
-    let lenisInstance: Lenis | null = null;
-
     function triggerToast(msg: string): void {
         toastMessage = msg;
         showToast = true;
         setTimeout(() => (showToast = false), 3000);
     }
 
-    onMount(() => {
-        // Keep the primary callback synchronous, initiate the async module import inside
-        const initLenis = async () => {
-            const { default: LenisModule } = await import("lenis");
-            
-            lenisInstance = new LenisModule({
-                duration: 2.4,          // Velocity scaling (higher is smoother & slower)
-                easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Physics curve
-                orientation: 'vertical',
-                gestureOrientation: 'vertical',
-                smoothWheel: true,
-                wheelMultiplier: 0.9,   // Slows down scroll step increments
-                infinite: false,
-            });
-
-            function raf(time: number) {
-                lenisInstance?.raf(time);
-                requestAnimationFrame(raf);
-            }
-
-            requestAnimationFrame(raf);
-        };
-
-        initLenis();
-
-        // Return the cleanup function synchronously
-        return () => {
-            if (lenisInstance) {
-                lenisInstance.destroy();
-            }
-        };
-    });
-
+    // Page Load State
+    let isPageReady = $state(false);
     function handleLoaderComplete(): void {
         isPageReady = true;
     }
@@ -127,17 +96,3 @@
 >
     preload
 </div>
-
-<style>
-    :global(html) {
-        scroll-behavior: initial !important; /* Overridden to allow Lenis virtual scrolling to control the viewport */
-    }
-
-    :global(html.lenis, html.lenis body) {
-        height: auto;
-    }
-
-    :global(.lenis-scrolling iframe) {
-        pointer-events: none;
-    }
-</style>

@@ -1,4 +1,7 @@
-<script>
+<script lang='ts'>
+    import { onMount } from "svelte";
+    import type Lenis from "lenis";
+
     import Navbar from "$components/navbar.svelte";
     import Footer from "$components/footer.svelte";
     import ScrollToTop from "$components/repetitive/scroll-to-top.svelte";
@@ -8,17 +11,21 @@
     import VerticalLines from "$components/repetitive/vertical-lines.svelte";
     
     import ProjectLanding from "$components/projects-page/projects-landing.svelte";
-    import ContactSection from "$components/projects-page/contact-section.svelte";
+    import ContactSection from "$components/contact.svelte";
     import ProjectsSection from "$components/projects.svelte";
+    import { handleLenisInit } from "$lib/lenis";
+    import ScrollTwirly from "$components/repetitive/scroll-twirly.svelte";
+
+    // Reference to the Lenis instance for cleanup
+    let lenisInstance: Lenis | null = null;
+    onMount(() => {
+        handleLenisInit(lenisInstance);
+    });
 
     // Toast State (Svelte 5 Runes)
     let toastMessage = $state("");
     let showToast = $state(false);
-
-    /**
-     * @param {string} msg
-     */
-    function triggerToast(msg) {
+    function triggerToast(msg: string) {
         toastMessage = msg;
         showToast = true;
         setTimeout(() => (showToast = false), 3000);
@@ -46,6 +53,7 @@
 
         <div class="px-4 md:px-12">
             <ProjectLanding />
+            <ScrollTwirly color="#ff6900" girth={100} />
             <ProjectsSection
                 onMissing={triggerToast}
                 fromHomePage={false}
@@ -60,9 +68,3 @@
 </div>
 <ScrollToTop />
 <CustomCursor />
-
-<style>
-    :global(html) {
-        scroll-behavior: smooth;
-    }
-</style>
