@@ -46,6 +46,26 @@
   }
 }
 
+/* Custom animation for the restricted visual scanner on Projects Popup */
+@keyframes scan {
+  0% { transform: translateY(-100%); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateY(500%); opacity: 0; }
+}
+
+:global(html) {
+  scroll-behavior: initial !important; /* Overridden to allow Lenis virtual scrolling to control the viewport */
+}
+
+:global(html.lenis, html.lenis body) {
+  height: auto;
+}
+
+:global(.lenis-scrolling iframe) {
+  pointer-events: none;
+}
+
 .marquee-track {
   display: flex;
   width: max-content;

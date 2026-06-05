@@ -33,7 +33,7 @@
             <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-primary/80 opacity-75"></span>
             <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-brand-primary"></span>
           </span>
-          <span class="text-xs font-mono text-gray-300 tracking-wider uppercase">
+          <span class="text-[9px] lg:text-xs font-mono text-gray-300 tracking-wider uppercase">
             Available for select projects
           </span>
         </div>
@@ -111,6 +111,15 @@
             >
               <span>Telegram</span>
               <span class="text-[10px] opacity-0 group-hover:opacity-100 transition-opacity font-mono">&nearr;</span>
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://leetcode.com/u/dagi_n34/"
+              class="text-gray-400 hover:text-brand-primary transition-colors flex items-center justify-between group"
+            >
+              <span>Leetcode</span>
+              <span class="text-[10px] opacity-0 group-hover:opacity-100 transition-opacity font-mono">&darr;</span>
             </a>
           </li>
           <li>
