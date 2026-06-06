@@ -6,8 +6,8 @@
 </script>
 
 <section id="home" class="min-h-screen flex flex-col justify-center border-b border-border-color">
-    <div class="pt-24 pb-4 pl-4 max-md:py-8">
-        <p class="text-[10px] max-md:hidden lg:text-[12px] font-mono text-brand-primary uppercase tracking-[0.4em] opacity-80">
+    <div class="pt-24 pb-4 pl-8 md:pl-12 max-md:py-8">
+        <p class="text-[9px] max-md:hidden lg:text-[11px] text-brand-primary uppercase tracking-[0.4em] opacity-80">
             Available for new opportunities — 2026
         </p>
     </div>
