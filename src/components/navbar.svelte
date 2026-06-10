@@ -58,7 +58,7 @@
     <nav
         class="w-full transition-all duration-500 ease-in-out pointer-events-auto
         {scrolled
-            ? 'max-w-5xl bg-white/6 backdrop-blur-sm border border-border-color/60 rounded-full shadow-[0_12px_40px_rgba(0,0,0,0.15)] px-8 py-4'
+            ? 'max-w-5xl bg-white/6 backdrop-blur-xs border-2 border-white/15 shadow-[0_12px_40px_rgba(0,0,0,0.15)] px-8 py-4'
             : 'max-w-7xl bg-background/0 border-b border-border-color/10 px-8 py-5 md:py-6'}"
     >
         <div class="flex items-center justify-between">
@@ -82,7 +82,7 @@
                     <li>
                         <button 
                             onclick={() => handleNavigation(link.href)} 
-                            class="relative px-4 py-1.5 text-sm font-medium rounded-full border border-transparent 
+                            class="relative px-4 py-1.5 text-sm font-medium border border-transparent 
                                    text-white/80 hover:text-white hover:border-brand-primary/80 hover:bg-brand-primary/20
                                    transition-all duration-300 ease-out group flex items-center"
                         >
