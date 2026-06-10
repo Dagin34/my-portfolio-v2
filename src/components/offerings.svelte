@@ -54,8 +54,6 @@
             <h2 class="text-3xl md:text-5xl font-light tracking-tighter text-white leading-tight">
             Services and <br /> <span class="opacity-40 italic">Offerings</span>
             </h2>
-
-            <div class="mt-8 h-px w-20 bg-brand-primary opacity-50"></div>
         </div>
 
         <!-- Lower Section: Horizontal Scrollable Cards -->

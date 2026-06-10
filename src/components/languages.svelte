@@ -46,8 +46,6 @@
     <h2 class="text-3xl md:text-5xl font-light tracking-tighter text-white leading-tight">
       Skills and <br /> <span class="opacity-40 italic">Languages</span>
     </h2>
-
-    <div class="mt-8 h-px w-20 bg-brand-primary opacity-50"></div>
   </div>
 
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 border-l border-t border-border-color">
