@@ -54,7 +54,7 @@
   </div>
 
   <div
-    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 border-l border-t border-border-color backdrop-blur-2xl"
+    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 border-l border-t border-border-color"
   >
     <div
       class="p-10 border-r border-b border-border-color hover:bg-white/2 transition-colors"
@@ -131,13 +131,5 @@
       with cloud-ready architectures. Experienced in leading Agile delivery with
       high impact.
     </p>
-    <!-- <div class="flex gap-6"> -->
-    <div class="text-center">
-      <span class="block text-3xl font-light text-brand-primary">3.75</span>
-      <span class="text-[10px] font-mono opacity-40 uppercase"
-        >Cumulative GPA
-      </span>
-    </div>
-    <!-- </div> -->
   </div>
 </section>
