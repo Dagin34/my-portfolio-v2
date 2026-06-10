@@ -59,7 +59,7 @@
         </div>
 
         <!-- Lower Section: Horizontal Scrollable Cards -->
-        <div class="relative w-full overflow-hidden my-auto pl-8 md:pl-16 lg:pl-24">
+        <div class="relative w-full overflow-hidden my-auto px-8 lg:px-12">
             <div 
                 bind:this={trackElement}
                 bind:clientWidth={trackWidth}
@@ -68,7 +68,7 @@
             >
                 {#each offerings as item}
                     {@const Icon = item.icon}
-                    <div class="w-80 md:w-105 shrink-0 border border-border-color mb-1 px-8 md:px-12 py-12 md:py-16 flex flex-col justify-between bg-white/3 backdrop-blur-lg hover:bg-white/6 hover:backdrop-blur-2xl transition-all duration-300">
+                    <div class="w-80 md:w-105 shrink-0 border border-white/10 mb-1 px-8 md:px-12 py-12 md:py-16 flex flex-col justify-between bg-white/3 backdrop-blur-xs hover:bg-white/6 hover:backdrop-blur-sm transition-all duration-300">
                         <div class="flex justify-between items-start pb-8">
                             <div class="w-16 h-16 rounded-full bg-brand-primary flex items-center justify-center text-black">
                                 <Icon size="1.5rem" strokeWidth={3} />
