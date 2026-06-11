@@ -30,4 +30,45 @@ const technologies: Technologies[] = [
     { name: "SpringBoot", icon: "devicon-spring-plain colored", monoIcon: "devicon-spring-plain" },
 ];
 
+export const getIconClass = (skillName: string): string | null => {
+    const normalized = skillName.toLowerCase().replace(/[\s.-]/g, "");
+
+    // Custom overrides/mappings for naming variations
+    if (normalized === "reactjs" || normalized === "reactnative") {
+        return "devicon-react-original colored";
+    }
+    if (normalized === "svelte" || normalized === "sveltekit") {
+        return "devicon-svelte-plain colored";
+    }
+    if (normalized === "sqlite") {
+        return "devicon-sqlite-plain colored";
+    }
+    if (normalized === "git") {
+        return "devicon-git-plain colored";
+    }
+    if (normalized === "postman") {
+        return "devicon-postman-plain colored";
+    }
+    if (normalized === "docker") {
+        return "devicon-docker-plain colored";
+    }
+    if (normalized === "python") {
+        return "devicon-python-plain colored";
+    }
+    if (normalized === "flutter") {
+        return "devicon-flutter-plain colored";
+    }
+    if (normalized === "adobeillustrator") {
+        return "devicon-illustrator-plain colored";
+    }
+
+    // Direct database search
+    const found = technologies.find((tech) => {
+        const techName = tech.name.toLowerCase().replace(/[\s.-]/g, "");
+        return techName === normalized || normalized.includes(techName) || techName.includes(normalized);
+    });
+
+    return found ? found.icon : null;
+};
+
 export default technologies;
