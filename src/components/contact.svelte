@@ -60,7 +60,7 @@
         </div>
 
         <!-- Integrated Interface Card -->
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-0 bg-white/1 border border-white/10 overflow-hidden shadow-[0_24px_80px_rgba(0,0,0,0.5)] backdrop-blur-md">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-0 bg-white/5 border border-white/10 overflow-hidden shadow-[0_24px_80px_rgba(0,0,0,0.5)] backdrop-blur-[1px]">
             
             <!-- Left Info Panel -->
             <div class="lg:col-span-5 p-5 lg:p-12 border-b lg:border-b-0 lg:border-r border-white/10 flex flex-col justify-between space-y-12">
