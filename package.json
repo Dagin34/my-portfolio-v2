@@ -24,6 +24,7 @@
 		"vite": "^8.0.14"
 	},
 	"dependencies": {
+		"@vercel/analytics": "^2.0.1",
 		"lenis": "^1.3.23",
 		"lucide-svelte": "^1.0.1"
 	}
