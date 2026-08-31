@@ -3,7 +3,7 @@
 </script>
 
 <div
-    class="absolute inset-y-0 left-0 h-full w-full bg-linear-to-t from-white/5 to-transparent z-10 pointer-events-none"
+    class="absolute inset-y-0 left-0 h-full w-full  z-10 pointer-events-none"
 ></div>
 <div class="bg-white/3 border border-border-color py-6 flex flex-wrap gap-12 opacity-100 transition-all duration-700 overflow-hidden select-none">
     <div class="marquee-track flex gap-4 whitespace-nowrap">
