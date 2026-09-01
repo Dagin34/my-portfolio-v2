@@ -64,7 +64,7 @@
 
         <div class="px-4 md:px-12">
             <div class="relative w-full overflow-visible">
-                <div id="home"><Landing /></div>
+                <div id="home" class="relative z-10"><Landing /></div>
                 
                 <ScrollTwirly color="#ff6900" girth={81} />
                 

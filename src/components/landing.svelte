@@ -1,23 +1,15 @@
 <script>
     import HomeTechCarousel from "./home-tech-carousel.svelte";
+    import ParticleName from "$components/repetitive/particle-name.svelte";
 
     // Using Svelte 5 Runes for any dynamic layout logic
     let heroText = $state("Software Engineer");
 </script>
 
-<section id="home" class="min-h-screen flex flex-col justify-center border-b border-border-color">
-    <div class="pt-24 pb-4 pl-8 md:pl-12 max-md:py-8">
-        <p class="text-[9px] max-md:hidden lg:text-[11px] text-brand-primary uppercase tracking-[0.4em] opacity-80">
-            Available for new opportunities — 2026
-        </p>
-    </div>
-
-    <div class="border-t border-x border-border-color group transition-colors hover:bg-white/1">
+<section id="home" class="min-h-screen flex flex-col justify-center pt-20 md:pt-24 border-b border-border-color">
+    <div class="border-t border-x border-border-color group transition-colors">
         <div class="p-8 md:p-12">
-            <h1 class="text-4xl md:text-7xl font-light tracking-tighter leading-none text-white flex flex-col -gap-2">
-                <span class="text-5xl md:text-8xl">Dagmawi</span>
-                <span class="text-brand-primary opacity-90">Napoleon <span class="text-white opacity-90">Bogale</span></span> 
-            </h1>
+            <ParticleName heading="h1" maxFontSize={160} />
         </div>
         
         <div class="flex flex-col md:flex-row border-t border-border-color">
