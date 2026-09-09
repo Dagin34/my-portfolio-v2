@@ -1,26 +1,13 @@
 <script lang='ts'>
-    import { onMount } from "svelte";
-    import type Lenis from "lenis";
-
-    import Navbar from "$components/navbar.svelte";
     import Footer from "$components/footer.svelte";
-    import ScrollToTop from "$components/repetitive/scroll-to-top.svelte";
     import Toast from "$components/repetitive/toast.svelte";
     import SEO from "$components/repetitive/SEO.svelte";
-    import CustomCursor from "$components/repetitive/custom-cursor.svelte";
     import VerticalLines from "$components/repetitive/vertical-lines.svelte";
-    
+
     import ProjectLanding from "$components/projects-page/projects-landing.svelte";
     import ContactSection from "$components/contact.svelte";
     import ProjectsSection from "$components/projects.svelte";
-    import { handleLenisInit } from "$lib/lenis";
     import ScrollTwirly from "$components/repetitive/scroll-twirly.svelte";
-
-    // Reference to the Lenis instance for cleanup
-    let lenisInstance: Lenis | null = null;
-    onMount(() => {
-        handleLenisInit(lenisInstance);
-    });
 
     // Toast State (Svelte 5 Runes)
     let toastMessage = $state("");
@@ -42,7 +29,6 @@
 <div
     class="bg-background text-white selection:bg-brand-primary selection:text-white"
 >
-    <Navbar />
     <Toast message={toastMessage} visible={showToast} />
 
     <main
@@ -66,5 +52,3 @@
         </div>
     </main>
 </div>
-<ScrollToTop />
-<CustomCursor />

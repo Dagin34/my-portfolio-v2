@@ -2,6 +2,7 @@
     import { onMount } from 'svelte';
     import navLinks from '$lib/navigation';
     import { goto } from '$app/navigation';
+    import { scrollToHash } from '$lib/lenis';
 
     let scrolled = $state(false);
     let mobileMenuOpen = $state(false);
@@ -19,23 +20,15 @@
 
         if (link.startsWith('/#')) {
             if (!isNotRoot) {
-                const targetId = link.slice(2);
-                const targetSection = document.getElementById(targetId);
-
-                if (targetSection) {
-                    targetSection.scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                }
+                // Already home — glide to the section. Lenis owns the viewport,
+                // so scrollIntoView here would be fighting it for the same pixels.
+                scrollToHash(link.slice(1));
             } else {
                 goto(link);
             }
         } else if (link.startsWith('/')) {
+            // The page transition resets scroll itself, while it is covering.
             goto(link);
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
         }
     }
 
