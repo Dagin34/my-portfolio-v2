@@ -29,8 +29,38 @@
   let canvasCssHeight = $state(0);
 
   const DURATION = 1800; // Matches the previous fill duration
+  // The intro is a first-impression, not a toll booth: once it has played, the
+  // page transition takes over for the rest of the tab's life.
+  const VISIT_KEY = "dnb:intro-played";
+
+  function introAlreadyPlayed(): boolean {
+    try {
+      return sessionStorage.getItem(VISIT_KEY) === "1";
+    } catch {
+      // Storage can throw outright under some privacy settings; falling back to
+      // playing the intro is the harmless direction to fail in.
+      return false;
+    }
+  }
+
+  function rememberIntro(): void {
+    try {
+      sessionStorage.setItem(VISIT_KEY, "1");
+    } catch {
+      /* nothing to do — the intro simply plays again next navigation */
+    }
+  }
 
   onMount(() => {
+    // Skipped before anything paints. The loader's backdrop and the page behind
+    // it are both `bg-background`, so there is nothing to flash between them.
+    if (introAlreadyPlayed()) {
+      showLoader = false;
+      onComplete?.();
+      return;
+    }
+    rememberIntro();
+
     document.body.style.overflow = "hidden";
 
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;

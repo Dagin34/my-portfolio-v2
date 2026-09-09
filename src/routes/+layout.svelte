@@ -7,6 +7,7 @@
 	import Navbar from "$components/navbar.svelte";
 	import ScrollToTop from "$components/repetitive/scroll-to-top.svelte";
 	import CustomCursor from "$components/repetitive/custom-cursor.svelte";
+	import PageTransition from "$components/repetitive/page-transition.svelte";
 	import { initLenis, destroyLenis } from "$lib/lenis";
 
 	inject({ mode: dev ? 'development' : 'production' });
@@ -46,3 +47,4 @@
 
 <ScrollToTop />
 <CustomCursor />
+<PageTransition />
