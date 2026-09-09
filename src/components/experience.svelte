@@ -123,12 +123,12 @@
              tracking whatever row currently sits at the vertical centre of the viewport. -->
         <div bind:this={railEl} class="absolute inset-y-0 left-0 z-20 w-px bg-border-color" aria-hidden="true">
             <div
-                class="rail-fill absolute top-0 left-0 w-px bg-brand-primary/40"
-                style="height: {progress * 100}%"
+                class="rail-fill absolute inset-y-0 left-0 w-px bg-brand-primary/40"
+                style="transform: scaleY({progress})"
             ></div>
             <div
-                class="rail-glow absolute left-1/2 h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-brand-primary shadow-[0_0_14px_4px_rgba(255,105,0,0.75)]"
-                style="top: {glowOffset}px"
+                class="rail-glow absolute left-1/2 top-0 h-2.5 w-2.5 rounded-full bg-brand-primary shadow-[0_0_14px_4px_rgba(255,105,0,0.75)]"
+                style="transform: translate(-50%, calc({glowOffset}px - 50%))"
             ></div>
         </div>
 
@@ -207,9 +207,17 @@
 </section>
 
 <style>
+    /* Positioned with `transform` (not top/height) and promoted to their own
+       compositing layer, so every scroll tick is a cheap GPU-composited move
+       instead of a main-thread layout + repaint of a blurred box-shadow. */
     .rail-fill,
     .rail-glow {
-        transition: top 150ms ease-out, height 150ms ease-out;
+        transition: transform 150ms ease-out;
+        will-change: transform;
+    }
+
+    .rail-fill {
+        transform-origin: top;
     }
 
     /* The row currently centred in the viewport grows on the y-axis and pushes
