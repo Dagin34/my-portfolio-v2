@@ -11,7 +11,7 @@
   let isExiting = $state(false); // Manages slide-up transition
   let showLoader = $state(true); // Manages unmounting from DOM
 
-  let canvas: HTMLCanvasElement = $state()!;
+  let canvas: HTMLCanvasElement;
 
   // Tight bounding box of the "DNB" glyphs — the DOM box the caption's spacing
   // is anchored to. The canvas itself is padded well beyond this and offset
@@ -20,6 +20,12 @@
   let markWidth = $state(0);
   let markHeight = $state(0);
   let pad = $state(0);
+  // The canvas's own CSS size (the padded field). Kept in state and folded into
+  // the same reactive `style` string as left/top below — setting it imperatively
+  // via canvas.style.width/height instead gets silently wiped out the next time
+  // Svelte re-renders that attribute from the `pad`-driven template binding.
+  let canvasCssWidth = $state(0);
+  let canvasCssHeight = $state(0);
 
   const TEXT = "DNB";
   const DURATION = 1800; // Matches the previous fill duration
@@ -77,6 +83,8 @@
       pad = fieldPad;
       markWidth = textWidth;
       markHeight = textHeight;
+      canvasCssWidth = width;
+      canvasCssHeight = height;
 
       const source = document.createElement("canvas");
       source.width = Math.ceil(textWidth);
@@ -114,8 +122,6 @@
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
       canvas.width = Math.ceil(width * dpr);
       canvas.height = Math.ceil(height * dpr);
-      canvas.style.width = `${width}px`;
-      canvas.style.height = `${height}px`;
       context.setTransform(dpr, 0, 0, dpr, 0, 0);
     }
 
@@ -219,7 +225,7 @@
           bind:this={canvas}
           aria-hidden="true"
           class="absolute"
-          style="left: {-pad}px; top: {-pad}px;"
+          style="left: {-pad}px; top: {-pad}px; width: {canvasCssWidth}px; height: {canvasCssHeight}px;"
         ></canvas>
       </div>
     </div>
