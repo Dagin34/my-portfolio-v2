@@ -17,43 +17,78 @@
     onMount(() => {
         let resyncTimer: ReturnType<typeof setTimeout>;
         let lastCurrent = -1;
+        let ticking = false;
 
-        function update() {
+        // Document-relative offsets, read from the DOM only on mount/resize/regrow —
+        // never on scroll, so a scroll tick is pure arithmetic instead of the forced
+        // layout reads (getBoundingClientRect on every row) that were causing the jank.
+        let railTop = 0;
+        let railHeight = 1;
+        let rowOffsets: { top: number; bottom: number }[] = [];
+
+        function measure() {
             if (!railEl) return;
             const railRect = railEl.getBoundingClientRect();
-            const railHeight = railRect.height || 1;
-            const glowY = window.innerHeight / 2 - railRect.top;
+            railTop = railRect.top + window.scrollY;
+            railHeight = railRect.height || 1;
+
+            rowOffsets = rowEls.map((el) => {
+                if (!el) return { top: 0, bottom: 0 };
+                const rect = el.getBoundingClientRect();
+                const top = rect.top + window.scrollY - railTop;
+                return { top, bottom: top + rect.height };
+            });
+        }
+
+        function apply() {
+            const glowY = window.scrollY + window.innerHeight / 2 - railTop;
 
             progress = Math.min(1, Math.max(0, glowY / railHeight));
             glowOffset = Math.min(railHeight, Math.max(0, glowY));
 
             let current = -1;
-            rowStates = rowEls.map((el, i) => {
-                if (!el) return "pending";
-                const rect = el.getBoundingClientRect();
-                if (glowY < rect.top - railRect.top) return "pending";
-                if (glowY > rect.bottom - railRect.top) return "done";
+            rowStates = rowOffsets.map((row, i) => {
+                if (glowY < row.top) return "pending";
+                if (glowY > row.bottom) return "done";
                 current = i;
                 return "current";
             });
 
             // The active row grows (see .is-current below), which shifts every
-            // row after it — resync the rail once that layout shift settles.
+            // row after it — remeasure once that layout shift settles.
             if (current !== lastCurrent) {
                 lastCurrent = current;
                 clearTimeout(resyncTimer);
-                resyncTimer = setTimeout(update, 850);
+                resyncTimer = setTimeout(() => {
+                    measure();
+                    apply();
+                }, 850);
             }
         }
 
-        update();
-        window.addEventListener("scroll", update, { passive: true });
-        window.addEventListener("resize", update);
+        function onScroll() {
+            if (ticking) return;
+            ticking = true;
+            requestAnimationFrame(() => {
+                apply();
+                ticking = false;
+            });
+        }
+
+        function onResize() {
+            measure();
+            apply();
+        }
+
+        measure();
+        apply();
+        window.addEventListener("scroll", onScroll, { passive: true });
+        window.addEventListener("resize", onResize);
 
         return () => {
             clearTimeout(resyncTimer);
-            window.removeEventListener("scroll", update);
-            window.removeEventListener("resize", update);
+            window.removeEventListener("scroll", onScroll);
+            window.removeEventListener("resize", onResize);
         };
     });
 </script>
@@ -100,7 +135,7 @@
         {#each experiences as exp, i}
             <div
                 bind:this={rowEls[i]}
-                class="exp-row group relative px-8 md:px-16 border-b border-border-color hover:bg-white/1 hover:backdrop-blur-sm transition-all duration-800"
+                class="exp-row group relative px-8 md:px-16 border-b border-border-color hover:bg-white/1 hover:backdrop-blur-sm"
                 class:is-current={rowStates[i] === "current"}
             >
                 <div
@@ -178,10 +213,13 @@
     }
 
     /* The row currently centred in the viewport grows on the y-axis and pushes
-       its neighbours down the page, pulling attention to itself as you scroll. */
+       its neighbours down the page, pulling attention to itself as you scroll.
+       Naming the properties (instead of `transition-all`) keeps the browser from
+       having to watch every animatable property while this is running. */
     .exp-row {
         padding-top: 2rem;
         padding-bottom: 2rem;
+        transition: padding 800ms ease, background-color 800ms ease, backdrop-filter 800ms ease;
     }
 
     .exp-row.is-current {
