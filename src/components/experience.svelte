@@ -1,5 +1,47 @@
 <script lang="ts">
     import experiences from "$lib/experience";
+    import { onMount } from "svelte";
+
+    let railEl: HTMLDivElement;
+    let rowEls: (HTMLDivElement | undefined)[] = $state([]);
+
+    // How far the "glow" (pinned to viewport centre) has travelled down the
+    // rail, as a 0-1 fraction of the rail's own height.
+    let progress = $state(0);
+    // Pixel offset of the glow within the rail, for positioning it directly.
+    let glowOffset = $state(0);
+    // Per-row state relative to the glow: not yet reached, currently being
+    // passed, or already scrolled by — this is what "strengthens" each entry.
+    let rowStates: ("pending" | "current" | "done")[] = $state([]);
+
+    onMount(() => {
+        function update() {
+            if (!railEl) return;
+            const railRect = railEl.getBoundingClientRect();
+            const railHeight = railRect.height || 1;
+            const glowY = window.innerHeight / 2 - railRect.top;
+
+            progress = Math.min(1, Math.max(0, glowY / railHeight));
+            glowOffset = Math.min(railHeight, Math.max(0, glowY));
+
+            rowStates = rowEls.map((el) => {
+                if (!el) return "pending";
+                const rect = el.getBoundingClientRect();
+                if (glowY < rect.top - railRect.top) return "pending";
+                if (glowY > rect.bottom - railRect.top) return "done";
+                return "current";
+            });
+        }
+
+        update();
+        window.addEventListener("scroll", update, { passive: true });
+        window.addEventListener("resize", update);
+
+        return () => {
+            window.removeEventListener("scroll", update);
+            window.removeEventListener("resize", update);
+        };
+    });
 </script>
 
 <section
@@ -27,9 +69,23 @@
         </p>
     </div>
 
-    <div class="w-full md:w-2/3 border-l border-border-color">
+    <div class="relative w-full md:w-2/3">
+        <!-- Progress rail: fills and glows down as you scroll through the list below,
+             tracking whatever row currently sits at the vertical centre of the viewport. -->
+        <div bind:this={railEl} class="absolute inset-y-0 left-0 w-px bg-border-color" aria-hidden="true">
+            <div
+                class="rail-fill absolute top-0 left-0 w-px bg-brand-primary/40"
+                style="height: {progress * 100}%"
+            ></div>
+            <div
+                class="rail-glow absolute left-1/2 h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-brand-primary shadow-[0_0_14px_4px_rgba(255,105,0,0.75)]"
+                style="top: {glowOffset}px"
+            ></div>
+        </div>
+
         {#each experiences as exp, i}
             <div
+                bind:this={rowEls[i]}
                 class="group relative p-8 md:p-16 border-b border-border-color hover:bg-white/1 hover:backdrop-blur-2xl transition-all duration-800"
             >
                 <div
@@ -39,6 +95,18 @@
                         class="absolute inset-0 separator-pattern scale-150"
                     ></div>
                 </div>
+
+                <!-- Row marker: dims when not yet reached, strengthens while the glow
+                     is passing through this entry, and stays lit once scrolled by. -->
+                <div
+                    class="row-marker absolute left-0 top-1/2 h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full transition-all duration-500 {rowStates[i] ===
+                    'current'
+                        ? 'scale-150 bg-brand-primary shadow-[0_0_10px_3px_rgba(255,105,0,0.7)]'
+                        : rowStates[i] === 'done'
+                          ? 'bg-brand-primary/50'
+                          : 'bg-gray-700'}"
+                    aria-hidden="true"
+                ></div>
 
                 <div class="relative z-10">
                     <div class="flex flex-wrap items-center gap-x-2 text-xs font-mono mb-2 uppercase">
@@ -87,3 +155,18 @@
         </a>
     </div>
 </section>
+
+<style>
+    .rail-fill,
+    .rail-glow {
+        transition: top 150ms ease-out, height 150ms ease-out;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .rail-fill,
+        .rail-glow,
+        .row-marker {
+            transition: none;
+        }
+    }
+</style>
