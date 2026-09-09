@@ -222,11 +222,6 @@
           style="left: {-pad}px; top: {-pad}px;"
         ></canvas>
       </div>
-
-      <!-- Loading Text -->
-      <p class="text-[10px] font-mono text-gray-500 uppercase tracking-[0.4em] mt-6 animate-pulse">
-        Initializing Portfolio
-      </p>
     </div>
   </div>
 {/if}

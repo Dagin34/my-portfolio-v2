@@ -15,6 +15,9 @@
     let rowStates: ("pending" | "current" | "done")[] = $state([]);
 
     onMount(() => {
+        let resyncTimer: ReturnType<typeof setTimeout>;
+        let lastCurrent = -1;
+
         function update() {
             if (!railEl) return;
             const railRect = railEl.getBoundingClientRect();
@@ -24,13 +27,23 @@
             progress = Math.min(1, Math.max(0, glowY / railHeight));
             glowOffset = Math.min(railHeight, Math.max(0, glowY));
 
-            rowStates = rowEls.map((el) => {
+            let current = -1;
+            rowStates = rowEls.map((el, i) => {
                 if (!el) return "pending";
                 const rect = el.getBoundingClientRect();
                 if (glowY < rect.top - railRect.top) return "pending";
                 if (glowY > rect.bottom - railRect.top) return "done";
+                current = i;
                 return "current";
             });
+
+            // The active row grows (see .is-current below), which shifts every
+            // row after it — resync the rail once that layout shift settles.
+            if (current !== lastCurrent) {
+                lastCurrent = current;
+                clearTimeout(resyncTimer);
+                resyncTimer = setTimeout(update, 850);
+            }
         }
 
         update();
@@ -38,6 +51,7 @@
         window.addEventListener("resize", update);
 
         return () => {
+            clearTimeout(resyncTimer);
             window.removeEventListener("scroll", update);
             window.removeEventListener("resize", update);
         };
@@ -72,7 +86,7 @@
     <div class="relative w-full md:w-2/3">
         <!-- Progress rail: fills and glows down as you scroll through the list below,
              tracking whatever row currently sits at the vertical centre of the viewport. -->
-        <div bind:this={railEl} class="absolute inset-y-0 left-0 w-px bg-border-color" aria-hidden="true">
+        <div bind:this={railEl} class="absolute inset-y-0 left-0 z-20 w-px bg-border-color" aria-hidden="true">
             <div
                 class="rail-fill absolute top-0 left-0 w-px bg-brand-primary/40"
                 style="height: {progress * 100}%"
@@ -86,7 +100,8 @@
         {#each experiences as exp, i}
             <div
                 bind:this={rowEls[i]}
-                class="group relative p-8 md:p-16 border-b border-border-color hover:bg-white/1 hover:backdrop-blur-2xl transition-all duration-800"
+                class="exp-row group relative px-8 md:px-16 border-b border-border-color hover:bg-white/1 hover:backdrop-blur-sm transition-all duration-800"
+                class:is-current={rowStates[i] === "current"}
             >
                 <div
                     class="absolute right-0 top-0 h-full w-24 opacity-0 group-hover:opacity-10 transition-opacity overflow-hidden pointer-events-none"
@@ -162,10 +177,35 @@
         transition: top 150ms ease-out, height 150ms ease-out;
     }
 
+    /* The row currently centred in the viewport grows on the y-axis and pushes
+       its neighbours down the page, pulling attention to itself as you scroll. */
+    .exp-row {
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+    }
+
+    .exp-row.is-current {
+        padding-top: 3.5rem;
+        padding-bottom: 3.5rem;
+    }
+
+    @media (min-width: 768px) {
+        .exp-row {
+            padding-top: 4rem;
+            padding-bottom: 4rem;
+        }
+
+        .exp-row.is-current {
+            padding-top: 7rem;
+            padding-bottom: 7rem;
+        }
+    }
+
     @media (prefers-reduced-motion: reduce) {
         .rail-fill,
         .rail-glow,
-        .row-marker {
+        .row-marker,
+        .exp-row {
             transition: none;
         }
     }
