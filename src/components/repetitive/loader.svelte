@@ -1,5 +1,6 @@
 <script lang="ts">
   import { onMount } from "svelte";
+  import { createParticleMark, fontSizeFor, measureMark } from "$lib/particle-mark";
 
   // TypeScript interface for Svelte 5 Props
   interface Props {
@@ -27,136 +28,79 @@
   let canvasCssWidth = $state(0);
   let canvasCssHeight = $state(0);
 
-  const TEXT = "DNB";
   const DURATION = 1800; // Matches the previous fill duration
-  // Negative tracking, matching the `tracking-tighter` treatment the mark used to have
-  const TRACKING = 0.03;
+  // The intro is a first-impression, not a toll booth: once it has played, the
+  // page transition takes over for the rest of the tab's life.
+  const VISIT_KEY = "dnb:intro-played";
 
-  interface Particle {
-    hx: number; // Home position — the sampled pixel this particle draws
-    hy: number;
-    sx: number; // Start position — scattered anywhere across the padded field
-    sy: number;
-    delay: number;
+  function introAlreadyPlayed(): boolean {
+    try {
+      return sessionStorage.getItem(VISIT_KEY) === "1";
+    } catch {
+      // Storage can throw outright under some privacy settings; falling back to
+      // playing the intro is the harmless direction to fail in.
+      return false;
+    }
   }
 
-  function easeOutCubic(t: number): number {
-    return 1 - Math.pow(1 - t, 3);
+  function rememberIntro(): void {
+    try {
+      sessionStorage.setItem(VISIT_KEY, "1");
+    } catch {
+      /* nothing to do — the intro simply plays again next navigation */
+    }
   }
 
   onMount(() => {
+    // Skipped before anything paints. The loader's backdrop and the page behind
+    // it are both `bg-background`, so there is nothing to flash between them.
+    if (introAlreadyPlayed()) {
+      showLoader = false;
+      onComplete?.();
+      return;
+    }
+    rememberIntro();
+
     document.body.style.overflow = "hidden";
 
-    const context = canvas.getContext("2d");
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-    let particles: Particle[] = [];
-    let width = 0;
-    let height = 0;
-    let dotSize = 3;
+    const mark = createParticleMark(canvas);
     let frame = 0;
 
     function build() {
-      if (!context) return;
-
-      // Same sizing logic as the `clamp(5rem, 18vw, 13rem)` type this replaces
-      const fontSize = Math.min(208, Math.max(80, window.innerWidth * 0.18));
-      const step = Math.max(2, Math.min(4, Math.round(fontSize / 38)));
-      dotSize = step * 0.75;
-
-      const measure = document.createElement("canvas").getContext("2d");
-      if (!measure) return;
-      measure.font = `900 ${fontSize}px Poppins, sans-serif`;
-      let textWidth = 0;
-      for (const char of TEXT) {
-        textWidth += measure.measureText(char).width - fontSize * TRACKING;
-      }
-      textWidth += fontSize * TRACKING;
-      const textHeight = fontSize * 1.2;
+      const fontSize = fontSizeFor(window.innerWidth);
+      const metrics = measureMark(fontSize);
+      if (!metrics) return false;
 
       // Particles start scattered across a field padded well beyond the glyphs
       // themselves, so the intro reads as dust collecting in from all over,
       // not just drifting out from around each letter.
       const fieldPad = Math.min(fontSize * 1.6, window.innerWidth * 0.25, window.innerHeight * 0.25);
-      width = textWidth + fieldPad * 2;
-      height = textHeight + fieldPad * 2;
+      const width = metrics.width + fieldPad * 2;
+      const height = metrics.height + fieldPad * 2;
+
+      const built = mark.build({
+        fontSize,
+        width,
+        height,
+        originX: fieldPad,
+        originY: fieldPad,
+        enter: reduceMotion
+          ? (hx, hy) => ({ x: hx, y: hy })
+          : () => ({ x: Math.random() * width, y: Math.random() * height }),
+        // The intro only ever assembles; it exits by sliding the whole panel
+        // away rather than by coming apart.
+        exit: (hx, hy) => ({ x: hx, y: hy }),
+        stagger: reduceMotion ? 0 : 0.4
+      });
+      if (!built) return false;
+
       pad = fieldPad;
-      markWidth = textWidth;
-      markHeight = textHeight;
+      markWidth = metrics.width;
+      markHeight = metrics.height;
       canvasCssWidth = width;
       canvasCssHeight = height;
-
-      const source = document.createElement("canvas");
-      source.width = Math.ceil(textWidth);
-      source.height = Math.ceil(textHeight);
-      const sourceContext = source.getContext("2d", { willReadFrequently: true });
-      if (!sourceContext) return;
-
-      sourceContext.fillStyle = "#fff";
-      sourceContext.font = `900 ${fontSize}px 'Poppins', sans-serif`;
-      sourceContext.textBaseline = "middle";
-      let cursor = 0;
-      const y = textHeight / 2 + fontSize * 0.1;
-      for (const char of TEXT) {
-        sourceContext.fillText(char, cursor, y);
-        cursor += sourceContext.measureText(char).width - fontSize * TRACKING;
-      }
-
-      const pixels = sourceContext.getImageData(0, 0, source.width, source.height).data;
-      particles = [];
-
-      for (let py = 0; py < source.height; py += step) {
-        for (let px = 0; px < source.width; px += step) {
-          if (pixels[(py * source.width + px) * 4 + 3] < 128) continue;
-
-          particles.push({
-            hx: pad + px,
-            hy: pad + py,
-            sx: reduceMotion ? pad + px : Math.random() * width,
-            sy: reduceMotion ? pad + py : Math.random() * height,
-            delay: reduceMotion ? 0 : Math.random() * DURATION * 0.4
-          });
-        }
-      }
-
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
-      canvas.width = Math.ceil(width * dpr);
-      canvas.height = Math.ceil(height * dpr);
-      context.setTransform(dpr, 0, 0, dpr, 0, 0);
-    }
-
-    // Bucketed by how far along its own convergence a particle is, so the whole
-    // field still only costs a handful of fillStyle switches per frame.
-    const ALPHA_STEPS = 8;
-
-    function draw(now: number) {
-      if (!context) return;
-      context.clearRect(0, 0, width, height);
-
-      const buckets: number[][] = Array.from({ length: ALPHA_STEPS }, () => []);
-
-      for (const p of particles) {
-        const local = now - p.delay;
-        const travel = DURATION - p.delay || 1;
-        const t = local <= 0 ? 0 : Math.min(1, local / travel);
-        const eased = easeOutCubic(t);
-
-        const x = p.sx + (p.hx - p.sx) * eased;
-        const y = p.sy + (p.hy - p.sy) * eased;
-        const size = dotSize * (0.55 + 0.45 * eased);
-        const bucket = Math.min(ALPHA_STEPS - 1, Math.floor(eased * ALPHA_STEPS));
-
-        buckets[bucket].push(x, y, size);
-      }
-
-      buckets.forEach((bucket, index) => {
-        if (bucket.length === 0) return;
-        const alpha = 0.12 + (index / (ALPHA_STEPS - 1)) * 0.88;
-        context.fillStyle = `rgba(255, 105, 0, ${alpha})`;
-        for (let i = 0; i < bucket.length; i += 3) {
-          context.fillRect(bucket[i], bucket[i + 1], bucket[i + 2], bucket[i + 2]);
-        }
-      });
+      return true;
     }
 
     function finish() {
@@ -167,7 +111,7 @@
 
         setTimeout(() => {
           showLoader = false;
-          if (onComplete) onComplete();
+          onComplete?.();
         }, 800); // Matches the exit duration
       }, 200);
     }
@@ -175,7 +119,7 @@
     function animate(startedAt: number) {
       function tick(now: number) {
         const elapsed = now - startedAt;
-        draw(Math.min(elapsed, DURATION));
+        mark.render(Math.min(elapsed / DURATION, 1));
 
         if (elapsed < DURATION) {
           frame = requestAnimationFrame(tick);
@@ -191,9 +135,13 @@
       .load("900 100px Poppins")
       .catch(() => {})
       .then(() => {
-        build();
+        if (!build()) {
+          // Nothing to draw — don't strand the page behind an empty loader.
+          finish();
+          return;
+        }
         if (reduceMotion) {
-          draw(DURATION);
+          mark.render(1);
           finish();
         } else {
           animate(performance.now());

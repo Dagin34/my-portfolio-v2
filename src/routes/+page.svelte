@@ -1,7 +1,4 @@
 <script lang="ts">
-    import { onMount } from "svelte";
-    import type Lenis from "lenis";
-    import Navbar from "$components/navbar.svelte";
     import Landing from "$components/landing.svelte";
     import VerticalLines from "$components/repetitive/vertical-lines.svelte";
     import Projects from "$components/projects.svelte";
@@ -9,20 +6,11 @@
     import Languages from "$components/languages.svelte";
     import Contact from "$components/contact.svelte";
     import Footer from "$components/footer.svelte";
-    import ScrollToTop from "$components/repetitive/scroll-to-top.svelte";
     import Toast from "$components/repetitive/toast.svelte";
     import SEO from "$components/repetitive/SEO.svelte";
-    import CustomCursor from "$components/repetitive/custom-cursor.svelte";
     import Offerings from "$components/offerings.svelte";
     import ScrollTwirly from "$components/repetitive/scroll-twirly.svelte";
-    import Loader from "$components/repetitive/loader.svelte"; 
-    import { handleLenisInit } from "$lib/lenis";
-
-    // Reference to the Lenis instance for cleanup
-    let lenisInstance: Lenis | null = null;
-    onMount(() => {
-        handleLenisInit(lenisInstance);
-    });
+    import Loader from "$components/repetitive/loader.svelte";
 
     // Toast State (Svelte 5 Runes)
     let toastMessage = $state("");
@@ -33,7 +21,8 @@
         setTimeout(() => (showToast = false), 3000);
     }
 
-    // Page Load State
+    // Page Load State. The loader only plays on the first visit of a tab
+    // session; afterwards it completes immediately and this flips on mount.
     let isPageReady = $state(false);
     function handleLoaderComplete(): void {
         isPageReady = true;
@@ -53,7 +42,6 @@
     class:transition-opacity={isPageReady}
     class:duration-700={isPageReady}
 >
-    <Navbar />
     <Toast message={toastMessage} visible={showToast} />
 
     <main
@@ -85,9 +73,6 @@
         </div>
     </main>
 </div>
-
-<ScrollToTop />
-<CustomCursor />
 
 <div 
     aria-hidden="true" 

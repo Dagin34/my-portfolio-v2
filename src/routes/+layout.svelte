@@ -1,11 +1,27 @@
 <script lang="ts">
 	import "./layout.css";
+	import { onMount } from "svelte";
 	import { dev } from '$app/environment';
 	import { inject } from '@vercel/analytics';
+
+	import Navbar from "$components/navbar.svelte";
+	import ScrollToTop from "$components/repetitive/scroll-to-top.svelte";
+	import CustomCursor from "$components/repetitive/custom-cursor.svelte";
+	import PageTransition from "$components/repetitive/page-transition.svelte";
+	import { initLenis, destroyLenis } from "$lib/lenis";
 
 	inject({ mode: dev ? 'development' : 'production' });
 
 	let { children } = $props();
+
+	// The shell lives here rather than in each route so that navigating does not
+	// remount it: the navbar keeps its scrolled state, the custom cursor stays
+	// where the pointer left it, and Lenis stays a single instance driving a
+	// single rAF loop.
+	onMount(() => {
+		initLenis();
+		return destroyLenis;
+	});
 </script>
 
 <svelte:head>
@@ -25,4 +41,10 @@
     <link rel="preload" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/fonts/devicon.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
 </svelte:head>
 
+<Navbar />
+
 {@render children()}
+
+<ScrollToTop />
+<CustomCursor />
+<PageTransition />
