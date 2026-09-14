@@ -43,7 +43,6 @@
             <ProjectsSection
                 onMissing={triggerToast}
                 fromHomePage={false}
-                limit={-1}
             />
             <ContactSection 
                 onMissing={triggerToast}

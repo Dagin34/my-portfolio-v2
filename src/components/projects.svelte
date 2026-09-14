@@ -1,16 +1,12 @@
 <script lang="ts">
     import allProjects, { type Project } from "$lib/projects";
-    import ProjectFilters from "$components/projects-filter.svelte"; // Adjust path as necessary
+    import ProjectFilters from "$components/projects-filter.svelte";
     import ProjectsPopup from "$components/projects-popup.svelte";
+    import ProjectsFeatured from "$components/projects-featured.svelte";
 
-    let {
-        onMissing,
-        fromHomePage,
-        limit = 10,
-    } = $props<{
+    let { onMissing, fromHomePage } = $props<{
         onMissing: (msg: string) => void;
-        fromHomePage: boolean | true;
-        limit?: number;
+        fromHomePage: boolean;
     }>();
 
     // Filter and Layout states
@@ -18,14 +14,25 @@
     let selectedTech = $state("");
     let layout = $state<"grid" | "list">("grid");
 
+    // The showcase is curated in the data module via `featured`; everything
+    // else falls through to the catalogue. Nothing is sliced off the end here —
+    // the old `limit` prop meant `/projects` passed -1 and silently dropped the
+    // last project from the page whose whole job is listing all of them.
+    const featured = allProjects.filter((p) => p.featured);
+    const catalogue = allProjects.filter((p) => !p.featured);
+
     // Gather unique technologies dynamically from all projects
     const availableTechs = Array.from(
         new Set(allProjects.flatMap((p) => p.tech || [])),
     ).sort();
 
-    // Filter projects based on query and selected technology, then apply slicing
+    let isFiltering = $derived(Boolean(searchQuery.trim() || selectedTech));
+
+    // While a filter is on, the showcase steps aside and the catalogue widens to
+    // every project — otherwise searching for a featured one would come back
+    // empty even though it is sitting right there on the page.
     let filteredProjects = $derived(
-        allProjects.filter((project) => {
+        (isFiltering ? allProjects : catalogue).filter((project) => {
             const matchesSearch =
                 !searchQuery ||
                 project.title
@@ -47,13 +54,10 @@
         }),
     );
 
-    let projects = $derived(filteredProjects.slice(0, limit));
     let activeProject = $state<Project | null>(null);
 
-    let currentImgIndex = $state(0);
     function openModal(p: Project) {
         activeProject = p;
-        currentImgIndex = 0;
     }
 </script>
 
@@ -81,21 +85,41 @@
         {/if}
     </div>
 
-    <!-- Dynamic Filter Component -->
-    <ProjectFilters
-        bind:searchQuery
-        bind:selectedTech
-        bind:layout
-        {availableTechs}
-    />
+    <!-- Curated showcase: sticky panels that stack as you scroll through them. -->
+    {#if !isFiltering}
+        <ProjectsFeatured projects={featured} onOpen={openModal} />
+    {/if}
+
+    {#if !fromHomePage}
+        <!-- Everything the showcase did not promote. -->
+        <div
+            class="flex items-baseline justify-between gap-4 border-t border-border-color px-8 lg:px-12 py-8 lg:py-12"
+        >
+            <h3
+                class="text-2xl md:text-4xl font-light tracking-tighter text-white"
+            >
+                Full <span class="opacity-40 italic">Catalogue</span>
+            </h3>
+            <span class="font-mono text-[10px] md:text-xs uppercase tracking-widest text-gray-500">
+                {filteredProjects.length}
+                {filteredProjects.length === 1 ? "project" : "projects"}
+            </span>
+        </div>
+
+        <ProjectFilters
+            bind:searchQuery
+            bind:selectedTech
+            bind:layout
+            {availableTechs}
+        />
 
     <!-- Project List / Grid View Wrapper -->
-    {#if projects.length > 0}
+    {#if filteredProjects.length > 0}
         {#if layout === "grid"}
             <div
                 class="grid grid-cols-1 md:grid-cols-2 gap-0 border-l border-t border-border-color"
             >
-                {#each projects as project}
+                {#each filteredProjects as project}
                     <button
                         onclick={() => openModal(project)}
                         class="group relative p-10 border-r border-b border-border-color text-left hover:bg-white/2 transition-all duration-500 overflow-hidden"
@@ -107,6 +131,17 @@
                         </div>
 
                         <div class="relative z-10">
+                            <div class="flex flex-wrap items-center gap-x-2 mb-3 font-mono text-[10px] uppercase tracking-widest">
+                                {#if project.year}
+                                    <span class="text-brand-primary opacity-60">{project.year}</span>
+                                {/if}
+                                {#if project.year && project.role}
+                                    <span class="text-gray-600">/</span>
+                                {/if}
+                                {#if project.role}
+                                    <span class="text-gray-400">{project.role}</span>
+                                {/if}
+                            </div>
                             <h3
                                 class="text-2xl md:text-4xl font-light text-white group-hover:text-brand-primary transition-colors duration-300 tracking-tighter"
                             >
@@ -136,12 +171,23 @@
         {:else}
             <!-- Responsive List View -->
             <div class="flex flex-col border-t border-border-color">
-                {#each projects as project}
+                {#each filteredProjects as project}
                     <button
                         onclick={() => openModal(project)}
                         class="group relative px-8 py-6 md:px-12 md:py-8 border-b border-border-color text-left hover:bg-white/2 transition-all duration-300 flex flex-col md:flex-row md:items-center justify-between gap-4 overflow-hidden"
                     >
                         <div class="relative z-10 flex-1 pr-0 md:pr-8">
+                            <div class="flex flex-wrap items-center gap-x-2 mb-2 font-mono text-[10px] uppercase tracking-widest">
+                                {#if project.year}
+                                    <span class="text-brand-primary opacity-60">{project.year}</span>
+                                {/if}
+                                {#if project.year && project.role}
+                                    <span class="text-gray-600">/</span>
+                                {/if}
+                                {#if project.role}
+                                    <span class="text-gray-400">{project.role}</span>
+                                {/if}
+                            </div>
                             <h3
                                 class="text-xl md:text-2xl font-light text-white group-hover:text-brand-primary transition-colors duration-300 tracking-tighter"
                             >
@@ -180,6 +226,7 @@
                 No projects found matching the criteria.
             </p>
         </div>
+    {/if}
     {/if}
     {#if fromHomePage}
         <a
