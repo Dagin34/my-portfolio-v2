@@ -2,93 +2,76 @@
     import experiences from "$lib/experience";
     import { onMount } from "svelte";
 
-    let railEl: HTMLDivElement;
     let rowEls: (HTMLDivElement | undefined)[] = $state([]);
 
-    // How far the "glow" (pinned to viewport centre) has travelled down the
-    // rail, as a 0-1 fraction of the rail's own height.
-    let progress = $state(0);
-    // Pixel offset of the glow within the rail, for positioning it directly.
-    let glowOffset = $state(0);
-    // Per-row state relative to the glow: not yet reached, currently being
-    // passed, or already scrolled by — this is what "strengthens" each entry.
+    // Where each row sits relative to the middle of the viewport: not yet
+    // reached, currently crossing it, or already scrolled past. Only "current"
+    // drives the growth; "pending" holds a row back at a lower opacity so the
+    // active one reads as swelling up out of the stack.
     let rowStates: ("pending" | "current" | "done")[] = $state([]);
 
+    // Mirrors the growth duration in the CSS below.
+    const GROWTH_MS = 520;
+
+    // Growing a row animates `padding`, which relays out everything beneath it
+    // on every frame. One row doing that is fine; three overlapping because the
+    // reader is scrolling faster than the animation runs is what stuttered. So
+    // while rows are being crossed faster than the growth can finish, they take
+    // their final size immediately and no layout animation runs at all.
+    let snapping = $state(false);
+
     onMount(() => {
-        let resyncTimer: ReturnType<typeof setTimeout>;
         let lastCurrent = -1;
-        let ticking = false;
+        let lastCurrentAt = 0;
+        let settleTimer: ReturnType<typeof setTimeout>;
 
-        // Document-relative offsets, read from the DOM only on mount/resize/regrow —
-        // never on scroll, so a scroll tick is pure arithmetic instead of the forced
-        // layout reads (getBoundingClientRect on every row) that were causing the jank.
-        let railTop = 0;
-        let railHeight = 1;
-        let rowOffsets: { top: number; bottom: number }[] = [];
+        // A zero-height root band pinned to the vertical centre of the viewport:
+        // a row intersects it exactly while it is the one centred on screen.
+        // This replaces the old scroll handler outright — nothing runs per
+        // frame, no geometry is read on scroll, and the observer re-evaluates
+        // itself when a growing row shifts the rows below it, so the timed
+        // remeasure that used to chase that layout shift is gone too.
+        const observer = new IntersectionObserver(
+            (entries) => {
+                for (const entry of entries) {
+                    const i = rowEls.indexOf(entry.target as HTMLDivElement);
+                    if (i === -1) continue;
 
-        function measure() {
-            if (!railEl) return;
-            const railRect = railEl.getBoundingClientRect();
-            railTop = railRect.top + window.scrollY;
-            railHeight = railRect.height || 1;
+                    rowStates[i] = entry.isIntersecting
+                        ? "current"
+                        : entry.boundingClientRect.top > window.innerHeight / 2
+                          ? "pending"
+                          : "done";
+                }
 
-            rowOffsets = rowEls.map((el) => {
-                if (!el) return { top: 0, bottom: 0 };
-                const rect = el.getBoundingClientRect();
-                const top = rect.top + window.scrollY - railTop;
-                return { top, bottom: top + rect.height };
-            });
-        }
+                // Only a change of *which* row is centred counts as crossing a
+                // row. Growing a row shifts the ones below it, which fires this
+                // callback again without the centre having moved — timing those
+                // would read the animation's own layout shift as fast scrolling.
+                const current = rowStates.indexOf("current");
+                if (current === -1 || current === lastCurrent) return;
 
-        function apply() {
-            const glowY = window.scrollY + window.innerHeight / 2 - railTop;
-
-            progress = Math.min(1, Math.max(0, glowY / railHeight));
-            glowOffset = Math.min(railHeight, Math.max(0, glowY));
-
-            let current = -1;
-            rowStates = rowOffsets.map((row, i) => {
-                if (glowY < row.top) return "pending";
-                if (glowY > row.bottom) return "done";
-                current = i;
-                return "current";
-            });
-
-            // The active row grows (see .is-current below), which shifts every
-            // row after it — remeasure once that layout shift settles.
-            if (current !== lastCurrent) {
+                // A new row took the centre before the last one finished
+                // growing: the reader is outrunning the animation. Snap until
+                // the scrolling settles, then let it animate again.
+                const now = performance.now();
+                if (now - lastCurrentAt < GROWTH_MS) snapping = true;
                 lastCurrent = current;
-                clearTimeout(resyncTimer);
-                resyncTimer = setTimeout(() => {
-                    measure();
-                    apply();
-                }, 850);
-            }
-        }
+                lastCurrentAt = now;
 
-        function onScroll() {
-            if (ticking) return;
-            ticking = true;
-            requestAnimationFrame(() => {
-                apply();
-                ticking = false;
-            });
-        }
+                clearTimeout(settleTimer);
+                settleTimer = setTimeout(() => (snapping = false), GROWTH_MS);
+            },
+            { rootMargin: "-50% 0px -50% 0px", threshold: 0 }
+        );
 
-        function onResize() {
-            measure();
-            apply();
+        for (const el of rowEls) {
+            if (el) observer.observe(el);
         }
-
-        measure();
-        apply();
-        window.addEventListener("scroll", onScroll, { passive: true });
-        window.addEventListener("resize", onResize);
 
         return () => {
-            clearTimeout(resyncTimer);
-            window.removeEventListener("scroll", onScroll);
-            window.removeEventListener("resize", onResize);
+            clearTimeout(settleTimer);
+            observer.disconnect();
         };
     });
 </script>
@@ -118,25 +101,18 @@
         </p>
     </div>
 
-    <div class="relative w-full md:w-2/3">
-        <!-- Progress rail: fills and glows down as you scroll through the list below,
-             tracking whatever row currently sits at the vertical centre of the viewport. -->
-        <div bind:this={railEl} class="absolute inset-y-0 left-0 z-20 w-px bg-border-color" aria-hidden="true">
-            <div
-                class="rail-fill absolute inset-y-0 left-0 w-px bg-brand-primary/40"
-                style="transform: scaleY({progress})"
-            ></div>
-            <div
-                class="rail-glow absolute left-1/2 top-0 h-2.5 w-2.5 rounded-full bg-brand-primary shadow-[0_0_14px_4px_rgba(255,105,0,0.75)]"
-                style="transform: translate(-50%, calc({glowOffset}px - 50%))"
-            ></div>
-        </div>
-
+    <!-- The divider the progress rail used to draw: vertical between the sticky
+         header and the list on desktop, horizontal where the two stack. -->
+    <div
+        class="relative w-full md:w-2/3 border-t md:border-t-0 md:border-l border-border-color"
+        class:snapping
+    >
         {#each experiences as exp, i}
             <div
                 bind:this={rowEls[i]}
                 class="exp-row group relative px-8 md:px-16 border-b border-border-color hover:bg-white/1 hover:backdrop-blur-sm"
                 class:is-current={rowStates[i] === "current"}
+                class:is-pending={rowStates[i] === "pending"}
             >
                 <div
                     class="absolute right-0 top-0 h-full w-24 opacity-0 group-hover:opacity-10 transition-opacity overflow-hidden pointer-events-none"
@@ -145,18 +121,6 @@
                         class="absolute inset-0 separator-pattern scale-150"
                     ></div>
                 </div>
-
-                <!-- Row marker: dims when not yet reached, strengthens while the glow
-                     is passing through this entry, and stays lit once scrolled by. -->
-                <div
-                    class="row-marker absolute left-0 top-1/2 h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full transition-all duration-500 {rowStates[i] ===
-                    'current'
-                        ? 'scale-150 bg-brand-primary shadow-[0_0_10px_3px_rgba(255,105,0,0.7)]'
-                        : rowStates[i] === 'done'
-                          ? 'bg-brand-primary/50'
-                          : 'bg-gray-700'}"
-                    aria-hidden="true"
-                ></div>
 
                 <div class="relative z-10">
                     <div class="flex flex-wrap items-center gap-x-2 text-xs font-mono mb-2 uppercase">
@@ -207,52 +171,61 @@
 </section>
 
 <style>
-    /* Positioned with `transform` (not top/height) and promoted to their own
-       compositing layer, so every scroll tick is a cheap GPU-composited move
-       instead of a main-thread layout + repaint of a blurred box-shadow. */
-    .rail-fill,
-    .rail-glow {
-        transition: transform 150ms ease-out;
-        will-change: transform;
-    }
-
-    .rail-fill {
-        transform-origin: top;
-    }
-
-    /* The row currently centred in the viewport grows on the y-axis and pushes
-       its neighbours down the page, pulling attention to itself as you scroll.
-       Naming the properties (instead of `transition-all`) keeps the browser from
-       having to watch every animatable property while this is running. */
+    /* The row crossing the middle of the viewport expands, pushing its
+       neighbours down the page. With the progress rail gone this is the only
+       cue for where you are in the list, so it swings roughly twice as far as
+       it used to, on a long decelerating curve that reads as the entry
+       unfolding rather than resizing. Rows it has not reached yet hang back
+       dimmed, which makes the active one feel like it is rising out of the
+       stack rather than merely getting taller.
+       Naming the properties (instead of `transition-all`) keeps the browser
+       from watching every animatable property while this runs. */
     .exp-row {
         padding-top: 2rem;
         padding-bottom: 2rem;
-        transition: padding 800ms ease, background-color 800ms ease, backdrop-filter 800ms ease;
+        transition:
+            padding 520ms cubic-bezier(0.16, 1, 0.3, 1),
+            opacity 520ms ease,
+            background-color 520ms ease,
+            backdrop-filter 520ms ease;
+    }
+
+    /* Outrunning the animation: rows take their final size with no transition,
+       so no padding is being interpolated and nothing relays out per frame.
+       The opacity crossfade is composited and costs nothing, so it stays. */
+    .snapping .exp-row {
+        transition: opacity 520ms ease;
+    }
+
+    .exp-row.is-pending {
+        opacity: 0.45;
     }
 
     .exp-row.is-current {
-        padding-top: 3.5rem;
-        padding-bottom: 3.5rem;
+        padding-top: 4.5rem;
+        padding-bottom: 4.5rem;
+        background-color: rgba(255, 255, 255, 0.025);
     }
 
     @media (min-width: 768px) {
         .exp-row {
-            padding-top: 4rem;
-            padding-bottom: 4rem;
+            padding-top: 3.5rem;
+            padding-bottom: 3.5rem;
         }
 
         .exp-row.is-current {
-            padding-top: 7rem;
-            padding-bottom: 7rem;
+            padding-top: 8rem;
+            padding-bottom: 8rem;
         }
     }
 
     @media (prefers-reduced-motion: reduce) {
-        .rail-fill,
-        .rail-glow,
-        .row-marker,
         .exp-row {
             transition: none;
+        }
+
+        .exp-row.is-pending {
+            opacity: 1;
         }
     }
 </style>

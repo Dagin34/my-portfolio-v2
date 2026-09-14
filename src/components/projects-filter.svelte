@@ -15,7 +15,7 @@
 </script>
 
 <div
-    class="border-2 border-border-color bg-white/3 backdrop-blur-sm px-8 lg:px-12 py-4 gap-3 flex flex-col md:flex-row items-center justify-between"
+    class="border-y border-border-color px-8 lg:px-12 py-3 gap-3 flex flex-col md:flex-row items-center justify-between"
 >
     <!-- Search Input -->
     <div class="relative flex-1 w-full">
@@ -27,7 +27,7 @@
             type="text"
             bind:value={searchQuery}
             placeholder="Search projects by title, description, or tech..."
-            class="w-full bg-transparent border border-border-color pl-10 pr-4 py-2.5 text-xs text-white font-light focus:outline-none focus:border-brand-primary/50 transition-colors placeholder:text-gray-500"
+            class="w-full bg-transparent border-b border-border-color pl-10 pr-4 py-2 text-xs text-white font-light focus:outline-none focus:border-brand-primary/50 transition-colors placeholder:text-gray-500"
         />
     </div>
 
@@ -37,7 +37,7 @@
         <div class="relative min-w-40">
             <select
                 bind:value={selectedTech}
-                class="w-full border border-border-color px-4 py-2.5 text-xs text-white font-light focus:outline-none focus:border-brand-primary/50 transition-colors appearance-none cursor-pointer"
+                class="w-full bg-transparent border-b border-border-color px-2 py-2 text-xs text-white font-light focus:outline-none focus:border-brand-primary/50 transition-colors appearance-none cursor-pointer"
             >
                 <option value="">All Technologies</option>
                 {#each availableTechs as tech}

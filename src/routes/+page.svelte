@@ -61,7 +61,6 @@
                     <Projects
                         onMissing={triggerToast}
                         fromHomePage={true}
-                        limit={10}
                     />
                 </div>
                 <div id="skills" class="relative z-10"><Languages /></div>

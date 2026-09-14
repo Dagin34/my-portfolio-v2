@@ -25,12 +25,14 @@ export interface Project {
     tech?: string[];                   // Tech stack tags
     role?: string;                     // e.g., "Lead Developer" or "Fullstack"
     year?: string;                     // e.g., "2024"
+    featured?: boolean;                // Promoted into the sticky showcase; the rest fall to the catalogue
 }
 
 // Real project data from your resume
 const allProjects: Project[] = [
     {
         title: 'StreamSynx',
+        featured: true,
         description: 'Virtual movie streaming platform with synchronized playback via TMDB API.',
         detailedDescription:
             'A watch-party platform allowing multiple users to stream and synchronize movie playback in real time. Users can create rooms, invite friends, and enjoy synchronized viewing experiences powered by TMDB metadata.',
@@ -69,6 +71,7 @@ const allProjects: Project[] = [
     },
     {
         title: 'BlueSpark SFA',
+        featured: true,
         description: 'A backend heavy Sales Force Automation system with responsibilities including implementing KPIs for sales performances, designing management of RTMs, and integration with MoR (Ministry of Revenue).',
         detailedDescription:
             'An enterprise-grade multi-tenant Sales Force Automation platform developed at Blue Spark. Responsibilities included backend architecture, KPI tracking modules, route-to-market management, inventory workflows, and integrations with external government and business systems.',
@@ -108,6 +111,7 @@ const allProjects: Project[] = [
     },
     {
         title: 'Andro Solutions',
+        featured: true,
         description: 'The official Andro Solutions website designed with a clean aesthetic. Features responsive layouts, smooth animations, and optimized SEO structure.',
         detailedDescription:
             'The corporate website for Andro Solutions, showcasing company services, branding, and digital presence through a highly polished and responsive user experience.',
@@ -166,6 +170,7 @@ const allProjects: Project[] = [
     },
     {
         title: "ENB Asset Mgmt",
+        featured: true,
         description:
             "A modern inventory and asset management platform built for tracking products, stock movement, and business operations through an intuitive dashboard.",
         detailedDescription:
@@ -187,6 +192,7 @@ const allProjects: Project[] = [
     },
     {
         title: 'Spectate Interview Room',
+        featured: true,
         description: 'A real-time virtual room for Python Interviews for Interviewers to monitor and manage the work of Interviewees.',
         detailedDescription:
             'A collaborative interview environment designed for technical assessments. Interviewers can observe candidate progress in real time while managing coding sessions remotely.',
@@ -206,6 +212,7 @@ const allProjects: Project[] = [
     },
     {
         title: 'Eon Recycling',
+        featured: true,
         description: 'Developed and maintained the system to support recycling operations, lead generations, including data management, and API integrations to improve operational efficiency and visibility.',
         detailedDescription:
             'Business operations platform supporting recycling workflows, customer acquisition, reporting, and integrations that improved operational visibility and process management.',
