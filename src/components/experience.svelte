@@ -10,7 +10,21 @@
     // active one reads as swelling up out of the stack.
     let rowStates: ("pending" | "current" | "done")[] = $state([]);
 
+    // Mirrors the growth duration in the CSS below.
+    const GROWTH_MS = 520;
+
+    // Growing a row animates `padding`, which relays out everything beneath it
+    // on every frame. One row doing that is fine; three overlapping because the
+    // reader is scrolling faster than the animation runs is what stuttered. So
+    // while rows are being crossed faster than the growth can finish, they take
+    // their final size immediately and no layout animation runs at all.
+    let snapping = $state(false);
+
     onMount(() => {
+        let lastCurrent = -1;
+        let lastCurrentAt = 0;
+        let settleTimer: ReturnType<typeof setTimeout>;
+
         // A zero-height root band pinned to the vertical centre of the viewport:
         // a row intersects it exactly while it is the one centred on screen.
         // This replaces the old scroll handler outright — nothing runs per
@@ -29,6 +43,24 @@
                           ? "pending"
                           : "done";
                 }
+
+                // Only a change of *which* row is centred counts as crossing a
+                // row. Growing a row shifts the ones below it, which fires this
+                // callback again without the centre having moved — timing those
+                // would read the animation's own layout shift as fast scrolling.
+                const current = rowStates.indexOf("current");
+                if (current === -1 || current === lastCurrent) return;
+
+                // A new row took the centre before the last one finished
+                // growing: the reader is outrunning the animation. Snap until
+                // the scrolling settles, then let it animate again.
+                const now = performance.now();
+                if (now - lastCurrentAt < GROWTH_MS) snapping = true;
+                lastCurrent = current;
+                lastCurrentAt = now;
+
+                clearTimeout(settleTimer);
+                settleTimer = setTimeout(() => (snapping = false), GROWTH_MS);
             },
             { rootMargin: "-50% 0px -50% 0px", threshold: 0 }
         );
@@ -37,7 +69,10 @@
             if (el) observer.observe(el);
         }
 
-        return () => observer.disconnect();
+        return () => {
+            clearTimeout(settleTimer);
+            observer.disconnect();
+        };
     });
 </script>
 
@@ -66,7 +101,12 @@
         </p>
     </div>
 
-    <div class="relative w-full md:w-2/3">
+    <!-- The divider the progress rail used to draw: vertical between the sticky
+         header and the list on desktop, horizontal where the two stack. -->
+    <div
+        class="relative w-full md:w-2/3 border-t md:border-t-0 md:border-l border-border-color"
+        class:snapping
+    >
         {#each experiences as exp, i}
             <div
                 bind:this={rowEls[i]}
@@ -144,10 +184,17 @@
         padding-top: 2rem;
         padding-bottom: 2rem;
         transition:
-            padding 800ms cubic-bezier(0.16, 1, 0.3, 1),
-            opacity 600ms ease,
-            background-color 600ms ease,
-            backdrop-filter 600ms ease;
+            padding 520ms cubic-bezier(0.16, 1, 0.3, 1),
+            opacity 520ms ease,
+            background-color 520ms ease,
+            backdrop-filter 520ms ease;
+    }
+
+    /* Outrunning the animation: rows take their final size with no transition,
+       so no padding is being interpolated and nothing relays out per frame.
+       The opacity crossfade is composited and costs nothing, so it stays. */
+    .snapping .exp-row {
+        transition: opacity 520ms ease;
     }
 
     .exp-row.is-pending {
