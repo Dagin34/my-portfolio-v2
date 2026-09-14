@@ -71,7 +71,7 @@
             <button
                 type="button"
                 onclick={() => onOpen(project)}
-                class="card group flex flex-col w-full h-full max-w-6xl max-h-[36rem] mx-auto text-left border border-border-color bg-background overflow-hidden"
+                class="card group flex flex-col w-full h-full max-w-6xl max-h-[44rem] mx-auto text-left border border-border-color bg-background overflow-hidden"
             >
                 <!-- Index / year strip -->
                 <div
@@ -86,37 +86,48 @@
                     {/if}
                 </div>
 
-                <div class="grid md:grid-cols-5 flex-1 min-h-0">
-                    {#if project.images?.[0]}
-                        <figure
-                            class="relative overflow-hidden border-b md:border-b-0 md:border-r border-border-color shrink-0 md:shrink md:h-full aspect-video md:aspect-auto md:col-span-3"
+                <!-- The screenshots are 1920x998, so the image wants to be wide and
+                     short. Giving it the full card width shows the whole site;
+                     boxing it into a column beside the text cropped away about
+                     half of every capture. The crop is anchored left rather than
+                     centred: it makes no difference on desktop, where the whole
+                     width fits, but on a phone it keeps the logo and nav in
+                     frame instead of a slice through the middle. -->
+                {#if project.images?.[0]}
+                    <figure class="relative flex-1 min-h-0 overflow-hidden border-b border-border-color shrink-0 md:shrink aspect-video md:aspect-auto">
+                        <img
+                            src={project.images[0]}
+                            alt=""
+                            loading="lazy"
+                            decoding="async"
+                            class="h-full w-full object-cover object-left-top grayscale group-hover:grayscale-0 transition-[filter,transform] duration-700 ease-out group-hover:scale-[1.03]"
+                        />
+                        <div class="absolute inset-0 bg-background/30 group-hover:bg-transparent transition-colors duration-500"></div>
+                    </figure>
+                {/if}
+
+                <div class="grid md:grid-cols-5 gap-4 md:gap-8 p-5 md:px-8 md:py-6 shrink-0">
+                    <div class="md:col-span-2 flex flex-col gap-2">
+                        <h3
+                            class="text-2xl md:text-4xl font-light tracking-tighter text-white group-hover:text-brand-primary transition-colors duration-300 leading-none"
                         >
-                            <img
-                                src={project.images[0]}
-                                alt=""
-                                loading="lazy"
-                                decoding="async"
-                                class="h-full w-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.03]"
-                            />
-                            <div class="absolute inset-0 bg-background/20 group-hover:bg-transparent transition-colors duration-500"></div>
-                        </figure>
-                    {/if}
+                            {project.title}
+                        </h3>
+                        {#if project.role}
+                            <p class="font-mono text-[10px] md:text-xs uppercase tracking-widest text-gray-400">
+                                {project.role}
+                            </p>
+                        {/if}
+                        <span
+                            class="mt-auto pt-2 inline-flex items-center gap-2 font-mono text-[10px] md:text-xs uppercase tracking-widest text-white"
+                        >
+                            View details
+                            <span class="transition-transform duration-300 group-hover:translate-x-1.5">→</span>
+                        </span>
+                    </div>
 
-                    <div class="flex flex-col justify-start md:justify-center gap-3 md:gap-4 p-5 md:p-8 min-h-0 overflow-hidden md:col-span-2">
-                        <div>
-                            <h3
-                                class="text-2xl md:text-4xl font-light tracking-tighter text-white group-hover:text-brand-primary transition-colors duration-300"
-                            >
-                                {project.title}
-                            </h3>
-                            {#if project.role}
-                                <p class="mt-1.5 font-mono text-[10px] md:text-xs uppercase tracking-widest text-gray-400">
-                                    {project.role}
-                                </p>
-                            {/if}
-                        </div>
-
-                        <p class="text-xs md:text-sm text-gray-400 font-light leading-relaxed line-clamp-3">
+                    <div class="md:col-span-3 flex flex-col gap-3">
+                        <p class="text-xs md:text-sm text-gray-400 font-light leading-relaxed line-clamp-2">
                             {project.description}
                         </p>
 
@@ -131,13 +142,6 @@
                                 {/each}
                             </div>
                         {/if}
-
-                        <span
-                            class="mt-1 inline-flex items-center gap-2 font-mono text-[10px] md:text-xs uppercase tracking-widest text-white"
-                        >
-                            View details
-                            <span class="transition-transform duration-300 group-hover:translate-x-1.5">→</span>
-                        </span>
                     </div>
                 </div>
             </button>
@@ -166,7 +170,9 @@
         height: var(--panel-h);
         display: flex;
         align-items: center;
-        padding: 5rem 1rem 2rem;
+        /* Top padding clears the fixed navbar; everything else is kept tight so
+           the card owns the viewport rather than floating in the middle of it. */
+        padding: 5.5rem 0.75rem 1.5rem;
     }
 
     .sentinel {
@@ -193,7 +199,7 @@
 
     @media (min-width: 768px) {
         .panel {
-            padding: 6rem 2rem 3rem;
+            padding: 5.5rem 1rem 2rem;
         }
     }
 
