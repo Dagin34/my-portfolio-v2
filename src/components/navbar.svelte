@@ -211,7 +211,7 @@
          combo was the one piece of chrome that didn't speak the rest of the
          site's vocabulary. -->
     <nav
-        class="relative w-full max-w-7xl px-8 transition-[background-color,border-color,padding] duration-500 ease-in-out pointer-events-auto
+        class="relative w-full md:w-4/5 px-4 md:px-12 transition-[background-color,border-color,padding] duration-500 ease-in-out pointer-events-auto
         {scrolled
             ? 'bg-background/95 border-b border-border-color/60 py-4'
             : 'bg-background/0 border-b border-border-color/10 py-5 md:py-6'}"
