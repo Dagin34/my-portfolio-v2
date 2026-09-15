@@ -200,16 +200,40 @@
 </script>
 
 <!-- Floating Wrapper -->
-<div
-    class="fixed top-0 left-0 w-full z-100 transition-all duration-500 ease-in-out flex justify-center pointer-events-none
-    {scrolled ? 'pt-4 px-4' : 'pt-0 px-0'}"
->
+<div class="fixed top-0 left-0 w-full z-100 flex justify-center pointer-events-none">
+    <!-- Full-width dock, not a shrinking pill: only the fill, border and corner
+         brackets change on scroll, not the width or vertical offset — reads
+         as a persistent toolbar committing to the page rather than a capsule
+         floating above it. The scrolled state drops the translucent white
+         glass-pill (border-white/15, backdrop-blur, drop shadow) for the same
+         hairline-and-flat-fill language used everywhere else in this codebase
+         (VerticalLines, card borders, the scrollspy pill) — that blur-and-glow
+         combo was the one piece of chrome that didn't speak the rest of the
+         site's vocabulary. -->
     <nav
-        class="w-full transition-all duration-500 ease-in-out pointer-events-auto
+        class="relative w-full max-w-7xl px-8 transition-[background-color,border-color,padding] duration-500 ease-in-out pointer-events-auto
         {scrolled
-            ? 'max-w-5xl bg-white/6 backdrop-blur-xs border-2 border-white/15 shadow-[0_12px_40px_rgba(0,0,0,0.15)] px-8 py-4'
-            : 'max-w-7xl bg-background/0 border-b border-border-color/10 px-8 py-5 md:py-6'}"
+            ? 'bg-background/95 border-b border-border-color/60 py-4'
+            : 'bg-background/0 border-b border-border-color/10 py-5 md:py-6'}"
     >
+        <!-- Corner-bracket framing: a viewfinder/HUD flourish that only appears
+             once scrolled, echoing the mono index-number "readout" language
+             elsewhere on the site rather than a generic card shadow. Inset
+             from the nav's own edges (not the viewport corners) so they read
+             as framing the bar's content, not touching the screen edge. -->
+        {#each [
+            'top-2 left-2 border-t border-l',
+            'top-2 right-2 border-t border-r',
+            'bottom-2 left-2 border-b border-l',
+            'bottom-2 right-2 border-b border-r'
+        ] as corner}
+            <span
+                aria-hidden="true"
+                class="pointer-events-none absolute h-3.5 w-3.5 border-brand-primary/70 transition-opacity duration-500 {corner}"
+                class:opacity-0={!scrolled}
+            ></span>
+        {/each}
+
         <div class="flex items-center justify-between">
             <a
                 href="/"
