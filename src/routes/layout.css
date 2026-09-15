@@ -5,7 +5,7 @@
   /* This tells Tailwind to create classes like bg-background, text-primary, etc. */
   --color-brand-primary: #ff6900; /* rgb(255, 105, 0) */
   --color-brand-secondary: #40b3ff;
-  --color-background: #030712;
+  --color-background: #000000;
   --color-primary: #00bcff;
   --color-primary-text: #ffffff;
   --color-success: #fff;
