@@ -9,7 +9,7 @@
 <section id="home" class="min-h-screen flex flex-col justify-center pt-20 md:pt-24 border-b border-border-color">
     <div class="border-t border-x border-border-color group transition-colors">
         <div class="p-8 md:p-12">
-            <ParticleName heading="h1" maxFontSize={160} />
+            <ParticleName heading="h1" maxFontSize={160} invertWord="Napoleon" />
         </div>
         
         <div class="flex flex-col md:flex-row border-t border-border-color">

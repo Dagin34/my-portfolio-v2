@@ -17,6 +17,11 @@
         heading?: "h1" | "h2";
         // Accessible/SEO text
         label?: string;
+        // Whole-word match (case-sensitive) against every line. Particles for
+        // that word start already tinted the brand color and fade toward
+        // white as the cursor pushes them — the inverse of every other
+        // particle's white-at-rest, orange-when-disturbed behavior.
+        invertWord?: string;
     }
 
     let {
@@ -32,6 +37,7 @@
         heading = "h2",
         label = "Dagmawi Napoleon Bogale",
         // label = "DAGMAWI Napoleon BOGALE"
+        invertWord,
     }: Props = $props();
 
     let wrapper: HTMLDivElement;
@@ -46,6 +52,7 @@
         vy: number;
         wobble: number; // Per-particle angular offset, turns a clean ring into a cloud
         delay: number;  // Staggers the intro sweep from left to right
+        inverted: boolean; // Belongs to `invertWord` — tints orange-to-white instead of white-to-orange
     }
 
     // Physics tuning — deliberately slow to settle so the trail lingers behind the cursor
@@ -113,8 +120,11 @@
             const ratio = Math.max(...lines.map((line) => lineWidth(measure, line, 100) / 100));
             const fontSize = Math.min(rect.width / ratio, maxFontSize);
 
-            // Slightly tight leading, so a stacked wordmark reads as one block
-            const lineHeight = fontSize * 1.5;
+            // Slightly tight leading, so a stacked wordmark reads as one block — and
+            // tighter still once it's actually stacked: three lines at the same
+            // generous single-line leading was most of a mobile viewport's height
+            // before any real content came into view.
+            const lineHeight = fontSize * (lines.length > 1 ? 1.25 : 1.5);
             width = rect.width;
             height = Math.round(lineHeight * lines.length + fontSize * 0);
 
@@ -131,16 +141,36 @@
             const sourceContext = source.getContext("2d", { willReadFrequently: true });
             if (!sourceContext) return;
 
+            // Column span of `invertWord` on each line, in the same pixel space the
+            // particles below are sampled from — null where that line doesn't
+            // contain it. Found by character index rather than a second measuring
+            // pass: the loop already walks every character to position it, so the
+            // word's start/end just fall out of the same cursor advance.
+            const invertRanges: ([number, number] | null)[] = lines.map(() => null);
+
             sourceContext.fillStyle = "#fff";
             sourceContext.font = `700 ${fontSize}px 'Poppins', sans-serif`;
             sourceContext.textBaseline = "middle";
             lines.forEach((line, index) => {
-                let cursor = 0;
+                // Each line centers on its own — the widest line sizes the type (and
+                // so typically spans the full width already), but shorter lines in a
+                // stacked layout would otherwise sit flush left with ragged empty
+                // space on the right, which is what made a 3-line mobile break read
+                // as lopsided rather than centered under itself. Measured on the
+                // scratch `measure` context, not `sourceContext` — that one is mid-way
+                // through being configured for the actual 700-weight draw below, and
+                // `lineWidth()` mutates whatever context it's given to probe at 800.
+                let cursor = Math.max(0, (width - lineWidth(measure, line, fontSize)) / 2);
                 const y = lineHeight * (index + 0.5) + fontSize * 0.1;
-                for (const char of line) {
+                const start = invertWord ? line.indexOf(invertWord) : -1;
+                const end = start === -1 ? -1 : start + invertWord!.length;
+
+                [...line].forEach((char, charIndex) => {
+                    if (charIndex === start) invertRanges[index] = [cursor, cursor];
                     sourceContext.fillText(char, cursor, y);
                     cursor += sourceContext.measureText(char).width - fontSize * TRACKING;
-                }
+                    if (charIndex >= start && charIndex < end) invertRanges[index]![1] = cursor;
+                });
             });
 
             const pixels = sourceContext.getImageData(0, 0, source.width, source.height).data;
@@ -156,6 +186,9 @@
                     const angle = Math.random() * Math.PI * 2;
                     const spread = scatter * (0.35 + Math.random() * 0.65);
 
+                    const range = invertRanges[Math.floor(y / lineHeight)];
+                    const inverted = !!range && x >= range[0] && x < range[1];
+
                     particles.push({
                         hx: x,
                         hy: y,
@@ -164,7 +197,8 @@
                         vx: 0,
                         vy: 0,
                         wobble: (Math.random() - 0.5) * 1.1,
-                        delay: introPending ? (x / source.width) * 420 + Math.random() * 90 : 0
+                        delay: introPending ? (x / source.width) * 420 + Math.random() * 90 : 0,
+                        inverted
                     });
                 }
             }
@@ -194,8 +228,11 @@
                 const distance = Math.sqrt(dx * dx + dy * dy);
                 const heat = Math.min(1, distance / 45);
                 const size = dotSize * (1 - heat * 0.4);
+                const step = Math.min(TINTS.length - 1, Math.floor(heat * TINTS.length));
 
-                buckets[Math.min(TINTS.length - 1, Math.floor(heat * TINTS.length))].push(
+                // Inverted particles read the same heat backwards: full orange at
+                // rest, fading toward white the further the cursor pushes them.
+                buckets[p.inverted ? TINTS.length - 1 - step : step].push(
                     p.x,
                     p.y,
                     size
