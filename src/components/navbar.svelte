@@ -209,9 +209,16 @@
          hairline-and-flat-fill language used everywhere else in this codebase
          (VerticalLines, card borders, the scrollspy pill) — that blur-and-glow
          combo was the one piece of chrome that didn't speak the rest of the
-         site's vocabulary. -->
+         site's vocabulary.
+
+         The width is main's own box (w-full/md:w-4/5) minus twice
+         VerticalLines' own width (w-4/md:w-12 on each side) — not main's outer
+         edges, which is where the lines themselves sit. The bar's visible box
+         (this background fill, the border, the corner brackets) has to end at
+         the lines' *inner* edges, or it renders passing behind them instead of
+         sitting in the gap they frame. -->
     <nav
-        class="relative w-full md:w-4/5 px-4 md:px-12 transition-[background-color,border-color,padding] duration-500 ease-in-out pointer-events-auto
+        class="relative w-[calc(100%-2rem)] md:w-[calc(80%-6rem)] px-6 md:px-8 transition-[background-color,border-color,padding] duration-500 ease-in-out pointer-events-auto
         {scrolled
             ? 'bg-background/95 border-b border-border-color/60 py-4'
             : 'bg-background/0 border-b border-border-color/10 py-5 md:py-6'}"
