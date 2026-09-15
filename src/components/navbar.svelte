@@ -226,7 +226,7 @@
                 >
             </a>
 
-            <ul bind:this={listEl} class="hidden md:flex items-center gap-2 relative">
+            <ul bind:this={listEl} class="hidden md:flex items-center gap-4 relative">
                 <!-- Sliding "you are here" pill: transform + width only, driven
                      by the spring above, so it costs no layout of its own. -->
                 <div

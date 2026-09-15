@@ -28,7 +28,7 @@ interface MagneticOptions {
  * (see the experience section and projects showcase history).
  */
 export function magnetic(node: HTMLElement, options: MagneticOptions = {}) {
-	const { strength = 0.35, max = 6 } = options;
+	const { strength = 0.5, max = 10 } = options;
 
 	if (typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
 		// No-op: the element's own hover styles (color, border) still apply,
